@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revolusi Visual | Spectacular Edition (GSAP Advanced)</title>
+
+    <style>
+        /* Base & Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&family=Press+Start+2P&display=swap');
+
+        :root {
+            --primary: #FFD700;
+            --primary-glow: rgba(255, 215, 0, 0.4);
+            --bg-light: #FFFFFF;
+            --bg-dark: #0A0A0A;
+            --text-dark: #111111;
+            --text-light: #F5F5F5;
+            --card-dark: #161616;
+            --accent-green: #25D366;
+            --accent-red: #EA4335;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Continuous Animations (Float & Glow) */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 0 0 var(--primary-glow);
+            }
+
+            70% {
+                box-shadow: 0 0 20px 15px rgba(255, 215, 0, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+            }
+        }
+
+        /* Layout */
+        .full-section {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-content {
+            width: 100%;
+            max-width: 1000px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- SECTION 1: HERO --- */
+        .hero-section {
+            background: #ffffff;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-box {
+            position: absolute;
+            top: 40px;
+            left: 5%;
+            width: 70px;
+            height: 70px;
+            background: #000;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 900;
+            text-align: center;
+            line-height: 1.1;
+            border-radius: 16px;
+            transition: transform 0.3s ease;
+            z-index: 20;
+        }
+
+        .logo-box:hover {
+            transform: scale(1.05) rotate(-3deg);
+        }
+
+        .hero-top {
+            display: flex;
+            justify-content: center; /* Ubah dari space-between agar bisa diatur jaraknya */
+            align-items: center;
+            gap: 20px; /* Jarak antara teks dan gambar diperdekat */
+            width: 100%;
+        }
+
+        .hero-text-content {
+            /* flex: 1 dihapus agar elemen teks tidak melebar penuh dan mendorong gambar menjauh */
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title-1 {
+            font-size: 5vw;
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 5px;
+            color: #111;
+            line-height: 1;
+        }
+
+        .hero-title-2 {
+            background: var(--primary);
+            color: #fff; /* Diubah dari #000 menjadi putih */
+            display: inline-block;
+            padding: 5px 25px;
+            font-size: 4vw;
+            font-weight: 900;
+            border-radius: 4px;
+            transform: skew(-2deg);
+        }
+
+        .hero-img-placeholder {
+            width: 50%; /* Dibesarkan sedikit dari 45vw */
+            max-width: 550px; /* Dibesarkan dari 450px */
+            height: 100%; /* Dibesarkan dari 350px */
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media(min-width: 1100px) {
+            .hero-title-1 {
+                font-size: 55px;
+            }
+
+            .hero-title-2 {
+                font-size: 45px;
+            }
+        }
+
+        /* --- SECTION 2: PANCA INDRA (PINNED CONTAINER) --- */
+        .panca-section-container {
+            position: relative;
+            background-color: var(--bg-light);
+            z-index: 2;
+            /* Di bawah Section Faktanya */
+        }
+
+        .panca-indra-pin {
+            width: 100%;
+            height: 100vh;
+            padding: 80px;
+        }
+
+        .panca-indra {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px; /* Jarak yang pas antara teks dan gambar */
+            padding: 0;
+            width: 100%;
+        }
+
+        .panca-text {
+            font-weight: 900;
+            font-size: 32px;
+            line-height: 1.5;
+            width: max-content; /* Lebar menyesuaikan isi teks agar rapat */
+            color: #111; /* Warna hitam pekat seperti di gambar */
+            position: relative;
+            text-align: left; /* Teks kiri rata kiri seperti di gambar */
+        }
+
+        /* Garis kuning dihapus sesuai gambar referensi */
+
+        .panca-text.right {
+            text-align: right; /* Teks kanan rata kanan seperti di gambar */
+        }
+
+        .panca-img-placeholder {
+            width: 450px;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: -150px;
+            /* Diperbesar dari -100px agar pas di tengah layar */
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .panca-img-placeholder:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- WRAPPER PANCA + FAKTANYA (BUAT PIN & ANIMASI COVER) --- */
+        .panca-faktanya-pin-wrap {
+            position: relative;
+        }
+
+        /* --- SECTION 3: FAKTANYA (OVERLAY CARDS) --- */
+        .faktanya-section-container {
+            position: relative;
+            color: var(--text-light);
+            z-index: 3;
+            margin-top: -100vh;
+            /* Overlap dengan panca indra */
+        }
+
+        .faktanya-card {
+            background: rgba(22, 22, 22, 0.8);
+            backdrop-filter: blur(20px);
+            /* border: 1px solid rgba(255, 255, 255, 0.05); */
+            border-radius: 40px;
+            padding: 80px 60px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faktanya-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, transparent 60%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .faktanya-header {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 7vw; /* Font dibesarkan */
+            letter-spacing: 10px; /* Dilebarkan agar memenuhi kontainer */
+            text-align: center;
+            margin-top: -81px; /* Dipepetin ke atas (melawan padding kontainer) */
+            margin-bottom: 10px; /* Dipepetin ke konten bawah */
+            color: #fff; 
+            border: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .faktanya-body {
+            display: flex;
+            justify-content: center; /* Diubah agar isinya lebih merapat ke tengah */
+            align-items: center;
+            gap: 40px; /* Menambahkan gap antar elemen */
+            padding: 20px; /* Padding kontainer dikurangi drastis agar gap tidak terlalu jauh */
+            position: relative;
+            z-index: 1;
+        }
+
+        .faktanya-stats {
+            width: auto; /* Dibuat auto agar merapat ke gambar */
+        }
+
+        .faktanya-percent {
+            font-size: 90px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .faktanya-desc {
+            font-size: 18px;
+            line-height: 1.6;
+            
+            color: #bbb;
+        }
+
+        .faktanya-desc span {
+            display: inline-block;
+            border-bottom: 3px solid #fff; /* Garis bawah diubah jadi putih sesuai gambar */
+            padding-bottom: 5px;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .faktanya-img-placeholder {
+            width: auto;
+            height: auto;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- SECTION 4: FORM (GSAP PINNING) --- */
+        .form-section-container {
+            position: relative;
+            background: #ffffff;
+            padding-bottom: 100px;
+            z-index: 4;
+        }
+
+        .sticky-title-wrapper {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            z-index: 1;
+        }
+
+        .form-title {
+            text-align: center;
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            background: linear-gradient(90deg, #111, #555);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .scroll-up-form-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            margin-top: -15vh;
+        }
+
+        .form-wrapper {
+            position: relative;
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .form-bg {
+            position: absolute;
+            top: 20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(45deg, #111, #111 10px, #222 10px, #222 20px);
+            border-radius: 40px;
+            z-index: 1;
+        }
+
+        .form-card {
+            background: #252525;
+            border-radius: 40px 40px 40px 0;
+            padding: 60px;
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            border: 1px solid #333;
+        }
+
+        .form-heading {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 50px;
+        }
+
+        .form-heading u {
+            text-decoration-thickness: 3px;
+            text-decoration-color: rgba(255, 255, 255, 0.2);
+            text-underline-offset: 6px;
+        }
+
+        .text-wa {
+            color: var(--accent-green);
+        }
+
+        .text-email {
+            color: var(--accent-red);
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #aaa;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 18px 25px;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 12px;
+            font-size: 16px;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: #1a1a1a;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #FFD700 0%, #FF8C00 100%);
+            border: none;
+            padding: 18px 50px;
+            font-size: 20px;
+            font-weight: 900;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 30px;
+            color: #000;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: pulseGlow 2s infinite;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+        }
+
+        /* --- SECTION 5: FOOTER --- */
+        .footer-section {
+            background-color: #050505;
+            position: relative;
+            z-index: 5;
+        }
+
+        .footer-img-placeholder {
+            width: 45%;
+            max-width: 700px;
+            height: 100%;
+            margin: 0 auto 80px;
+            margin-bottom: 20px !important;
+            background: transparent;
+            /* border: 2px dashed rgba(255, 255, 255, 0.1); */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* border-radius: 20px; */
+            transition: all 0.5s ease;
+        }
+
+        .footer-img-placeholder:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0;
+            background: transparent;
+            max-width: max-content;
+        }
+
+        .footer-logo-img {
+            width: 150px;
+            height: 150px;
+            background: transparent;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            margin-right: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .footer-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .footer-info-title {
+            color: var(--primary);
+            font-weight: 900;
+            font-size: 24px;
+            margin-bottom: 5px;
+            letter-spacing: 0;
+        }
+
+        .footer-contact {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.4;
+            color: #fff;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 900px) {
+            .full-section {
+                padding: 60px 5%;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .panca-indra-pin {
+                height: auto;
+            }
+
+            .hero-top {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .logo-box {
+                position: static;
+                margin-bottom: 40px;
+                box-shadow: none;
+            }
+
+            .hero-title-1 {
+                font-size: 42px;
+            }
+
+            .hero-title-2 {
+                font-size: 32px;
+            }
+
+            .hero-img-placeholder {
+                width: 100%;
+                max-width: 100%;
+                margin-top: 40px;
+                height: 300px;
+            }
+
+            .panca-indra {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .panca-text.right,
+            .panca-text {
+                text-align: center;
+                width: 100%;
+            }
+
+            .panca-text::before,
+            .panca-text.right::before {
+                left: 50%;
+                transform: translateX(-50%);
+                top: -20px;
+            }
+
+            .panca-img-placeholder {
+                width: 100%;
+                height: 300px;
+            }
+
+            .faktanya-card {
+                padding: 40px 30px;
+            }
+
+            .faktanya-header {
+                font-size: 32px;
+                margin-bottom: 40px;
+            }
+
+            .faktanya-body {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .faktanya-stats {
+                width: 100%;
+                margin-bottom: 40px;
+            }
+
+            .faktanya-percent {
+                font-size: 60px;
+            }
+
+            .faktanya-img-placeholder {
+                width: 100%;
+                height: 250px;
+            }
+
+            .form-title {
+                font-size: 36px;
+            }
+
+            .form-bg {
+                left: -10px;
+                top: 15px;
+                border-radius: 30px;
+            }
+
+            .form-card {
+                padding: 40px 30px;
+                border-radius: 30px 30px 30px 0;
+            }
+
+            .form-heading {
+                font-size: 24px;
+                margin-bottom: 30px;
+            }
+
+            .btn-submit {
+                width: 100%;
+            }
+
+            .footer-img-placeholder {
+                height: 250px;
+                margin-bottom: 50px;
+            }
+
+            .footer-bottom {
+                border-radius: 20px;
+                flex-direction: column;
+                text-align: center;
+                width: 100%;
+                padding: 30px;
+            }
+
+            .footer-logo {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Section 1: Hero -->
+    <div class="full-section hero-section">
+        <div class="logo-box gsap-fade-up"><img src="assets/revolusivisual.png" alt="Logo" style="width: 100%; height: 100%;">
+        </div>
+        <div class="section-content">
+            <div class="hero-top">
+                <div class="hero-text-content gsap-fade-up">
+                    <div class="hero-title-1">GAMBAR PUNYA</div>
+                    <div class="hero-title-2">MAKNA</div>
+                </div>
+                <div class="hero-img-placeholder gsap-fade-up">
+                    <img src="assets/image 16.png" alt="Placeholder Image"
+                        style="width: 100%; height: 100%; border-radius: 20px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wrap Panca + Faktanya untuk pin & animasi card menutupi -->
+    <div class="panca-faktanya-pin-wrap">
+
+        <!-- Section 2: Panca Indra (Di-wrap khusus buat efek Pinning) -->
+        <div class="panca-section-container">
+            <div class="full-section panca-indra-pin">
+                <div class="section-content panca-indra panca-trigger">
+                    <!-- Panca Kiri -->
+                    <div class="panca-text panca-left">
+                        SEJATINYA<br>CARA<br>MANUSIA<br>NGERESPON<br>ITU PAKE
+                    </div>
+                    <!-- Panca Tengah -->
+                    <div class="panca-img-placeholder panca-center">
+                        <img src="assets/Group 1.png" alt="Placeholder Image" style="width: 100%; height: 100%;">
+                    </div>
+                    <!-- Panca Kanan -->
+                    <div class="panca-text right panca-right">
+                        MATA<br>HIDUNG<br>MULUT<br>TELINGA<br>RABA
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Faktanya (Card Hitam yang bergerak ke atas menutupi Panca Indra) -->
+        <div class="full-section faktanya-section-container">
+            <div class="section-content faktanya-card">
+                <div class="faktanya-header">FAKTANYA</div>
+                <div class="faktanya-body">
+                    <div class="faktanya-stats">
+                        <div class="faktanya-percent">90%</div>
+                        <div class="faktanya-desc">
+                            INFORMASI YANG TERKIRIM<br>KE OTAK ADALAH<br>
+                            <span>VISUAL / GAMBAR</span>
+                        </div>
+                    </div>
+                    <div class="faktanya-img-placeholder">
+                        <img src="assets/otak.png" alt="Placeholder Image" style="width: 100%; height: 100%;"
+                            background-position: center;>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /panca-faktanya-pin-wrap -->
+
+    <!-- Section 4: Form (GSAP PIN & SCROLL) -->
+    <div class="form-section-container form-pin-trigger">
+        <div class="sticky-title-wrapper form-title-pin">
+            <div class="form-title">Mau Tau Lebih?</div>
+        </div>
+
+        <div class="scroll-up-form-wrapper">
+            <div class="form-wrapper gsap-fade-up">
+                <div class="form-bg"></div>
+                <div class="form-card">
+                    <div class="form-heading">
+                        <u>Kami Akan Kirim</u><br>
+                        <u>Materi Ke</u><br>
+                        <u><span class="text-wa">Whatsapp ✆</span></u> <u>dan</u><br>
+                        <u><span class="text-email">Email ✉</span></u> <u>Mu</u>
+                    </div>
+
+                    <form action="#" method="POST">
+                        <div class="form-group">
+                            <label class="form-label">Namamu</label>
+                            <input type="text" class="form-input" placeholder="Masukkan nama panggilanmu">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Nomor WhatsApp <span class="text-wa">✆</span></label>
+                            <input type="tel" class="form-input" placeholder="08...">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Alamat Email <span class="text-email">✉</span></label>
+                            <input type="email" class="form-input" placeholder="email@domain.com">
+                        </div>
+                        <button type="submit" class="btn-submit">Kirim Sekarang</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 5: Footer -->
+    <div class="full-section footer-section">
+        <div class="section-content">
+            <div class="footer-img-placeholder gsap-fade-up">
+                <img src="assets/semuabisa.png" alt="Placeholder Image" style="width: 100%; height: 100%;">
+            
+            </div>
+
+            <div class="footer-bottom gsap-fade-up">
+                <div class="footer-logo-img">
+                    <span style="color:#888;">[IMG: Hand Logo & Revolusi Visual]</span>
+                </div>
+                <div class="footer-info">
+                    <div class="footer-info-title">REVOLUSI VISUAL</div>
+                    <p class="footer-contact">andriandito@gmail.com</p>
+                    <p class="footer-contact">+62 811 861 384</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GSAP Core & ScrollTrigger Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. ANIMASI UMUM (Fade Up)
+        gsap.utils.toArray('.gsap-fade-up').forEach(element => {
+            gsap.from(element, {
+                scrollTrigger: {
+                    trigger: element,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 80,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
+        });
+
+        // 2. ANIMASI ENTERING PANCA INDRA (Fly-in Elements)
+        const tlPanca = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".panca-trigger",
+                start: "top 75%",
+                toggleActions: "play none none reverse"
+            }
+        });
+        tlPanca.from(".panca-left", { x: -100, opacity: 0, duration: 1, ease: "power3.out" }, 0)
+            .from(".panca-center", { y: 100, opacity: 0, duration: 1, ease: "power3.out" }, 0.2)
+            .from(".panca-right", { x: 100, opacity: 0, duration: 1, ease: "power3.out" }, 0.4);
+
+        // 3. BARU ── PIN WRAPPER & ANIMASI CARD MENUTUPI PANCA INDRA
+        // Pin wrapper yang berisi panca + faktanya menggunakan timeline untuk jeda
+        const pancaTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".panca-faktanya-pin-wrap",
+                start: "top top",
+                end: "+=150%", // Durasi scroll diperpanjang untuk mengakomodasi jeda
+                pin: true,
+                scrub: true
+            }
+        });
+
+        // Jeda dulu sebentar saat di-scroll (durasi 0.5)
+        pancaTl.to({}, { duration: 0.5 })
+               // Faktanya card bergerak dari bawah ke atas menutupi panca indra
+               .fromTo(".faktanya-card",
+                   { y: "100vh" },
+                   { y: 0, duration: 1, ease: "none" }
+               );
+
+        // 4. ANIMASI STICKY TITLE FORM SECTION
+        // Berikan jeda saat di-scroll sebelum form naik menutupi title
+        ScrollTrigger.create({
+            trigger: ".form-pin-trigger",
+            start: "top top",
+            end: "+=50%", // Jeda scroll sejauh 50% viewport
+            pin: ".scroll-up-form-wrapper",
+            pinSpacing: true
+        });
+
+        // Sticky title tetap pada posisinya
+        ScrollTrigger.create({
+            trigger: ".form-pin-trigger",
+            start: "top top",
+            end: "bottom top",
+            pin: ".form-title-pin",
+            pinSpacing: false
+        });
+    </script>
+</body>
+
+</html>
