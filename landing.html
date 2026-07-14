@@ -14,8 +14,8 @@
             --primary: #FBBF24;
             /* Rich Amber Gold */
             --primary-glow: rgba(251, 191, 36, 0.4);
-            --bg-gradient: linear-gradient(135deg, #0F172A 0%, #020617 100%);
-            /* Elegant Midnight Slate to Deep Navy */
+            --bg-gradient: #000000;
+            /* Solid Deep Black */
             --bg-light: #1E293B;
             /* Lighter Slate */
             --bg-dark: #0F172A;
@@ -26,43 +26,6 @@
             /* Glassmorphism base */
             --accent-green: #10B981;
             --accent-red: #EF4444;
-        }
-
-
-
-        /* --- BACKGROUND ANIMATIONS (STARS & ORBS) --- */
-        .bg-animations {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            background-image:
-                radial-gradient(1.5px 1.5px at 15% 25%, #fff 100%, transparent),
-                radial-gradient(2px 2px at 45% 65%, #fff 100%, transparent),
-                radial-gradient(1.5px 1.5px at 75% 35%, #fff 100%, transparent),
-                radial-gradient(2px 2px at 85% 85%, #fff 100%, transparent),
-                radial-gradient(1.5px 1.5px at 35% 85%, #fff 100%, transparent),
-                radial-gradient(2.5px 2.5px at 95% 15%, #fff 100%, transparent);
-            background-size: 200px 200px, 350px 350px, 250px 250px, 400px 400px, 300px 300px, 500px 500px;
-            opacity: 0.3;
-        }
-
-        [data-theme="light"] .bg-animations {
-            opacity: 0.1;
-            filter: invert(1);
-        }
-
-        .glowing-orb {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
-            filter: blur(40px);
-            opacity: 0.5;
-            z-index: -1;
-            pointer-events: none;
         }
 
         * {
@@ -141,21 +104,11 @@
         }
 
         .logo-box {
-            position: absolute;
-            top: 40px;
-            left: 5%;
-            width: 70px;
-            height: 70px;
-            background: #000;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            font-weight: 900;
-            text-align: center;
-            line-height: 1.1;
-            border-radius: 16px;
+            width: 120px;
+            height: 120px;
+            margin-top: -60px;
+            margin-left: -15px;
+            margin-bottom: 25px;
             transition: transform 0.3s ease;
             z-index: 20;
         }
@@ -277,10 +230,6 @@
             align-items: center;
             justify-content: center;
             margin-top: -150px;
-            background-color: #FFFFFF;
-            /* Menutup area transparan agar full putih */
-            border-radius: 30px;
-            /* Opsional agar sudutnya tidak kaku jika image tidak full */
             /* Diperbesar dari -100px agar pas di tengah layar */
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -415,20 +364,29 @@
         }
 
         .form-bg {
-            display: none;
+            position: absolute;
+            top: -200px;
+            left: -150px;
+            width: 1200px;
+            height: 1200px;
+            background-image: url('assets/rocket_sketch.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+            opacity: 0.4;
+            filter: invert(1);
+            mix-blend-mode: screen;
+            transform: rotate(45deg);
+            pointer-events: none;
+            display: block;
         }
 
         .form-card {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border-radius: 24px;
-            padding: 60px;
+            background: transparent;
+            padding: 20px 0;
             position: relative;
             z-index: 2;
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
         .form-heading {
@@ -531,19 +489,18 @@
 
         .footer-bottom {
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            align-items: flex-start;
             justify-content: flex-start;
             padding: 0;
             background: transparent;
-            max-width: max-content;
+            gap: 15px;
         }
 
         .footer-logo-img {
-            width: 150px;
-            height: 150px;
-            background: transparent;
-            border: 1px dashed rgba(255, 255, 255, 0.2);
-            margin-right: 30px;
+            width: 120px;
+            height: 120px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -667,16 +624,7 @@
                 font-size: 36px;
             }
 
-            .form-bg {
-                left: -10px;
-                top: 15px;
-                border-radius: 30px;
-            }
 
-            .form-card {
-                padding: 40px 30px;
-                border-radius: 30px 30px 30px 0;
-            }
 
             .form-heading {
                 font-size: 24px;
@@ -716,12 +664,12 @@
 
     <!-- Section 1: Hero -->
     <div class="full-section hero-section">
-        <div class="logo-box gsap-fade-up"><img class="logo-img" src="assets/revolusivisual.png" alt="Logo"
-                style="width: 100%; height: 100%;">
-        </div>
         <div class="section-content">
             <div class="hero-top">
                 <div class="hero-text-content gsap-fade-up">
+                    <div class="logo-box"><img class="logo-img" src="assets/revolusivisual.png" alt="Logo"
+                            style="width: 100%; height: 100%;">
+                    </div>
                     <div class="hero-title-1">Anak Malas Belajar? Mungkin <span class="highlight">Metodenya</span> yang
                         Salah, Bukan Otaknya.</div>
                     <div class="hero-subtitle">Tinggalkan metode hafalan usang. Ubah ratusan halaman teks menjadi visual
@@ -745,10 +693,10 @@
                 </div>
                 <!-- Panca Tengah -->
                 <div class="panca-img-placeholder panca-center">
-                    <img src="assets/Group 1.png" alt="Placeholder Image" style="width: 100%; height: 100%;">
+                    <img src="assets/panca_indra_sketch.png" alt="Panca Indra Sketch" style="width: 100%; height: 100%;">
                 </div>
                 <!-- Panca Kanan -->
-                <div class="panca-text right panca-right">
+                <div class="panca-text right panca-right" style="color: var(--primary);">
                     MATA<br>HIDUNG<br>MULUT<br>TELINGA<br>RABA
                 </div>
             </div>
@@ -783,40 +731,25 @@
             <div class="form-wrapper gsap-fade-up">
                 <div class="form-bg"></div>
                 <div class="form-card">
-                    <div class="form-heading">
-                        Kami Akan Kirim<br>
-                        Materi Ke<br>
-                        <span class="text-wa">Whatsaap</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 448 512"
-                            fill="var(--accent-green)" style="vertical-align: middle; margin: 0 2px 6px 2px;">
-                            <path
-                                d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157.1zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
-                        </svg>
-                        dan<br>
-                        <span class="text-email">Email</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24"
-                            style="vertical-align: middle; margin: 0 2px 6px 2px;">
-                            <rect x="2" y="5" width="20" height="14" rx="2" fill="#FFFFFF" />
-                            <path d="M2 19l7.5-6 M22 19l-7.5-6" fill="none" stroke="#CBD5E1" stroke-width="1.5" />
-                            <path d="M2 19V7c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2v12" fill="none" stroke="#EA4335"
-                                stroke-width="2.5" stroke-linecap="round" />
-                            <path d="M2 6l10 7 10-7" fill="none" stroke="#EA4335" stroke-width="3.5"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        Mu
+                    <div class="form-heading" style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 20px;">
+                        Dapatkan Akses Instan PDF Premium<br>
+                        'Revi Brain' Siap Cetak
                     </div>
 
-                    <form action="#" method="POST">
-                        <div class="form-group">
-                            <input type="text" class="form-input" placeholder="Nama Panggilan">
+                    <form action="#" method="POST" style="max-width: 400px; position: relative; z-index: 3;">
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="display: block; color: #fff; font-size: 16px; margin-bottom: 5px;">Namamu</label>
+                            <input type="text" class="form-input" placeholder="andrian dito" style="background: #fff; color: #000; border-radius: 0; padding: 10px 15px; width: 100%; border: none;">
                         </div>
-                        <div class="form-group">
-                            <input type="tel" class="form-input" placeholder="Nomor WhatsApp">
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="display: block; color: #fff; font-size: 16px; margin-bottom: 5px;">Nomor</label>
+                            <input type="tel" class="form-input" placeholder="08283..." style="background: #fff; color: #000; border-radius: 0; padding: 10px 15px; width: 100%; border: none;">
                         </div>
-                        <div class="form-group">
-                            <input type="email" class="form-input" placeholder="Alamat Email">
+                        <div class="form-group" style="margin-bottom: 35px;">
+                            <label style="display: block; color: #fff; font-size: 16px; margin-bottom: 5px;">Email 📩</label>
+                            <input type="email" class="form-input" placeholder="andriandito@gmail.com" style="background: #fff; color: #000; border-radius: 0; padding: 10px 15px; width: 100%; border: none;">
                         </div>
-                        <button type="submit" class="btn-submit">Kirim Akses Sekarang</button>
+                        <button type="submit" class="btn-submit" style="background: linear-gradient(90deg, #FDE047, #FACC15); color: #000; box-shadow: 4px 4px 0 #EA580C; border-radius: 30px; width: max-content; font-weight: 900; font-family: serif; font-size: 22px; padding: 10px 40px; margin-top: 0; text-transform: none; letter-spacing: 0;">Kirim</button>
                     </form>
                 </div>
             </div>
@@ -833,7 +766,7 @@
 
             <div class="footer-bottom gsap-fade-up">
                 <div class="footer-logo-img">
-                    <img src="assets/revolusivisual.png" alt="Logo" style="width: 100%; height: 100%;">
+                    <img class="logo-img" src="assets/revolusivisual.png" alt="Logo" style="width: 100%; height: 100%;">
                 </div>
                 <div class="footer-info">
                     <div class="footer-info-title">REVOLUSI VISUAL</div>
@@ -900,44 +833,6 @@
         });
 
 
-        // Background Parallax Stars Logic
-        const bgContainer = document.createElement('div');
-        bgContainer.className = 'bg-animations';
-        document.body.prepend(bgContainer);
-
-        // Background Glowing Orbs
-        for (let i = 0; i < 3; i++) {
-            const orb = document.createElement('div');
-            orb.className = 'glowing-orb';
-            const size = Math.random() * 300 + 200; // 200px to 500px
-            orb.style.width = `${size}px`;
-            orb.style.height = `${size}px`;
-            orb.style.top = `${Math.random() * 80 + 10}vh`;
-            orb.style.left = `${Math.random() * 80 + 10}vw`;
-
-            // Random floating animation
-            gsap.to(orb, {
-                y: `+=${Math.random() * 100 - 50}`,
-                x: `+=${Math.random() * 100 - 50}`,
-                duration: Math.random() * 5 + 5,
-                repeat: -1,
-                yoyo: true,
-                ease: "sine.inOut"
-            });
-
-            bgContainer.appendChild(orb);
-        }
-
-        // ScrollTrigger for Stars Parallax
-        gsap.to('.bg-animations', {
-            backgroundPosition: "0px -500px, 0px -800px, 0px -400px, 0px -1000px, 0px -600px, 0px -1200px",
-            ease: "none",
-            scrollTrigger: {
-                start: "top top",
-                end: "max",
-                scrub: 1
-            }
-        });
 
         // Rocket Flying Animation on Scroll
         gsap.to("#heroRocket", {
