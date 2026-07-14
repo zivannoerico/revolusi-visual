@@ -11,14 +11,19 @@
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&display=swap');
 
         :root {
-            --primary: #FBBF24; /* Rich Amber Gold */
+            --primary: #FBBF24;
+            /* Rich Amber Gold */
             --primary-glow: rgba(251, 191, 36, 0.4);
-            --bg-gradient: linear-gradient(135deg, #0F172A 0%, #020617 100%); /* Elegant Midnight Slate to Deep Navy */
-            --bg-light: #1E293B; /* Lighter Slate */
-            --bg-dark: #0F172A; 
-            --text-dark: #94A3B8; /* Premium slate text */
+            --bg-gradient: linear-gradient(135deg, #0F172A 0%, #020617 100%);
+            /* Elegant Midnight Slate to Deep Navy */
+            --bg-light: #1E293B;
+            /* Lighter Slate */
+            --bg-dark: #0F172A;
+            --text-dark: #94A3B8;
+            /* Premium slate text */
             --text-light: #F8FAFC;
-            --card-dark: rgba(30, 41, 59, 0.6); /* Glassmorphism base */
+            --card-dark: rgba(30, 41, 59, 0.6);
+            /* Glassmorphism base */
             --accent-green: #10B981;
             --accent-red: #EF4444;
         }
@@ -34,7 +39,7 @@
             height: 100%;
             pointer-events: none;
             z-index: -1;
-            background-image: 
+            background-image:
                 radial-gradient(1.5px 1.5px at 15% 25%, #fff 100%, transparent),
                 radial-gradient(2px 2px at 45% 65%, #fff 100%, transparent),
                 radial-gradient(1.5px 1.5px at 75% 35%, #fff 100%, transparent),
@@ -161,9 +166,11 @@
 
         .hero-top {
             display: flex;
-            justify-content: center; /* Ubah dari space-between agar bisa diatur jaraknya */
+            justify-content: center;
+            /* Ubah dari space-between agar bisa diatur jaraknya */
             align-items: center;
-            gap: 20px; /* Jarak antara teks dan gambar diperdekat */
+            gap: 20px;
+            /* Jarak antara teks dan gambar diperdekat */
             width: 100%;
         }
 
@@ -197,9 +204,12 @@
         }
 
         .hero-img-placeholder {
-            width: 50%; /* Dibesarkan sedikit dari 45vw */
-            max-width: 550px; /* Dibesarkan dari 450px */
-            height: 100%; /* Dibesarkan dari 350px */
+            width: 50%;
+            /* Dibesarkan sedikit dari 45vw */
+            max-width: 550px;
+            /* Dibesarkan dari 450px */
+            height: 100%;
+            /* Dibesarkan dari 350px */
             backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
@@ -234,7 +244,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 50px; /* Jarak yang pas antara teks dan gambar */
+            gap: 50px;
+            /* Jarak yang pas antara teks dan gambar */
             padding: 0;
             width: 100%;
         }
@@ -243,16 +254,20 @@
             font-weight: 900;
             font-size: 32px;
             line-height: 1.5;
-            width: max-content; /* Lebar menyesuaikan isi teks agar rapat */
-            color: var(--text-light); /* Warna kontras terang untuk background gelap */
+            width: max-content;
+            /* Lebar menyesuaikan isi teks agar rapat */
+            color: var(--text-light);
+            /* Warna kontras terang untuk background gelap */
             position: relative;
-            text-align: left; /* Teks kiri rata kiri seperti di gambar */
+            text-align: left;
+            /* Teks kiri rata kiri seperti di gambar */
         }
 
         /* Garis kuning dihapus sesuai gambar referensi */
 
         .panca-text.right {
-            text-align: right; /* Teks kanan rata kanan seperti di gambar */
+            text-align: right;
+            /* Teks kanan rata kanan seperti di gambar */
         }
 
         .panca-img-placeholder {
@@ -262,8 +277,10 @@
             align-items: center;
             justify-content: center;
             margin-top: -150px;
-            background-color: #FFFFFF; /* Menutup area transparan agar full putih */
-            border-radius: 30px; /* Opsional agar sudutnya tidak kaku jika image tidak full */
+            background-color: #FFFFFF;
+            /* Menutup area transparan agar full putih */
+            border-radius: 30px;
+            /* Opsional agar sudutnya tidak kaku jika image tidak full */
             /* Diperbesar dari -100px agar pas di tengah layar */
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -294,13 +311,14 @@
             display: flex;
             justify-content: center;
         }
-        
+
         .faktanya-img-col img {
             width: 100%;
             height: auto;
             border-radius: 20px;
             transition: transform 0.5s ease;
         }
+
         .faktanya-img-col img:hover {
             transform: scale(1.05);
         }
@@ -313,16 +331,16 @@
         }
 
         .faktanya-header {
-            font-size: 3vw; 
+            font-size: 3vw;
             font-weight: 900;
-            letter-spacing: 5px; 
-            margin-bottom: 20px; 
+            letter-spacing: 5px;
+            margin-bottom: 20px;
             color: var(--primary);
             text-transform: uppercase;
         }
 
         .faktanya-percent {
-            font-size: 10vw; 
+            font-size: 10vw;
             font-weight: 900;
             color: var(--text-light);
             line-height: 1;
@@ -333,13 +351,14 @@
         .faktanya-desc {
             font-size: 18px;
             line-height: 1.6;
-            
+
             color: #bbb;
         }
 
         .faktanya-desc span {
             display: inline-block;
-            border-bottom: 3px solid #fff; /* Garis bawah diubah jadi putih sesuai gambar */
+            border-bottom: 3px solid #fff;
+            /* Garis bawah diubah jadi putih sesuai gambar */
             padding-bottom: 5px;
             font-weight: 900;
             color: #fff;
@@ -396,86 +415,91 @@
         }
 
         .form-bg {
-            display: none; /* Menghilangkan efek glowing blur yang terlihat terlalu AI */
+            display: none;
         }
 
         .form-card {
-            background: #111827; /* Warna gelap matte yang solid dan premium */
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border-radius: 24px;
-            padding: 50px 60px;
+            padding: 60px;
             position: relative;
             z-index: 2;
             color: #fff;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
         }
 
         .form-heading {
-            font-size: 38px;
-            font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 40px;
+            font-size: 34px;
+            font-weight: 400;
+            line-height: 1.4;
+            margin-bottom: 45px;
             color: var(--text-light);
-            text-align: left; /* Berubah menjadi rata kiri seperti gambar */
+            text-align: left;
+            letter-spacing: -0.5px;
         }
 
         .text-wa {
             color: var(--accent-green);
+            font-weight: 600;
         }
 
         .text-email {
             color: var(--accent-red);
+            font-weight: 600;
         }
 
         .form-group {
-            margin-bottom: 30px;
+            margin-bottom: 24px;
             position: relative;
         }
 
         .form-input {
             width: 100%;
-            padding: 18px 25px;
-            background: rgba(0, 0, 0, 0.2); /* Efek cekung yang clean */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            padding: 20px 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
             font-size: 16px;
+            font-weight: 400;
             color: var(--text-light);
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .form-input:focus {
             outline: none;
-            border-color: var(--primary);
-            background: rgba(0, 0, 0, 0.4);
-            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.15); /* Cincin fokus presisi, bukan sekadar blur */
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.03);
         }
-        
+
         .form-input::placeholder {
-            color: var(--text-muted);
+            color: rgba(148, 163, 184, 0.6);
             font-weight: 300;
         }
 
         .btn-submit {
-            background: var(--primary);
+            background: var(--text-light);
             border: 1px solid transparent;
             padding: 20px 50px;
             font-size: 16px;
-            font-weight: 700;
-            border-radius: 12px;
+            font-weight: 600;
+            border-radius: 16px;
             cursor: pointer;
-            margin-top: 20px;
-            color: #0F172A;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            margin-top: 15px;
+            color: var(--bg-dark);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.5px;
             width: 100%;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 10px 20px -5px rgba(255, 255, 255, 0.15);
         }
 
         .btn-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-            filter: brightness(1.1);
+            background: #ffffff;
+            box-shadow: 0 15px 25px -5px rgba(255, 255, 255, 0.25);
         }
 
         /* --- SECTION 5: FOOTER --- */
@@ -681,6 +705,10 @@
                 margin-bottom: 20px;
             }
         }
+
+        .logo-img {
+            border-radius: 7%;
+        }
     </style>
 </head>
 
@@ -688,16 +716,20 @@
 
     <!-- Section 1: Hero -->
     <div class="full-section hero-section">
-        <div class="logo-box gsap-fade-up"><img src="assets/revolusivisual.png" alt="Logo" style="width: 100%; height: 100%;">
+        <div class="logo-box gsap-fade-up"><img class="logo-img" src="assets/revolusivisual.png" alt="Logo"
+                style="width: 100%; height: 100%;">
         </div>
         <div class="section-content">
             <div class="hero-top">
                 <div class="hero-text-content gsap-fade-up">
-                    <div class="hero-title-1">Anak Malas Belajar? Mungkin <span class="highlight">Metodenya</span> yang Salah, Bukan Otaknya.</div>
-                    <div class="hero-subtitle">Tinggalkan metode hafalan usang. Ubah ratusan halaman teks menjadi visual memukau yang bikin anak paham lebih cepat dan betah belajar.</div>
+                    <div class="hero-title-1">Anak Malas Belajar? Mungkin <span class="highlight">Metodenya</span> yang
+                        Salah, Bukan Otaknya.</div>
+                    <div class="hero-subtitle">Tinggalkan metode hafalan usang. Ubah ratusan halaman teks menjadi visual
+                        memukau yang bikin anak paham lebih cepat dan betah belajar.</div>
                 </div>
                 <div class="hero-img-placeholder rocket-container">
-                    <img id="heroRocket" src="assets/rocket_sketch.png" alt="Rocket Sketch" style="width: 250px; height: auto; filter: invert(1) drop-shadow(0 0 15px rgba(255,255,255,0.3)); mix-blend-mode: screen;">
+                    <img id="heroRocket" src="assets/rocket_sketch.png" alt="Rocket Sketch"
+                        style="width: 250px; height: auto; filter: invert(1) drop-shadow(0 0 15px rgba(255,255,255,0.3)); mix-blend-mode: screen;">
                 </div>
             </div>
         </div>
@@ -727,7 +759,8 @@
     <div class="full-section faktanya-section-container">
         <div class="section-content faktanya-layout gsap-fade-up">
             <div class="faktanya-img-col">
-                <img src="assets/otak_transparent.png" alt="Otak Image" style="width: 100%; height: auto; border-radius: 20px;">
+                <img src="assets/otak_transparent.png" alt="Otak Image"
+                    style="width: 100%; height: auto; border-radius: 20px;">
             </div>
             <div class="faktanya-text-col">
                 <div class="faktanya-header">Faktanya</div>
@@ -753,15 +786,22 @@
                     <div class="form-heading">
                         Kami Akan Kirim<br>
                         Materi Ke<br>
-                        <span class="text-wa">Whatsaap</span> 
-                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 448 512" fill="var(--accent-green)" style="vertical-align: middle; margin: 0 2px 6px 2px;"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157.1zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+                        <span class="text-wa">Whatsaap</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 448 512"
+                            fill="var(--accent-green)" style="vertical-align: middle; margin: 0 2px 6px 2px;">
+                            <path
+                                d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157.1zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
+                        </svg>
                         dan<br>
                         <span class="text-email">Email</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24" style="vertical-align: middle; margin: 0 2px 6px 2px;">
-                            <rect x="2" y="5" width="20" height="14" rx="2" fill="#FFFFFF"/>
-                            <path d="M2 19l7.5-6 M22 19l-7.5-6" fill="none" stroke="#CBD5E1" stroke-width="1.5"/>
-                            <path d="M2 19V7c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2v12" fill="none" stroke="#EA4335" stroke-width="2.5" stroke-linecap="round"/>
-                            <path d="M2 6l10 7 10-7" fill="none" stroke="#EA4335" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24"
+                            style="vertical-align: middle; margin: 0 2px 6px 2px;">
+                            <rect x="2" y="5" width="20" height="14" rx="2" fill="#FFFFFF" />
+                            <path d="M2 19l7.5-6 M22 19l-7.5-6" fill="none" stroke="#CBD5E1" stroke-width="1.5" />
+                            <path d="M2 19V7c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2v12" fill="none" stroke="#EA4335"
+                                stroke-width="2.5" stroke-linecap="round" />
+                            <path d="M2 6l10 7 10-7" fill="none" stroke="#EA4335" stroke-width="3.5"
+                                stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                         Mu
                     </div>
@@ -788,7 +828,7 @@
         <div class="section-content">
             <div class="footer-img-placeholder gsap-fade-up">
                 <img src="assets/semuabisa.png" alt="Placeholder Image" style="width: 100%; height: 100%;">
-            
+
             </div>
 
             <div class="footer-bottom gsap-fade-up">
@@ -874,7 +914,7 @@
             orb.style.height = `${size}px`;
             orb.style.top = `${Math.random() * 80 + 10}vh`;
             orb.style.left = `${Math.random() * 80 + 10}vw`;
-            
+
             // Random floating animation
             gsap.to(orb, {
                 y: `+=${Math.random() * 100 - 50}`,
