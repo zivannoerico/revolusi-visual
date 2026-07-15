@@ -383,10 +383,18 @@
         }
 
         .form-card {
-            background: transparent;
-            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.05);
+            /* Sangat transparan agar blurnya kelihatan */
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            border-radius: 24px;
+            padding: 40px;
             position: relative;
             z-index: 2;
+            overflow: hidden;
+            transform: translateZ(0);
         }
 
         .form-heading {
@@ -693,7 +701,8 @@
                 </div>
                 <!-- Panca Tengah -->
                 <div class="panca-img-placeholder panca-center">
-                    <img src="assets/panca_indra_sketch.png" alt="Panca Indra Sketch" style="width: 100%; height: 100%;">
+                    <img src="assets/panca_indra_sketch.png" alt="Panca Indra Sketch"
+                        style="width: 100%; height: 100%;">
                 </div>
                 <!-- Panca Kanan -->
                 <div class="panca-text right panca-right" style="color: var(--primary);">
@@ -731,25 +740,30 @@
             <div class="form-wrapper gsap-fade-up">
                 <div class="form-bg"></div>
                 <div class="form-card">
-                    <div class="form-heading" style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 20px;">
+                    <div class="form-heading"
+                        style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 20px;">
                         Dapatkan Akses Instan PDF Premium<br>
                         'Revi Brain' Siap Cetak
                     </div>
 
                     <form action="#" method="POST" style="max-width: 400px; position: relative; z-index: 3;">
                         <div class="form-group" style="margin-bottom: 15px;">
-                            <label style="display: block; color: #fff; font-size: 16px; margin-bottom: 5px;">Namamu</label>
-                            <input type="text" class="form-input" placeholder="andrian dito" style="background: #fff; color: #000; border-radius: 0; padding: 10px 15px; width: 100%; border: none;">
+                            <label
+                                style="display: block; color: #fff; font-size: 16px; margin-bottom: 5px;">Namamu</label>
+                            <input type="text" class="form-input" placeholder="andrian dito">
                         </div>
                         <div class="form-group" style="margin-bottom: 15px;">
-                            <label style="display: block; color: #fff; font-size: 16px; margin-bottom: 5px;">Nomor</label>
-                            <input type="tel" class="form-input" placeholder="08283..." style="background: #fff; color: #000; border-radius: 0; padding: 10px 15px; width: 100%; border: none;">
+                            <label
+                                style="display: block; color: #fff; font-size: 16px; margin-bottom: 5px;">Nomor</label>
+                            <input type="tel" class="form-input" placeholder="08283...">
                         </div>
                         <div class="form-group" style="margin-bottom: 35px;">
-                            <label style="display: block; color: #fff; font-size: 16px; margin-bottom: 5px;">Email 📩</label>
-                            <input type="email" class="form-input" placeholder="andriandito@gmail.com" style="background: #fff; color: #000; border-radius: 0; padding: 10px 15px; width: 100%; border: none;">
+                            <label style="display: block; color: #fff; font-size: 16px; margin-bottom: 5px;">Email
+                                📩</label>
+                            <input type="email" class="form-input" placeholder="andriandito@gmail.com">
                         </div>
-                        <button type="submit" class="btn-submit" style="background: linear-gradient(90deg, #FDE047, #FACC15); color: #000; box-shadow: 4px 4px 0 #EA580C; border-radius: 30px; width: max-content; font-weight: 900; font-family: serif; font-size: 22px; padding: 10px 40px; margin-top: 0; text-transform: none; letter-spacing: 0;">Kirim</button>
+                        <button type="submit" class="btn-submit"
+                            style="background: linear-gradient(90deg, #FDE047, #FACC15); color: #000; box-shadow: 4px 4px 0 #EA580C; border-radius: 30px; width: max-content; font-weight: 900; font-family: serif; font-size: 22px; padding: 10px 40px; margin-top: 0; text-transform: none; letter-spacing: 0;">Kirim</button>
                     </form>
                 </div>
             </div>
