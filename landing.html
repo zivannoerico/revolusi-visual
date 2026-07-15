@@ -354,6 +354,7 @@
             background: transparent;
             padding-bottom: 100px;
             z-index: 4000;
+            overflow: hidden;
         }
 
         .sticky-title-wrapper {
@@ -395,18 +396,18 @@
 
         .form-bg {
             position: absolute;
-            top: -300px;
-            left: -270px;
-            width: 1200px;
-            height: 1200px;
+            bottom: -200px;
+            right: -200px;
+            width: 1400px;
+            height: 1400px;
             background-image: url('assets/rocket_sketch.png');
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
-            z-index: 1;
-            opacity: 0.1;
+            z-index: 0;
+            opacity: 0.05;
             mix-blend-mode: screen;
-            transform: rotate(18deg) scale(1.6);
+            transform: rotate(20deg);
             pointer-events: none;
             display: block;
         }
@@ -709,33 +710,36 @@
             z-index: 1;
         }
 
-        /* .btn-submit::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 8px;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, #F59E0B, #EA580C);
-    border-radius: 9999px 8px 9999px 9999px;
-    z-index: -1;
-} */
-
-        /* .btn-submit::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 16px;
-    width: 100%;
-    height: 100%;
-    background: #EA580C;
-    border-radius: 9999px 8px 9999px 9999px;
-    z-index: -2;
-} */
+        /* Glow Orbs */
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: floatOrb 10s infinite ease-in-out alternate;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .orb-1 {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent);
+            top: -100px; left: -100px;
+        }
+        .orb-2 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.4), transparent);
+            bottom: -200px; right: -100px;
+            animation-delay: -5s;
+        }
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, -50px) scale(1.1); }
+        }
     </style>
 </head>
 
 <body>
+    <div id="tsparticles" style="position: fixed; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.5;"></div>
     <div class="grain-overlay"></div>
     <div class="cursor-glow" id="cursorGlow"></div>
     <!-- Section 1: Hero -->
@@ -786,8 +790,10 @@
     </div>
 
     <!-- Section 3: Faktanya -->
-    <div class="full-section faktanya-section-container">
-        <div class="section-content faktanya-layout gsap-fade-up">
+    <div class="full-section faktanya-section-container" style="position: relative; overflow: hidden;">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+        <div class="section-content faktanya-layout gsap-fade-up" style="position: relative; z-index: 2;">
             <div class="faktanya-img-col" data-tilt data-tilt-max="10" data-tilt-speed="400"
                 data-tilt-perspective="1000">
                 <img class="parallax-img mask-reveal" src="assets/otak_transparent.png" alt="Otak Image"
@@ -806,12 +812,12 @@
 
     <!-- Section 4: Form (GSAP PIN & SCROLL) -->
     <div class="form-section-container form-pin-trigger">
+        <div class="form-bg"></div>
         <div class="sticky-title-wrapper form-title-pin">
             <div class="form-title">Mau Tau Lebih?</div>
         </div>
 
         <div class="p scroll-up-form-wrapper">
-            <div class="form-bg"></div>
             <div class=" form-wrapper gsap-fade-up">
                 <div class="form-card">
                     <div class="form-heading"
@@ -988,6 +994,33 @@
 
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <!-- tsParticles -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <script>
+        tsParticles.load("tsparticles", {
+            fpsLimit: 60,
+            particles: {
+                number: { value: 60, density: { enable: true, value_area: 800 } },
+                color: { value: "#ffffff" },
+                links: { enable: true, color: "#ffffff", distance: 150, opacity: 0.2, width: 1 },
+                move: { enable: true, speed: 1.5, direction: "none", random: false, straight: false, outModes: { default: "bounce" } },
+                size: { value: 3, random: true },
+                opacity: { value: 0.5 }
+            },
+            interactivity: {
+                events: {
+                    onHover: { enable: true, mode: "grab" },
+                    onClick: { enable: true, mode: "push" },
+                    resize: true
+                },
+                modes: {
+                    grab: { distance: 200, links: { opacity: 0.5 } },
+                    push: { quantity: 4 }
+                }
+            },
+            detectRetina: true
+        });
+    </script>
 </body>
 
 </html>
