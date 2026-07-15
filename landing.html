@@ -47,6 +47,28 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* 1 & 5. Premium Effects: Grain and Glow */
+        .grain-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.08) 0%, rgba(251, 191, 36, 0) 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 1; /* Below content but above background */
+            transition: left 0.1s ease-out, top 0.1s ease-out;
+        }
+
         /* Continuous Animations (Float & Glow) */
         @keyframes float {
             0% {
@@ -672,7 +694,8 @@
 </head>
 
 <body>
-
+    <div class="grain-overlay"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
     <!-- Section 1: Hero -->
     <div class="full-section hero-section">
         <div class="section-content">
@@ -686,9 +709,9 @@
                     <div class="hero-subtitle">Tinggalkan metode hafalan usang. Ubah ratusan halaman teks menjadi visual
                         memukau yang bikin anak paham lebih cepat dan betah belajar.</div>
                 </div>
-                <div class="hero-img-placeholder rocket-container">
-                    <img id="heroRocket" src="assets/rocket_sketch.png" alt="Rocket Sketch"
-                        style="width: 250px; height: auto; filter: invert(1) drop-shadow(0 0 15px rgba(255,255,255,0.3)); mix-blend-mode: screen;">
+                <div class="hero-img-placeholder rocket-container" style="justify-content: flex-end; padding-right: 0; position: relative;" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-perspective="1000" data-tilt-glare data-tilt-max-glare="0.2">
+                    <img id="heroRocket" class="parallax-img mask-reveal" src="assets/orang_menguap.png" alt="Orang Menguap"
+                        style="width: 500px; height: auto; filter: drop-shadow(0 0 25px rgba(255,255,255,0.2)); transform: translate(110px, 40px); position: relative; z-index: 5;">
                 </div>
             </div>
         </div>
@@ -703,8 +726,8 @@
                     SEJATINYA<br>CARA<br>MANUSIA<br>NGERESPON<br>ITU PAKE
                 </div>
                 <!-- Panca Tengah -->
-                <div class="panca-img-placeholder panca-center">
-                    <img src="assets/panca_indra_sketch.png" alt="Panca Indra Sketch"
+                <div class="panca-img-placeholder panca-center" data-tilt data-tilt-max="15" data-tilt-speed="400" data-tilt-perspective="1000">
+                    <img class="parallax-img mask-reveal" src="assets/panca_indra_sketch.png" alt="Panca Indra Sketch"
                         style="width: 100%; height: 100%;">
                 </div>
                 <!-- Panca Kanan -->
@@ -718,13 +741,13 @@
     <!-- Section 3: Faktanya -->
     <div class="full-section faktanya-section-container">
         <div class="section-content faktanya-layout gsap-fade-up">
-            <div class="faktanya-img-col">
-                <img src="assets/otak_transparent.png" alt="Otak Image"
+            <div class="faktanya-img-col" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-perspective="1000">
+                <img class="parallax-img mask-reveal" src="assets/otak_transparent.png" alt="Otak Image"
                     style="width: 100%; height: auto; border-radius: 20px;">
             </div>
             <div class="faktanya-text-col">
                 <div class="faktanya-header">Faktanya</div>
-                <div class="faktanya-percent">90%</div>
+                <div class="faktanya-percent">0%</div>
                 <div class="faktanya-desc">
                     Informasi yang terkirim<br>ke otak adalah<br>
                     <span>Visual / Gambar</span>
@@ -860,23 +883,62 @@
             opacity: 0,
             y: -50
         });
-
-        // Rocket Flying Animation on Scroll
-        gsap.to("#heroRocket", {
+        // Counter Animation for Faktanya 90%
+        let counterElement = document.querySelector(".faktanya-percent");
+        let countObj = { val: 0 };
+        gsap.to(countObj, {
+            val: 90,
+            roundProps: "val",
+            duration: 2.5,
+            ease: "power3.out",
             scrollTrigger: {
-                trigger: ".hero-section",
-                start: "top top",
-                end: "+=800", // Terbang ke atas seiring scroll ke bawah
-                scrub: 1
+                trigger: ".faktanya-section-container",
+                start: "top 75%", // Mulai animasi saat section terlihat 25% dari bawah
+                toggleActions: "play none none none"
             },
-            y: -600,       // Terbang ke atas
-            x: 400,        // Agak serong ke kanan
-            scale: 0.5,    // Mengecil seolah menjauh
-            opacity: 0,    // Menghilang di kejauhan
-            rotation: 15,  // Miring sedikit saat terbang
-            ease: "power1.inOut"
+            onUpdate: function() {
+                counterElement.innerText = countObj.val + "%";
+            }
         });
+        // 3. Mouse-tracking Glow
+        const cursorGlow = document.getElementById('cursorGlow');
+        document.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+        // 4. Parallax Scroll
+        gsap.utils.toArray('.parallax-img').forEach(img => {
+            gsap.to(img, {
+                yPercent: 15,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: img.parentElement,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+        });
+
+        // 5. Masking Reveal Halus
+        gsap.utils.toArray('.mask-reveal').forEach(el => {
+            gsap.fromTo(el, 
+                { clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" },
+                { 
+                    clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+                    duration: 1.5,
+                    ease: "power3.inOut",
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%",
+                        toggleActions: "play none none none"
+                    }
+                }
+            );
+        });
+
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 </body>
 
 </html>
