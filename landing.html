@@ -327,7 +327,7 @@
             position: relative;
             background: transparent;
             padding-bottom: 100px;
-            z-index: 4;
+            z-index: 4000;
         }
 
         .sticky-title-wrapper {
@@ -336,7 +336,8 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            z-index: 1;
+            z-index: 0;
+            position: relative;
         }
 
         .form-title {
@@ -351,9 +352,10 @@
 
         .scroll-up-form-wrapper {
             position: relative;
-            z-index: 2;
+            z-index: 999;
             width: 100%;
             margin-top: -15vh;
+            transform: translateZ(100px);
         }
 
         .form-wrapper {
@@ -375,7 +377,7 @@
             background-repeat: no-repeat;
             z-index: 1;
             opacity: 0.4;
-            filter: invert(1);
+            filter: invert(1) blur(15px);
             mix-blend-mode: screen;
             transform: rotate(45deg);
             pointer-events: none;
@@ -759,7 +761,7 @@
                         </div>
                         <div class="form-group" style="margin-bottom: 35px;">
                             <label style="display: block; color: #fff; font-size: 16px; margin-bottom: 5px;">Email
-                                📩</label>
+                                </label>
                             <input type="email" class="form-input" placeholder="andriandito@gmail.com">
                         </div>
                         <button type="submit" class="btn-submit"
@@ -828,16 +830,7 @@
 
 
         // 4. ANIMASI STICKY TITLE FORM SECTION
-        // Berikan jeda saat di-scroll sebelum form naik menutupi title
-        ScrollTrigger.create({
-            trigger: ".form-pin-trigger",
-            start: "top top",
-            end: "+=50%", // Jeda scroll sejauh 50% viewport
-            pin: ".scroll-up-form-wrapper",
-            pinSpacing: true
-        });
-
-        // Sticky title tetap pada posisinya
+        // Pindahkan title pin ke atas agar dibuat lebih dulu oleh GSAP
         ScrollTrigger.create({
             trigger: ".form-pin-trigger",
             start: "top top",
@@ -846,7 +839,26 @@
             pinSpacing: false
         });
 
+        // Form pin (akan menutupi title karena dibuat setelahnya)
+        ScrollTrigger.create({
+            trigger: ".form-pin-trigger",
+            start: "top top",
+            end: "+=50%",
+            pin: ".scroll-up-form-wrapper",
+            pinSpacing: true
+        });
 
+        // Fade out title saat form menggulung naik
+        gsap.to(".form-title", {
+            scrollTrigger: {
+                trigger: ".form-pin-trigger",
+                start: "top top",
+                end: "+=40%",
+                scrub: true
+            },
+            opacity: 0,
+            y: -50
+        });
 
         // Rocket Flying Animation on Scroll
         gsap.to("#heroRocket", {
