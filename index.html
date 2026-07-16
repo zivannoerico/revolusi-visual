@@ -112,7 +112,6 @@
             align-items: center;
             padding: 40px 5%;
             position: relative;
-            overflow: hidden;
         }
 
         .section-content {
@@ -354,7 +353,6 @@
             background: transparent;
             padding-bottom: 100px;
             z-index: 4000;
-            overflow: hidden;
         }
 
         .sticky-title-wrapper {
@@ -701,6 +699,60 @@
                 margin-right: 0;
                 margin-bottom: 20px;
             }
+
+            /* Tulisan vs Visual Mobile */
+            .vs-section {
+                padding: 60px 5% !important;
+            }
+
+            .vs-header {
+                flex-direction: column;
+                gap: 15px;
+                margin-bottom: 40px;
+            }
+
+            .vs-bar-left, .vs-bar-right {
+                width: 100%;
+                text-align: center !important;
+                padding: 12px 20px;
+                border-radius: 99px;
+            }
+
+            .vs-circle {
+                margin: 10px 0;
+                width: 120px;
+                height: 120px;
+                font-size: 16px;
+                border-width: 5px;
+            }
+
+            .vs-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+
+            .vs-text-desc {
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+
+            .vs-stat-num {
+                font-size: 70px;
+            }
+
+            .vs-stat-label {
+                font-size: 24px;
+            }
+
+            .vs-sketch-img {
+                max-width: 260px;
+            }
+
+            /* Semua Bisa Menulis Mobile */
+            .menulis-title {
+                font-size: 36px !important;
+                gap: 15px;
+            }
         }
 
         .logo-img {
@@ -745,6 +797,198 @@
         @keyframes floatOrb {
             0% { transform: translate(0, 0) scale(1); }
             100% { transform: translate(50px, -50px) scale(1.1); }
+        }
+
+        /* --- SECTION 2a & 2b: TULISAN VS VISUAL & SEMUA BISA --- */
+        .vs-section {
+            background: #ffffff;
+            color: #000000;
+            padding: 80px 8%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .vs-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .vs-bar-left {
+            flex: 1;
+            background: #000000;
+            color: #FBBF24;
+            font-weight: 900;
+            font-size: 20px;
+            text-align: right;
+            padding: 15px 40px 15px 20px;
+            text-transform: uppercase;
+            border-radius: 99px 0 0 99px;
+            letter-spacing: 0.5px;
+        }
+
+        .vs-circle {
+            width: 160px;
+            height: 160px;
+            background: #000000;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #FBBF24;
+            font-weight: 900;
+            font-size: 20px;
+            line-height: 1.2;
+            z-index: 2;
+            margin: 0 -30px;
+            border: 8px solid #ffffff;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .vs-circle span {
+            color: #ffffff;
+        }
+
+        .vs-bar-right {
+            flex: 1;
+            background: #FBBF24;
+            color: #000000;
+            font-weight: 900;
+            font-size: 20px;
+            text-align: left;
+            padding: 15px 20px 15px 40px;
+            text-transform: uppercase;
+            border-radius: 0 99px 99px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .vs-content {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: stretch;
+            gap: 60px;
+        }
+
+        .vs-left-col {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: left;
+        }
+
+        .vs-text-desc {
+            font-size: 22px;
+            line-height: 1.7;
+            color: #111111;
+            font-weight: 400;
+            margin-bottom: 40px;
+        }
+
+        .vs-stat-box {
+            display: flex;
+            align-items: flex-end;
+            gap: 15px;
+            color: #000000;
+        }
+
+        .vs-stat-num {
+            font-size: 90px;
+            font-weight: 900;
+            line-height: 0.8;
+            letter-spacing: -2px;
+        }
+
+        .vs-stat-label {
+            font-size: 32px;
+            font-weight: 400;
+            padding-bottom: 5px;
+            color: #000000;
+        }
+
+        .vs-right-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .vs-sketch-img {
+            width: 100%;
+            max-width: 320px;
+            height: auto;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+
+        .vs-logo-watermark {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: auto;
+            pointer-events: none;
+        }
+
+        .vs-logo-watermark img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Section 2b */
+        .menulis-section {
+            background: #000000;
+            color: #ffffff;
+            padding: 100px 5%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .menulis-title {
+            font-size: 64px;
+            font-weight: 900;
+            text-align: center;
+            line-height: 1.6;
+            letter-spacing: 1px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .menulis-line {
+            position: relative;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .menulis-logo-watermark {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: auto;
+            pointer-events: none;
+        }
+
+        .menulis-logo-watermark img {
+            width: 100%;
+            height: auto;
         }
     </style>
 </head>
@@ -800,10 +1044,67 @@
         </div>
     </div>
 
+    <!-- Section 2a: Tulisan VS Visual -->
+    <div class="full-section vs-section">
+        <div class="vs-header gsap-fade-up">
+            <div class="vs-bar-left">PENJELASAN TULISAN</div>
+            <div class="vs-circle">
+                TULISAN<br><span>VS</span><br>VISUAL
+            </div>
+            <div class="vs-bar-right">PENJELASAN GAMBAR/ VISUAL</div>
+        </div>
+        
+        <div class="vs-content gsap-fade-up">
+            <div class="vs-left-col">
+                <p class="vs-text-desc">
+                    Seorang anak sedang memegang balon dan tangan kanan bemegang pinggang, dia menggunakan celana panjang dan tersenyum. Suasana siang hari karena matahri bersinar dengan terang, terdapat 2 awan di langit Dia berdiri di rumput dan ada 3 pohon berbentuk segitiga dan 2 pohon berbentuk bulat di sebelah kiri dan kanannya.
+                </p>
+                <div class="vs-stat-box">
+                    <div class="vs-stat-num">
+                        <span style="font-size: 50px; font-weight: 900; vertical-align: middle; margin-right: 5px;">±</span>506
+                    </div>
+                    <div class="vs-stat-label">bentuk</div>
+                </div>
+            </div>
+            
+            <div class="vs-right-col">
+                <img class="vs-sketch-img" src="assets/anak_balon_sketch.png" alt="Anak Balon Sketch">
+                <div class="vs-stat-box">
+                    <div class="vs-stat-num">44</div>
+                    <div class="vs-stat-label">bentuk</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="vs-logo-watermark">
+            <img src="assets/revolusivisual.png" alt="Logo">
+        </div>
+    </div>
+
+    <!-- Section 2b: Semua Orang Bisa Menulis Kan? -->
+    <div class="full-section menulis-section">
+        <div class="menulis-title gsap-fade-up">
+            <span class="menulis-line">
+                SEMUA ORANG
+                <svg viewBox="0 0 100 10" preserveAspectRatio="none" style="position: absolute; bottom: -5px; left: 0; width: 100%; height: 12px; pointer-events: none;">
+                    <path d="M 5 5 Q 50 2, 95 6 T 98 5" stroke="#FBBF24" stroke-width="4" fill="none" stroke-linecap="round" />
+                </svg>
+            </span>
+            <span class="menulis-line">
+                BISA MENULIS KAN?
+                <svg viewBox="0 0 100 10" preserveAspectRatio="none" style="position: absolute; bottom: -5px; left: 0; width: 100%; height: 12px; pointer-events: none;">
+                    <path d="M 2 4 Q 48 6, 95 3 T 97 5" stroke="#FBBF24" stroke-width="4" fill="none" stroke-linecap="round" />
+                </svg>
+            </span>
+        </div>
+        
+        <div class="menulis-logo-watermark">
+            <img src="assets/revolusivisual.png" alt="Logo">
+        </div>
+    </div>
+
     <!-- Section 3: Faktanya -->
-    <div class="full-section faktanya-section-container" style="position: relative; overflow: hidden;">
-        <div class="glow-orb orb-1"></div>
-        <div class="glow-orb orb-2"></div>
+    <div class="full-section faktanya-section-container" style="position: relative;">
         <div class="section-content faktanya-layout gsap-fade-up" style="position: relative; z-index: 2;">
             <div class="faktanya-img-col" data-tilt data-tilt-max="10" data-tilt-speed="400"
                 data-tilt-perspective="1000">
