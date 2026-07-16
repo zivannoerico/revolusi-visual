@@ -397,10 +397,9 @@
         .form-bg {
             position: absolute;
             bottom: -200px;
-            right: -200px;
+            right: -400px;
             width: 1400px;
             height: 1400px;
-            background-image: url('assets/rocket_sketch.png');
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
@@ -473,6 +472,18 @@
         .form-input::placeholder {
             color: rgba(148, 163, 184, 0.6);
             font-weight: 300;
+        }
+
+        .form-input[type="number"]::-webkit-inner-spin-button,
+        .form-input[type="number"]::-webkit-outer-spin-button {
+            background-color: transparent;
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Jika pengguna menggunakan Firefox */
+        .form-input[type="number"] {
+            -moz-appearance: textfield;
         }
 
         .btn-submit {
