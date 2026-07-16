@@ -719,7 +719,7 @@
             }
 
             .vs-circle {
-                margin: 10px 0;
+                margin: 10px 10;
                 width: 120px;
                 height: 120px;
                 font-size: 16px;
@@ -752,6 +752,12 @@
             .menulis-title {
                 font-size: 36px !important;
                 gap: 15px;
+            }
+
+            .garis {
+                width: 100% !important;
+                height: 1px !important;
+                margin: 30px 0 !important;
             }
         }
 
@@ -801,7 +807,6 @@
 
         /* --- SECTION 2a & 2b: TULISAN VS VISUAL & SEMUA BISA --- */
         .vs-section {
-            background: #ffffff;
             color: #000000;
             padding: 80px 8%;
             display: flex;
@@ -823,7 +828,7 @@
 
         .vs-bar-left {
             flex: 1;
-            background: #000000;
+            background: #ffffff;
             color: #FBBF24;
             font-weight: 900;
             font-size: 20px;
@@ -855,6 +860,7 @@
         }
 
         .vs-circle span {
+         margin-top: 17px;
             color: #ffffff;
         }
 
@@ -890,7 +896,7 @@
         .vs-text-desc {
             font-size: 22px;
             line-height: 1.7;
-            color: #111111;
+            color: #ffffff;
             font-weight: 400;
             margin-bottom: 40px;
         }
@@ -948,7 +954,6 @@
 
         /* Section 2b */
         .menulis-section {
-            background: #000000;
             color: #ffffff;
             padding: 100px 5%;
             display: flex;
@@ -989,6 +994,16 @@
         .menulis-logo-watermark img {
             width: 100%;
             height: auto;
+        }
+        .judul-vs{
+            color: #ffffff;
+            margin-bottom: 40px;
+        }
+        .garis {
+            background: rgba(243, 242, 242, 0.583);
+            width: 1px;
+            align-self: stretch;
+            margin: 0 10px;
         }
     </style>
 </head>
@@ -1046,10 +1061,11 @@
 
     <!-- Section 2a: Tulisan VS Visual -->
     <div class="full-section vs-section">
+        <h1 class="judul-vs">kamu lebih paham mana</h1>
         <div class="vs-header gsap-fade-up">
             <div class="vs-bar-left">PENJELASAN TULISAN</div>
             <div class="vs-circle">
-                TULISAN<br><span>VS</span><br>VISUAL
+                TULISAN<br><span>atau</span><br>VISUAL
             </div>
             <div class="vs-bar-right">PENJELASAN GAMBAR/ VISUAL</div>
         </div>
@@ -1067,6 +1083,8 @@
                 </div>
             </div>
             
+            <div class="garis"></div>
+            
             <div class="vs-right-col">
                 <img class="vs-sketch-img" src="assets/anak_balon_sketch.png" alt="Anak Balon Sketch">
                 <div class="vs-stat-box">
@@ -1076,9 +1094,6 @@
             </div>
         </div>
         
-        <div class="vs-logo-watermark">
-            <img src="assets/revolusivisual.png" alt="Logo">
-        </div>
     </div>
 
     <!-- Section 2b: Semua Orang Bisa Menulis Kan? -->
@@ -1098,9 +1113,7 @@
             </span>
         </div>
         
-        <div class="menulis-logo-watermark">
-            <img src="assets/revolusivisual.png" alt="Logo">
-        </div>
+       
     </div>
 
     <!-- Section 3: Faktanya -->
