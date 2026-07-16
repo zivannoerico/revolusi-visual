@@ -904,7 +904,7 @@
             display: flex;
             align-items: flex-end;
             gap: 15px;
-            color: #000000;
+            color: #ffffff;
         }
 
         .vs-stat-num {
@@ -918,7 +918,7 @@
             font-size: 32px;
             font-weight: 400;
             padding-bottom: 5px;
-            color: #000000;
+            color: #ffffff;
         }
 
         .vs-right-col {
@@ -1075,7 +1075,7 @@
                 </p>
                 <div class="vs-stat-box">
                     <div class="vs-stat-num">
-                        <span style="font-size: 50px; font-weight: 900; vertical-align: middle; margin-right: 5px;">±</span>506
+                        <span style="font-size: 50px; font-weight: 900; vertical-align: middle; margin-right: 5px;">±</span><span class="vs-counter" data-target="506">0</span>
                     </div>
                     <div class="vs-stat-label">bentuk</div>
                 </div>
@@ -1086,7 +1086,7 @@
             <div class="vs-right-col">
                 <img class="vs-sketch-img" src="assets/anak_balon_sketch.png" alt="Anak Balon Sketch">
                 <div class="vs-stat-box">
-                    <div class="vs-stat-num">44</div>
+                    <div class="vs-stat-num"><span class="vs-counter" data-target="44">0</span></div>
                     <div class="vs-stat-label">bentuk</div>
                 </div>
             </div>
@@ -1277,6 +1277,26 @@
             onUpdate: function () {
                 counterElement.innerText = countObj.val + "%";
             }
+        });
+
+        // Counter Animation for VS Section
+        gsap.utils.toArray(".vs-counter").forEach(counter => {
+            let targetVal = parseInt(counter.getAttribute("data-target"));
+            let cObj = { val: 0 };
+            gsap.to(cObj, {
+                val: targetVal,
+                roundProps: "val",
+                duration: 2.5,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: ".vs-section",
+                    start: "top 75%",
+                    toggleActions: "play none none none"
+                },
+                onUpdate: function () {
+                    counter.innerText = cObj.val;
+                }
+            });
         });
         // 3. Mouse-tracking Glow
         const cursorGlow = document.getElementById('cursorGlow');
