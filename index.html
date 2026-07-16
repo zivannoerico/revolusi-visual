@@ -611,11 +611,24 @@
                 font-size: 32px;
             }
 
+            .hero-subtitle {
+                font-size: 16px;
+                margin-top: 20px;
+                line-height: 1.6;
+            }
+
             .hero-img-placeholder {
                 width: 100%;
                 max-width: 100%;
                 margin-top: 40px;
-                height: 300px;
+                height: auto;
+                justify-content: center !important;
+            }
+
+            #heroRocket {
+                transform: none !important;
+                width: 90% !important;
+                max-width: 350px !important;
             }
 
             .panca-indra {
@@ -624,10 +637,18 @@
                 text-align: center;
             }
 
-            .panca-text.right,
             .panca-text {
                 text-align: center;
                 width: 100%;
+                font-size: 24px;
+            }
+
+            .panca-text.right {
+                margin-top: 20px;
+            }
+
+            .desktop-br {
+                display: none;
             }
 
             .panca-text::before,
@@ -640,6 +661,7 @@
             .panca-img-placeholder {
                 width: 100%;
                 height: 300px;
+                margin-top: 0;
             }
 
             .faktanya-card {
@@ -651,9 +673,10 @@
                 margin-bottom: 40px;
             }
 
-            .faktanya-body {
+            .faktanya-layout {
                 flex-direction: column;
                 text-align: center;
+                gap: 40px;
             }
 
             .faktanya-stats {
@@ -722,7 +745,7 @@
             }
 
             .vs-circle {
-                margin: 10px 10;
+                margin: 10px 0;
                 width: 120px;
                 height: 120px;
                 font-size: 16px;
@@ -1045,7 +1068,7 @@
             <div class="section-content panca-indra panca-trigger">
                 <!-- Panca Kiri -->
                 <div class="panca-text panca-left">
-                    SEJATINYA<br>CARA<br>MANUSIA<br>NGERESPON<br>ITU PAKE
+                    SEJATINYA <br class="desktop-br">CARA <br class="desktop-br">MANUSIA <br class="desktop-br">NGERESPON <br class="desktop-br">ITU PAKE
                 </div>
                 <!-- Panca Tengah -->
                 <div class="panca-img-placeholder panca-center" data-tilt data-tilt-max="15" data-tilt-speed="400"
@@ -1055,7 +1078,7 @@
                 </div>
                 <!-- Panca Kanan -->
                 <div class="panca-text right panca-right" style="color: var(--primary);">
-                    MATA<br>HIDUNG<br>MULUT<br>TELINGA<br>RABA
+                    MATA <br class="desktop-br">HIDUNG <br class="desktop-br">MULUT <br class="desktop-br">TELINGA <br class="desktop-br">RABA
                 </div>
             </div>
         </div>
