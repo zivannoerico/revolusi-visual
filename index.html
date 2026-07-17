@@ -459,24 +459,17 @@
 
         .form-card {
             overflow: hidden;
-            background: #11110f;
-            border: 1px solid rgba(255, 255, 255, 0.13);
-            border-radius: 20px;
-            padding: 48px;
+            background: #080808;
+            border: 1px solid #1a1a1a;
+            border-radius: 4px;
+            padding: 56px 48px;
             position: relative;
             z-index: 2;
             transform: translateZ(0);
-            box-shadow: 0 28px 70px rgba(0, 0, 0, 0.42);
         }
 
         .form-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 48px;
-            right: 48px;
-            height: 2px;
-            background: var(--primary);
+            display: none;
         }
 
         .form-card::after {
@@ -492,21 +485,22 @@
 
         .form-heading {
             max-width: 520px;
-            font-size: 30px;
-            font-weight: 600;
-            line-height: 1.18;
-            margin-bottom: 12px;
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 1.2;
+            margin-bottom: 16px;
             color: var(--text-light);
             text-align: left;
-            letter-spacing: -0.035em;
+            letter-spacing: -0.02em;
         }
 
         .form-description {
             max-width: 480px;
-            margin: 0 0 32px;
-            color: rgba(248, 250, 252, 0.62);
+            margin: 0 0 40px;
+            color: rgba(255, 255, 255, 0.5);
             font-size: 15px;
-            line-height: 1.55;
+            line-height: 1.6;
+            font-weight: 300;
         }
 
         .lead-form {
@@ -526,27 +520,27 @@
         }
 
         .form-group {
-            margin-bottom: 14px;
+            margin-bottom: 24px;
             position: relative;
         }
 
         .form-input {
             width: 100%;
-            padding: 26px 18px 9px;
-            background: #181816;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 10px;
+            padding: 20px 0 10px;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0;
             font-size: 16px;
-            font-weight: 400;
+            font-weight: 300;
             color: var(--text-light);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .form-input:focus {
             outline: none;
-            background: #1d1d19;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.12);
+            border-bottom-color: var(--primary);
+            box-shadow: 0 1px 0 var(--primary);
         }
 
         .form-input::placeholder {
@@ -555,21 +549,23 @@
 
         .form-group label {
             position: absolute;
-            top: 50%;
-            left: 18px;
-            transform: translateY(-50%);
-            color: rgba(148, 163, 184, 0.8);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            top: 22px;
+            left: 0;
+            color: rgba(255, 255, 255, 0.4);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
             font-size: 16px;
+            font-weight: 300;
         }
 
         .form-input:focus + label,
         .form-input:not(:placeholder-shown) + label {
-            top: 14px;
-            font-size: 12px;
-            color: #fcd34d;
-            font-weight: 600;
+            top: 0px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
 
         .form-input[type="number"]::-webkit-inner-spin-button,
@@ -585,39 +581,31 @@
         }
 
         .btn-submit {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            justify-content: space-between;
-            background: var(--primary);
-            border: 1px solid transparent;
-            padding: 17px 20px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 10px;
+            justify-content: center;
+            background: transparent;
+            border: 1px solid #333;
+            padding: 16px 32px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 4px;
             cursor: pointer;
-            margin-top: 15px;
-            color: #15120b;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            letter-spacing: 0.5px;
-            width: 100%;
-            box-shadow: 0 10px 20px -8px rgba(251, 191, 36, 0.45);
+            margin-top: 30px;
+            color: #fff;
+            transition: all 0.4s ease;
         }
 
         .btn-submit:hover {
-            transform: translateY(-2px);
-            background: #fcd34d;
-            box-shadow: 0 15px 25px -8px rgba(251, 191, 36, 0.55);
+            background: #fff;
+            color: #000;
+            border-color: #fff;
         }
 
         .btn-submit::after {
-            content: '→';
-            font-size: 22px;
-            line-height: 1;
-            transition: transform 0.3s ease;
-        }
-
-        .btn-submit:hover::after {
-            transform: translateX(4px);
+            display: none;
         }
 
         .form-note {
@@ -848,7 +836,8 @@
             }
 
             .btn-submit {
-                width: 100%;
+                width: auto;
+                padding: 14px 28px;
             }
 
             .footer-img-placeholder {
