@@ -1594,7 +1594,7 @@
                 </svg>
             </span>
         </div>
-        <p class="typewriter-text"></p>
+
     </div>
 
     <div class="full-section faktanya-section-container" style="position: relative;">
@@ -1900,29 +1900,6 @@
             },
             detectRetina: true
         });
-        // Typewriter Effect
-        const textToType = "Lalu kenapa menggambar masih sering dianggap murni sebagai bakat bawaan? Mari ubah pola pikir usang ini. Sama halnya seperti menulis huruf abjad, merangkai bahasa visual juga sangat bisa dipelajari oleh siapa saja.";
-        let i = 0;
-        const typeWriterElement = document.querySelector('.typewriter-text');
-        
-        if (typeWriterElement) {
-            ScrollTrigger.create({
-                trigger: ".menulis-section",
-                start: "top 60%",
-                onEnter: () => {
-                    if(i === 0) {
-                        function typeWriter() {
-                            if (i < textToType.length) {
-                                typeWriterElement.innerHTML += textToType.charAt(i);
-                                i++;
-                                setTimeout(typeWriter, 35);
-                            }
-                        }
-                        typeWriter();
-                    }
-                }
-            });
-        }
 
         // Back to top
         const backToTopBtn = document.getElementById("backToTop");
