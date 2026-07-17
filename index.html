@@ -104,16 +104,6 @@
             }
         }
 
-        .typewriter-cursor {
-            display: inline-block;
-            animation: blink 0.7s infinite;
-            color: var(--primary);
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -1586,9 +1576,7 @@
             </span>
         </div>
         
-        <div class="menulis-subtext gsap-fade-up" style="margin-top: 40px; font-size: 24px; color: #bbb; max-width: 800px; text-align: center; font-weight: 300; line-height: 1.6; min-height: 120px;">
-            <span class="typewriter-text"></span><span class="typewriter-cursor">|</span>
-        </div>
+
     </div>
 
     <!-- Section 3: Faktanya -->
@@ -1895,28 +1883,6 @@
             },
             detectRetina: true
         });
-        // Typewriter Effect
-        const textToType = "Lalu kenapa menggambar masih sering dianggap murni sebagai bakat bawaan? Mari ubah pola pikir usang ini. Sama halnya seperti menulis huruf abjad, merangkai bahasa visual juga sangat bisa dipelajari oleh siapa saja.";
-        let i = 0;
-        const typeWriterElement = document.querySelector('.typewriter-text');
-        
-        ScrollTrigger.create({
-            trigger: ".menulis-section",
-            start: "top 60%",
-            onEnter: () => {
-                if(i === 0) {
-                    function typeWriter() {
-                        if (i < textToType.length) {
-                            typeWriterElement.innerHTML += textToType.charAt(i);
-                            i++;
-                            setTimeout(typeWriter, 35);
-                        }
-                    }
-                    typeWriter();
-                }
-            }
-        });
-
         // Back to top
         const backToTopBtn = document.getElementById("backToTop");
         window.addEventListener("scroll", () => {
