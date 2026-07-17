@@ -1425,6 +1425,257 @@
                 transform: translateY(110%) translateZ(-150px) rotateX(-25deg);
             }
         }
+
+        /* Phone-only refinement: keep text comfortably sized and naturally wrapped. */
+        @media (max-width: 600px) {
+            .full-section {
+                padding: 52px 6%;
+            }
+
+            .hero-section {
+                min-height: auto;
+                padding-top: 72px;
+            }
+
+            .logo-box {
+                width: 92px;
+                height: 92px;
+                margin: 0 auto 28px;
+            }
+
+            .hero-text-content {
+                width: 100%;
+            }
+
+            .hero-title-1 {
+                max-width: 19ch;
+                margin-inline: auto;
+                font-size: clamp(32px, 9.5vw, 42px);
+                line-height: 1.14;
+                letter-spacing: -0.8px;
+            }
+
+            .hero-subtitle {
+                max-width: 34ch;
+                margin: 18px auto 0;
+                font-size: 15px;
+                line-height: 1.65;
+            }
+
+            .hero-img-placeholder {
+                margin-top: 26px;
+            }
+
+            #heroRocket {
+                width: min(88vw, 330px) !important;
+            }
+
+            .panca-indra {
+                gap: 26px;
+            }
+
+            .panca-text,
+            .panca-text.right {
+                max-width: 15ch;
+                margin-inline: auto;
+                font-size: clamp(21px, 6.5vw, 25px);
+                line-height: 1.28;
+            }
+
+            .panca-text.right {
+                margin-top: 12px;
+            }
+
+            .panca-img-placeholder {
+                height: 235px;
+            }
+
+            .judul-vs {
+                max-width: 14ch;
+                margin-bottom: 20px;
+                text-align: center;
+                font-size: 28px;
+                line-height: 1.15;
+            }
+
+            .vs-bar-left,
+            .vs-bar-right {
+                padding: 11px 16px;
+                font-size: 14px;
+                line-height: 1.25;
+            }
+
+            .vs-text-desc {
+                font-size: 16px;
+                line-height: 1.65;
+            }
+
+            .vs-stat-num {
+                font-size: 58px;
+            }
+
+            .vs-stat-label {
+                font-size: 20px;
+            }
+
+            .slideshow-title {
+                max-width: 17ch;
+                font-size: 28px;
+                line-height: 1.2;
+            }
+
+            .slideshow-desc {
+                max-width: 35ch;
+                font-size: 15px;
+                line-height: 1.65;
+            }
+
+            .slideshow-visual-col {
+                min-height: 360px;
+            }
+
+            .carousel-3d-container {
+                height: 390px;
+            }
+
+            .carousel-3d-viewport {
+                width: min(76vw, 280px);
+                height: auto;
+                aspect-ratio: 16 / 9;
+            }
+
+            .gerakan-section {
+                padding-inline: 6%;
+            }
+
+            .gerakan-content {
+                gap: 30px;
+            }
+
+            .gerakan-logo-col img {
+                max-width: 210px;
+            }
+
+            .gerakan-text-col {
+                width: 100%;
+                gap: 12px;
+            }
+
+            .gerakan-small-text {
+                max-width: 29ch;
+                font-size: 12px;
+                line-height: 1.45;
+            }
+
+            .gerakan-large-text {
+                max-width: 100%;
+                white-space: normal;
+                font-size: clamp(24px, 7vw, 28px);
+                line-height: 1.16;
+            }
+
+            .menulis-section {
+                min-height: 64vh;
+            }
+
+            .menulis-title {
+                width: 100%;
+                font-size: clamp(30px, 10vw, 36px) !important;
+                line-height: 1.18;
+                gap: 20px;
+            }
+
+            .menulis-line {
+                max-width: 100%;
+                white-space: normal;
+            }
+
+            .faktanya-section-container {
+                padding: 60px 6%;
+            }
+
+            .faktanya-layout {
+                gap: 28px;
+            }
+
+            .faktanya-img-col {
+                max-width: 300px;
+            }
+
+            .faktanya-header {
+                margin-bottom: 12px;
+                font-size: 28px;
+                letter-spacing: 3px;
+            }
+
+            .faktanya-percent {
+                font-size: 64px;
+            }
+
+            .faktanya-desc {
+                font-size: 16px;
+                line-height: 1.5;
+            }
+
+            .form-title {
+                max-width: 12ch;
+                font-size: 32px;
+                line-height: 1.15;
+            }
+
+            .scroll-up-form-wrapper {
+                margin-top: -9vh;
+                padding-inline: 6%;
+            }
+
+            .form-card {
+                padding: 28px 20px;
+                border-radius: 20px;
+            }
+
+            .form-heading {
+                font-size: 21px !important;
+                line-height: 1.35;
+            }
+
+            .form-card form {
+                max-width: none !important;
+            }
+
+            .footer-section {
+                margin-top: 12vh;
+            }
+
+            .footer-bottom {
+                align-items: center;
+                padding: 20px 0 0;
+            }
+
+            .footer-logo-img {
+                width: 92px;
+                height: 92px;
+            }
+
+            .footer-info {
+                margin-right: 0;
+            }
+
+            .footer-info-title {
+                font-size: 21px;
+            }
+
+            .footer-contact {
+                font-size: 16px;
+                overflow-wrap: anywhere;
+            }
+
+            .back-to-top {
+                right: 18px;
+                bottom: 18px;
+                width: 46px;
+                height: 46px;
+            }
+        }
     </style>
 </head>
 
