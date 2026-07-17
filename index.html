@@ -741,6 +741,15 @@
                 margin-bottom: 40px;
             }
 
+            .desktop-only {
+                display: none !important;
+            }
+
+            .mobile-only {
+                display: block !important;
+                margin-bottom: 20px;
+            }
+
             .vs-bar-left, .vs-bar-right {
                 width: 100%;
                 text-align: center !important;
@@ -749,11 +758,7 @@
             }
 
             .vs-circle {
-                margin: 10px 0;
-                width: 120px;
-                height: 120px;
-                font-size: 16px;
-                border-width: 5px;
+                display: none;
             }
 
             .vs-content {
@@ -994,6 +999,10 @@
             height: auto;
         }
 
+        .mobile-only {
+            display: none;
+        }
+
         /* Section 2b */
         .menulis-section {
             color: #ffffff;
@@ -1187,15 +1196,16 @@
     <div class="full-section vs-section">
         <h1 class="judul-vs">kamu lebih paham mana</h1>
         <div class="vs-header gsap-fade-up">
-            <div class="vs-bar-left">PENJELASAN TULISAN</div>
+            <div class="vs-bar-left desktop-only">PENJELASAN TULISAN</div>
             <div class="vs-circle">
                 TULISAN<br><span>atau</span><br>VISUAL
             </div>
-            <div class="vs-bar-right">PENJELASAN GAMBAR/ VISUAL</div>
+            <div class="vs-bar-right desktop-only">PENJELASAN GAMBAR/ VISUAL</div>
         </div>
         
         <div class="vs-content gsap-fade-up">
             <div class="vs-left-col">
+                <div class="vs-bar-left mobile-only">PENJELASAN TULISAN</div>
                 <p class="vs-text-desc">
                     Seorang anak sedang memegang balon dan tangan kanan bemegang pinggang, dia menggunakan celana panjang dan tersenyum. Suasana siang hari karena matahri bersinar dengan terang, terdapat 2 awan di langit Dia berdiri di rumput dan ada 3 pohon berbentuk segitiga dan 2 pohon berbentuk bulat di sebelah kiri dan kanannya.
                 </p>
@@ -1210,6 +1220,7 @@
             <div class="garis"></div>
             
             <div class="vs-right-col">
+                <div class="vs-bar-right mobile-only">PENJELASAN GAMBAR/ VISUAL</div>
                 <img class="vs-sketch-img" src="assets/anak_balon_sketch.png" alt="Anak Balon Sketch">
                 <div class="vs-stat-box">
                     <div class="vs-stat-num"><span class="vs-counter" data-target="44">0</span></div>
