@@ -510,7 +510,6 @@
         }
 
         .lead-form {
-            max-width: 520px;
             position: relative;
             z-index: 1;
         }
@@ -902,12 +901,12 @@
                 display: none !important;
             }
 
-            .vs-content {
+            .vs-dual-carousel {
                 flex-direction: column;
                 gap: 40px;
             }
 
-            .vs-left-col, .vs-text-desc {
+            .vs-text-slide, .vs-text-desc {
                 text-align: left;
             }
 
@@ -918,6 +917,24 @@
             .vs-text-desc {
                 font-size: 18px;
                 margin-bottom: 20px;
+            }
+
+            .vs-carousel-wrapper {
+                gap: 8px;
+            }
+
+            .vs-nav-btn {
+                width: 40px;
+                height: 40px;
+            }
+
+            .vs-nav-btn svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            .vs-dots {
+                margin-top: 30px;
             }
 
             .vs-stat-num {
@@ -950,7 +967,7 @@
         }
 
         .btn-submit {
-            width: 180px;
+            width: 100%;
             position: relative;
             padding: 10px 10px;
             border: none;
@@ -1084,9 +1101,10 @@
             letter-spacing: 0.5px;
         }
 
-        .vs-content {
+        .vs-dual-carousel {
             display: flex;
             width: 100%;
+            min-width: 0;
             max-width: 1170px;
             margin: 0 auto;
             justify-content: space-between;
@@ -1094,8 +1112,23 @@
             gap: 60px;
         }
 
-        .vs-left-col {
+        .vs-text-viewport {
             flex: 1.2;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .vs-text-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .vs-text-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            min-width: 0;
+            max-width: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -1109,6 +1142,7 @@
             font-weight: 400;
             margin-bottom: 40px;
             text-align: left;
+            width: 100%;
         }
 
         .vs-stat-box {
@@ -1133,8 +1167,23 @@
             color: #ffffff;
         }
 
-        .vs-right-col {
+        .vs-image-viewport {
             flex: 1;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .vs-image-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .vs-image-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            min-width: 0;
+            max-width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -1165,6 +1214,72 @@
 
         .mobile-only {
             display: none;
+        }
+
+        /* --- VS CAROUSEL --- */
+        .vs-carousel-wrapper {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 1170px;
+            margin: 0 auto;
+            gap: 24px;
+        }
+
+        .vs-nav-btn {
+            flex-shrink: 0;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 5;
+        }
+
+        .vs-nav-btn:hover {
+            background: var(--primary);
+            color: #000000;
+            transform: scale(1.12);
+            box-shadow: 0 0 25px var(--primary-glow);
+        }
+
+        .vs-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .vs-dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 50px;
+        }
+
+        .vs-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .vs-dot:hover {
+            background: rgba(251, 191, 36, 0.6);
+        }
+
+        .vs-dot.active {
+            background: var(--primary);
+            width: 34px;
+            border-radius: 99px;
         }
 
         /* Section 2b */
@@ -1821,33 +1936,110 @@
             <div class="vs-bar-right desktop-only">PENJELASAN GAMBAR/ VISUAL</div>
         </div>
         
-        <div class="vs-content gsap-fade-up">
-            <div class="vs-left-col">
-                <div class="vs-bar-left mobile-only">PENJELASAN TULISAN</div>
-                <p class="vs-text-desc">
-                    Seorang anak sedang memegang balon dan tangan kanan bemegang pinggang, dia menggunakan celana panjang dan tersenyum. Suasana siang hari karena matahri bersinar dengan terang, terdapat 2 awan di langit Dia berdiri di rumput dan ada 3 pohon berbentuk segitiga dan 2 pohon berbentuk bulat di sebelah kiri dan kanannya.
-                </p>
-                <div class="vs-stat-box">
-                    <div class="vs-stat-num">
-                        <span style="font-size: 50px; font-weight: 900; vertical-align: middle; margin-right: 5px;">±</span><span class="vs-counter" data-target="506">0</span>
+        <div class="vs-carousel-wrapper gsap-fade-up">
+            <button class="vs-nav-btn vs-nav-prev" aria-label="Sebelumnya">
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+
+            <div class="vs-dual-carousel">
+
+                <!-- TEXT CAROUSEL -->
+                <div class="vs-text-viewport">
+                    <div class="vs-text-track">
+
+                        <div class="vs-text-slide">
+                            <div class="vs-bar-left mobile-only">PENJELASAN TULISAN</div>
+                            <p class="vs-text-desc">
+                                Seorang anak sedang memegang balon dan tangan kanan bemegang pinggang, dia menggunakan celana panjang dan tersenyum. Suasana siang hari karena matahri bersinar dengan terang, terdapat 2 awan di langit Dia berdiri di rumput dan ada 3 pohon berbentuk segitiga dan 2 pohon berbentuk bulat di sebelah kiri dan kanannya.
+                            </p>
+                            <div class="vs-stat-box">
+                                <div class="vs-stat-num">
+                                    <span style="font-size: 50px; font-weight: 900; vertical-align: middle; margin-right: 5px;">±</span><span class="vs-counter" data-target="506">0</span>
+                                </div>
+                                <div class="vs-stat-label">bentuk</div>
+                            </div>
+                        </div>
+
+                        <div class="vs-text-slide">
+                            <div class="vs-bar-left mobile-only">PENJELASAN TULISAN</div>
+                            <p class="vs-text-desc">
+                                Disebuah meja dengan taplak hiasan ombak pinggirnya, terdapat telur mata sapi di atas piring bundar. Ada sendok garpu disebelah kiri piring, dan secangkir kopi hitam disebelah kanannya.
+                            </p>
+                            <div class="vs-stat-box">
+                                <div class="vs-stat-num">
+                                    <span style="font-size: 50px; font-weight: 900; vertical-align: middle; margin-right: 5px;">±</span><span class="vs-counter" data-target="260">0</span>
+                                </div>
+                                <div class="vs-stat-label">bentuk</div>
+                            </div>
+                        </div>
+
+                        <div class="vs-text-slide">
+                            <div class="vs-bar-left mobile-only">PENJELASAN TULISAN</div>
+                            <p class="vs-text-desc">
+                                Lemari persegi panjang dengan pintu terbuka dan 2 paku di dinding sebagai penguat. Terdapat 3 lantai, lantai atas terdapat sebuah botol berbentuk segitiga dan botol lonjong. Lantai tengah terdapat dua botol kaca. Lantai bawah terdapat tiga kotak berdiri ditopang dengan sebuah botol kecil. Semua botol ada sticker mereknya.
+                            </p>
+                            <div class="vs-stat-box">
+                                <div class="vs-stat-num">
+                                    <span style="font-size: 50px; font-weight: 900; vertical-align: middle; margin-right: 5px;">±</span><span class="vs-counter" data-target="400">0</span>
+                                </div>
+                                <div class="vs-stat-label">bentuk</div>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="vs-stat-label">bentuk</div>
                 </div>
-            </div>
-            
-            <div class="garis"></div>
-            
-            <div class="vs-right-col">
-                <div class="vs-bar-right mobile-only">PENJELASAN GAMBAR/ VISUAL</div>
-                <img class="vs-sketch-img" src="assets/anak_balon_sketch.png" alt="Anak Balon Sketch">
-                <div class="vs-stat-box">
-                    <div class="vs-stat-num"><span class="vs-counter" data-target="44">0</span></div>
-                    <div class="vs-stat-label">bentuk</div>
+
+                <div class="garis"></div>
+
+                <!-- IMAGE CAROUSEL -->
+                <div class="vs-image-viewport">
+                    <div class="vs-image-track">
+
+                        <div class="vs-image-slide">
+                            <div class="vs-bar-right mobile-only">PENJELASAN GAMBAR/ VISUAL</div>
+                            <img class="vs-sketch-img" src="assets/anak_balon_sketch.png" alt="Anak Balon Sketch">
+                            <div class="vs-stat-box">
+                                <div class="vs-stat-num"><span class="vs-counter" data-target="44">0</span></div>
+                                <div class="vs-stat-label">bentuk</div>
+                            </div>
+                        </div>
+
+                        <div class="vs-image-slide">
+                            <div class="vs-bar-right mobile-only">PENJELASAN GAMBAR/ VISUAL</div>
+                            <img class="vs-sketch-img" src="assets/sketch_telur.png" alt="Telur Mata Sapi Sketch">
+                            <div class="vs-stat-box">
+                                <div class="vs-stat-num"><span class="vs-counter" data-target="37">0</span></div>
+                                <div class="vs-stat-label">bentuk</div>
+                            </div>
+                        </div>
+
+                        <div class="vs-image-slide">
+                            <div class="vs-bar-right mobile-only">PENJELASAN GAMBAR/ VISUAL</div>
+                            <img class="vs-sketch-img" src="assets/sketch_lemari.png" alt="Lemari Botol Sketch">
+                            <div class="vs-stat-box">
+                                <div class="vs-stat-num"><span class="vs-counter" data-target="56">0</span></div>
+                                <div class="vs-stat-label">bentuk</div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
+
             </div>
+
+            <button class="vs-nav-btn vs-nav-next" aria-label="Berikutnya">
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
         </div>
-        
+
+        <div class="vs-dots">
+            <button class="vs-dot active" data-index="0" aria-label="Slide 1"></button>
+            <button class="vs-dot" data-index="1" aria-label="Slide 2"></button>
+            <button class="vs-dot" data-index="2" aria-label="Slide 3"></button>
+        </div>
+
     </div>
+
 
     <!-- Section 2a-1: 3D Vertical Slideshow Section -->
     <div class="full-section slideshow-section">
@@ -2203,8 +2395,88 @@
             init3dCarousel();
         }
 
+        // 6. VS Section Horizontal Dual-Carousel Logic (text track + image track, synced)
+        function initVsCarousel() {
+            const wrapper = document.querySelector('.vs-carousel-wrapper');
+            const textTrack = document.querySelector('.vs-text-track');
+            const imageTrack = document.querySelector('.vs-image-track');
+            const textSlides = document.querySelectorAll('.vs-text-slide');
+            const dots = document.querySelectorAll('.vs-dot');
+            const prevBtn = document.querySelector('.vs-nav-prev');
+            const nextBtn = document.querySelector('.vs-nav-next');
+
+            if (!textTrack || !imageTrack || textSlides.length === 0) return;
+
+            let current = 0;
+            const total = textSlides.length;
+            let autoplayTimer = null;
+
+            function goTo(index) {
+                current = (index + total) % total;
+                gsap.to([textTrack, imageTrack], {
+                    xPercent: -100 * current,
+                    duration: 0.9,
+                    ease: "power3.inOut"
+                });
+                dots.forEach((d, i) => d.classList.toggle('active', i === current));
+            }
+
+            function next() { goTo(current + 1); }
+            function prev() { goTo(current - 1); }
+
+            function startAutoplay() {
+                stopAutoplay();
+                autoplayTimer = setInterval(next, 5000);
+            }
+            function stopAutoplay() {
+                if (autoplayTimer) clearInterval(autoplayTimer);
+            }
+            function resetAutoplay() {
+                startAutoplay();
+            }
+
+            if (nextBtn) nextBtn.addEventListener('click', () => { next(); resetAutoplay(); });
+            if (prevBtn) prevBtn.addEventListener('click', () => { prev(); resetAutoplay(); });
+
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    goTo(parseInt(dot.getAttribute('data-index')));
+                    resetAutoplay();
+                });
+            });
+
+            if (wrapper) {
+                wrapper.addEventListener('mouseenter', stopAutoplay);
+                wrapper.addEventListener('mouseleave', startAutoplay);
+            }
+
+            // Touch / swipe support (bind on wrapper so it works over both tracks)
+            let touchStartX = 0;
+            wrapper.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                stopAutoplay();
+            }, { passive: true });
+
+            wrapper.addEventListener('touchend', (e) => {
+                const diff = e.changedTouches[0].clientX - touchStartX;
+                if (Math.abs(diff) > 50) {
+                    diff > 0 ? prev() : next();
+                }
+                startAutoplay();
+            }, { passive: true });
+
+            goTo(0);
+            startAutoplay();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initVsCarousel();
+        });
+        if (document.readyState === 'interactive' || document.readyState === 'complete') {
+            initVsCarousel();
+        }
+
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
     <!-- tsParticles -->
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
     <script>
