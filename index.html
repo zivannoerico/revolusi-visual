@@ -4,1201 +4,678 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revolusi Visual | Spectacular Edition (GSAP Advanced)</title>
+    <title>Revolusi Visual | Edukasi Berbasis Visual Modern</title>
+    <meta name="description"
+        content="Revolusi Visual - Pengalaman scrolling edukasi interaktif berbasis visual modern. Mengubah cara belajar dari hafalan usang menjadi pemahaman instan.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Outfit:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
     <style>
-        /* Base & Fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&display=swap');
-
         :root {
             --primary: #FBBF24;
-            /* Rich Amber Gold */
-            --primary-glow: rgba(251, 191, 36, 0.4);
-            --bg-gradient: #000000;
-            /* Solid Deep Black */
-            --bg-light: #1E293B;
-            /* Lighter Slate */
-            --bg-dark: #0F172A;
-            --text-dark: #94A3B8;
-            /* Premium slate text */
-            --text-light: #F8FAFC;
-            --card-dark: rgba(30, 41, 59, 0.6);
-            /* Glassmorphism base */
-            --accent-green: #10B981;
-            --accent-red: #EF4444;
+            --primary-hover: #F59E0B;
+
+            --bg-void: #070A0F;
+            --bg-surface: #0E1420;
+            --bg-card: #121824;
+            --bg-card-hover: #172030;
+
+            --border-subtle: #1E293B;
+            --border-highlight: #FBBF24;
+
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --text-dim: #475569;
+
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-pill: 99px;
+
+            --transition-smooth: all 0.3s ease;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Outfit', sans-serif;
+            font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+            scroll-behavior: smooth;
         }
 
         html {
-            scroll-behavior: smooth;
             overflow-x: hidden;
             width: 100%;
+            background-color: var(--bg-void);
+            color: var(--text-main);
         }
 
         body {
-            background: var(--bg-gradient);
-            background-attachment: fixed;
-            color: var(--text-light);
+            background-color: var(--bg-void);
+            color: var(--text-main);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
         }
 
-        /* 1 & 5. Premium Effects: Grain and Glow */
-        .grain-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
+        /* Layout Grid System */
+        .screen-wrapper {
             width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.04;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
-
-        .cursor-glow {
-            position: fixed;
-            width: 400px;
-            height: 400px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(251, 191, 36, 0.08) 0%, rgba(251, 191, 36, 0) 70%);
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            /* Below content but above background */
-            transition: left 0.1s ease-out, top 0.1s ease-out;
-        }
-
-        /* Continuous Animations (Float & Glow) */
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-15px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        @keyframes pulseGlow {
-            0% {
-                box-shadow: 0 0 0 0 var(--primary-glow);
-            }
-
-            70% {
-                box-shadow: 0 0 20px 15px rgba(255, 215, 0, 0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
-            }
-        }
-
-        /* Layout */
-        .full-section {
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 5%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .section-content {
-            width: 100%;
-            max-width: 1000px;
-            position: relative;
-            z-index: 10;
-        }
-
-        /* --- SECTION 1: HERO --- */
-        .hero-section {
-            background: transparent;
-            position: relative;
-            z-index: 1;
-        }
-
-        .logo-box {
-            width: 120px;
-            height: 120px;
-            margin-top: -60px;
-            margin-left: -15px;
-            margin-bottom: 25px;
-            transition: transform 0.3s ease;
-            z-index: 20;
-        }
-
-        .logo-box:hover {
-            transform: scale(1.05) rotate(-3deg);
-        }
-
-        .hero-top {
-            display: flex;
-            justify-content: center;
-            /* Ubah dari space-between agar bisa diatur jaraknya */
-            align-items: center;
-            gap: 20px;
-            /* Jarak antara teks dan gambar diperdekat */
-            width: 100%;
-        }
-
-        .hero-text-content {
-            /* flex: 1 dihapus agar elemen teks tidak melebar penuh dan mendorong gambar menjauh */
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
             position: relative;
             z-index: 2;
         }
 
-        .hero-title-1 {
-            font-size: 4vw;
-            font-weight: 700;
-            letter-spacing: -1px;
-            margin-bottom: 10px;
-            color: var(--text-light);
-            line-height: 1.2;
-            max-width: 600px;
+        .section-block {
+            padding: 110px 0;
+            position: relative;
         }
 
-        .hero-subtitle {
-            font-size: 1.2vw;
-            font-weight: 400;
-            margin-top: 15px;
-            color: var(--text-muted);
-            line-height: 1.5;
-            max-width: 550px;
+        .whitespace-block {
+            padding: 140px 0;
+            position: relative;
+            text-align: center;
+        }
+
+        /* Typography Essentials */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+            line-height: 1.15;
+            letter-spacing: -0.03em;
         }
 
         .highlight {
             color: var(--primary);
         }
 
-        .hero-img-placeholder {
-            width: 50%;
-            /* Dibesarkan sedikit dari 45vw */
-            max-width: 550px;
-            /* Dibesarkan dari 450px */
-            height: 100%;
-            /* Dibesarkan dari 350px */
-            display: flex;
+        /* Buttons & Badges */
+        .badge-pill {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-        }
-
-        @media(min-width: 1100px) {
-            .hero-title-1 {
-                font-size: 48px;
-            }
-
-            .hero-subtitle {
-                font-size: 18px;
-            }
-        }
-
-        /* --- SECTION 2: PANCA INDRA (PINNED CONTAINER) --- */
-        .panca-section-container {
-            position: relative;
-            background-color: transparent;
-            z-index: 2;
-            /* Di bawah Section Faktanya */
-        }
-
-        .panca-indra-pin {
-            width: 100%;
-            height: 100vh;
-            padding: 80px;
-        }
-
-        .panca-indra {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 50px;
-            /* Jarak yang pas antara teks dan gambar */
-            padding: 0;
-            width: 100%;
-        }
-
-        .panca-text {
-            font-weight: 900;
-            font-size: 32px;
-            line-height: 1.5;
-            width: max-content;
-            /* Lebar menyesuaikan isi teks agar rapat */
-            color: var(--text-light);
-            /* Warna kontras terang untuk background gelap */
-            position: relative;
-            text-align: left;
-            /* Teks kiri rata kiri seperti di gambar */
-        }
-
-        /* Garis kuning dihapus sesuai gambar referensi */
-
-        .panca-text.right {
-            text-align: right;
-            /* Teks kanan rata kanan seperti di gambar */
-        }
-
-        .panca-img-placeholder {
-            width: 450px;
-            height: 350px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: -150px;
-            /* Diperbesar dari -100px agar pas di tengah layar */
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .panca-img-placeholder:hover {
-            transform: scale(1.05);
-        }
-
-        /* --- SECTION 3: FAKTANYA (2-COLUMN LAYOUT) --- */
-        .faktanya-section-container {
-            position: relative;
-            color: var(--text-light);
-            z-index: 3;
-            padding: 100px 5%;
-        }
-
-        .faktanya-layout {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 80px;
-            width: 100%;
-        }
-
-        .faktanya-img-col {
-            flex: 1;
-            max-width: 450px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .faktanya-img-col img {
-            width: 100%;
-            height: auto;
-            border-radius: 20px;
-            transition: transform 0.5s ease;
-        }
-
-        .faktanya-img-col img:hover {
-            transform: scale(1.05);
-        }
-
-        .faktanya-text-col {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .faktanya-header {
-            font-size: 3vw;
-            font-weight: 900;
-            letter-spacing: 5px;
-            margin-bottom: 20px;
+            gap: 8px;
+            padding: 8px 18px;
+            border-radius: var(--radius-pill);
+            background: #141C2B;
+            border: 1px solid #28354A;
             color: var(--primary);
-            text-transform: uppercase;
-        }
-
-        .faktanya-percent {
-            font-size: 10vw;
-            font-weight: 900;
-            color: var(--text-light);
-            line-height: 1;
-            letter-spacing: -2px;
-            margin-bottom: 10px;
-        }
-
-        .faktanya-desc {
-            font-size: 18px;
-            line-height: 1.6;
-
-            color: #bbb;
-        }
-
-        .faktanya-desc span {
-            display: inline-block;
-            border-bottom: 3px solid #fff;
-            /* Garis bawah diubah jadi putih sesuai gambar */
-            padding-bottom: 5px;
-            font-weight: 900;
-            color: #fff;
-        }
-
-        .faktanya-img-placeholder {
-            width: auto;
-            height: auto;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* --- SECTION 4: FORM (GSAP PINNING) --- */
-        .form-section-container {
-            position: relative;
-            background: transparent;
-            padding-bottom: 100px;
-            z-index: 4000;
-            overflow: hidden;
-        }
-
-        .sticky-title-wrapper {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            z-index: 0;
-            position: relative;
-        }
-
-        .form-title {
-            text-align: center;
-            font-size: 48px;
-            font-weight: 700;
-            letter-spacing: -1px;
-            background: linear-gradient(90deg, #FFF, #AAA);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .scroll-up-form-wrapper {
-            position: relative;
-            z-index: 999;
-            width: 100%;
-            margin-top: -15vh;
-            transform: translateZ(100px);
-        }
-
-        .form-wrapper {
-            position: relative;
-            max-width: 800px;
-            width: 100%;
-            margin: 0 auto;
-            backdrop-filter: blur(200px);
-            opacity: 0.9;
-        }
-
-        .form-bg {
-            position: absolute;
-            bottom: -200px;
-            right: -400px;
-            width: 1400px;
-            height: 1400px;
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            z-index: 0;
-            opacity: 0.05;
-            mix-blend-mode: screen;
-            transform: rotate(20deg);
-            pointer-events: none;
-            display: block;
-        }
-
-        .form-card {
-            background: rgba(255, 255, 255, 0.05);
-            /* Sangat transparan agar blurnya kelihatan */
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(300px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            border-radius: 24px;
-            padding: 40px;
-            position: relative;
-            z-index: 2;
-            transform: translateZ(0);
-        }
-
-        .form-heading {
-            font-size: 34px;
-            font-weight: 400;
-            line-height: 1.4;
-            margin-bottom: 45px;
-            color: var(--text-light);
-            text-align: left;
-            letter-spacing: -0.5px;
-        }
-
-        .text-wa {
-            color: var(--accent-green);
+            font-size: 13px;
             font-weight: 600;
-        }
-
-        .text-email {
-            color: var(--accent-red);
-            font-weight: 600;
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-            position: relative;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 20px 24px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            font-size: 16px;
-            font-weight: 400;
-            color: var(--text-light);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .form-input:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.03);
-        }
-
-        .form-input::placeholder {
-            color: rgba(148, 163, 184, 0.6);
-            font-weight: 300;
-        }
-
-        .form-input[type="number"]::-webkit-inner-spin-button,
-        .form-input[type="number"]::-webkit-outer-spin-button {
-            background-color: transparent;
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        /* Jika pengguna menggunakan Firefox */
-        .form-input[type="number"] {
-            -moz-appearance: textfield;
-        }
-
-        .btn-submit {
-            background: var(--text-light);
-            border: 1px solid transparent;
-            padding: 20px 50px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 16px;
-            cursor: pointer;
-            margin-top: 15px;
-            color: var(--bg-dark);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             letter-spacing: 0.5px;
-            width: 100%;
-            box-shadow: 0 10px 20px -5px rgba(255, 255, 255, 0.15);
+            margin-bottom: 24px;
         }
 
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            background: #ffffff;
-            box-shadow: 0 15px 25px -5px rgba(255, 255, 255, 0.25);
-        }
-
-        /* --- SECTION 5: FOOTER --- */
-        .footer-section {
-            margin-top: 25vh;
-            background-color: #000000;
-            position: relative;
-            z-index: 5;
-        }
-
-        .footer-img-placeholder {
-            width: 45%;
-            max-width: 700px;
-            height: 100%;
-            margin: 0 auto 80px;
-            margin-bottom: 20px !important;
-            background: transparent;
-            /* border: 2px dashed rgba(255, 255, 255, 0.1); */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            /* border-radius: 20px; */
-            transition: all 0.5s ease;
-        }
-
-        .footer-img-placeholder:hover {
-            border-color: rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 0;
-            background: transparent;
-            gap: 15px;
-        }
-
-        .footer-logo-img {
-            width: 120px;
-            height: 120px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            text-align: center;
-        }
-
-        .footer-info {
-            margin-right: 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .footer-info-title {
-            color: var(--primary);
-            font-weight: 900;
-            font-size: 24px;
-            margin-bottom: 5px;
-            letter-spacing: 0;
-        }
-
-        .footer-contact {
-            font-size: 20px;
-            font-weight: 700;
-            line-height: 1.4;
-            color: #fff;
-        }
-
-        /* Mobile adjustments */
-        @media (max-width: 900px) {
-            .full-section {
-                padding: 60px 5%;
-                height: auto;
-                min-height: 100vh;
-            }
-
-            .panca-indra-pin {
-                height: auto;
-            }
-
-            .hero-top {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            .logo-box {
-                position: static;
-                margin-bottom: 40px;
-                box-shadow: none;
-            }
-
-            .hero-title-1 {
-                font-size: 42px;
-            }
-
-            .hero-title-2 {
-                font-size: 32px;
-            }
-
-            .hero-subtitle {
-                font-size: 16px;
-                margin-top: 20px;
-                line-height: 1.6;
-            }
-
-            .hero-img-placeholder {
-                width: 100%;
-                max-width: 100%;
-                margin-top: 40px;
-                height: auto;
-                justify-content: center !important;
-            }
-
-            #heroRocket {
-                transform: none !important;
-                width: 90% !important;
-                max-width: 350px !important;
-            }
-
-            .panca-indra {
-                flex-direction: column;
-                gap: 40px;
-                text-align: center;
-            }
-
-            .panca-text.right,
-            .panca-text {
-                text-align: center;
-                width: 100%;
-                font-size: 24px;
-            }
-
-            .panca-text.right {
-                margin-top: 40px;
-                line-height: 1.2;
-            }
-
-            .desktop-br {
-                display: none;
-            }
-
-            .panca-text::before,
-            .panca-text.right::before {
-                left: 50%;
-                transform: translateX(-50%);
-                top: -20px;
-            }
-
-            .panca-img-placeholder {
-                width: 100%;
-                height: 300px;
-                margin-top: 0;
-            }
-
-            .faktanya-card {
-                padding: 40px 30px;
-            }
-
-            .faktanya-header {
-                font-size: 32px;
-                margin-bottom: 40px;
-            }
-
-            .faktanya-layout {
-                flex-direction: column;
-                text-align: center;
-                gap: 40px;
-            }
-
-            .faktanya-stats {
-                width: 100%;
-                margin-bottom: 40px;
-            }
-
-            .faktanya-percent {
-                font-size: 60px;
-            }
-
-            .faktanya-img-placeholder {
-                width: 100%;
-                height: 250px;
-            }
-
-            .form-title {
-                font-size: 36px;
-            }
-
-
-
-            .form-heading {
-                font-size: 24px;
-                margin-bottom: 30px;
-            }
-
-            .btn-submit {
-                width: 100%;
-            }
-
-            .footer-img-placeholder {
-                width: 100%;
-                max-width: 100%;
-                height: auto;
-                margin-bottom: 50px;
-            }
-
-            .footer-bottom {
-                border-radius: 20px;
-                flex-direction: column;
-                text-align: center;
-                width: 100%;
-                padding: 30px;
-            }
-
-            .footer-logo {
-                margin-right: 0;
-                margin-bottom: 20px;
-            }
-
-            /* Tulisan vs Visual Mobile */
-            .vs-section {
-                padding: 60px 5% !important;
-            }
-
-            .vs-header {
-                flex-direction: column;
-                gap: 15px;
-                margin-bottom: 40px;
-            }
-
-            .desktop-only {
-                display: none !important;
-            }
-
-            .mobile-only {
-                display: block !important;
-                margin-bottom: 20px;
-            }
-
-            .vs-bar-left, .vs-bar-right {
-                width: 100%;
-                text-align: center !important;
-                padding: 12px 20px;
-                border-radius: 99px;
-            }
-
-            .vs-circle {
-                display: none;
-            }
-
-            .vs-content {
-                flex-direction: column;
-                gap: 40px;
-            }
-
-            .vs-left-col, .vs-text-desc {
-                text-align: left;
-            }
-
-            .vs-stat-box {
-                justify-content: flex-start;
-            }
-
-            .vs-text-desc {
-                font-size: 18px;
-                margin-bottom: 20px;
-            }
-
-            .vs-stat-num {
-                font-size: 70px;
-            }
-
-            .vs-stat-label {
-                font-size: 24px;
-            }
-
-            .vs-sketch-img {
-                max-width: 260px;
-            }
-
-            /* Semua Bisa Menulis Mobile */
-            .menulis-title {
-                font-size: 36px !important;
-                gap: 15px;
-            }
-
-            .garis {
-                width: 100% !important;
-                height: 1px !important;
-                margin: 30px 0 !important;
-            }
-        }
-
-        .logo-img {
-            border-radius: 7%;
-        }
-
-        .btn-submit {
-            width: 180px;
-            position: relative;
-            padding: 10px 10px;
-            border: none;
-            color: #000;
-            font-size: 22px;
-            font-weight: 900;
-            cursor: pointer;
-            background: linear-gradient(90deg, #FACC15, #F59E0B);
-            border-radius: 99px 8px 99px 99px;
-            z-index: 1;
-        }
-
-        /* Glow Orbs */
-        .glow-orb {
-            position: absolute;
+        .badge-pulse {
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.4;
-            animation: floatOrb 10s infinite ease-in-out alternate;
-            z-index: 0;
-            pointer-events: none;
-        }
-        .orb-1 {
-            width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent);
-            top: -100px; left: -100px;
-        }
-        .orb-2 {
-            width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(245, 158, 11, 0.4), transparent);
-            bottom: -200px; right: -100px;
-            animation-delay: -5s;
-        }
-        @keyframes floatOrb {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(50px, -50px) scale(1.1); }
+            background-color: var(--primary);
         }
 
-        /* --- SECTION 2a & 2b: TULISAN VS VISUAL & SEMUA BISA --- */
-        .vs-section {
-            color: #000000;
-            padding: 40px 13%;
+        .btn-action-group {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
+            margin-bottom: 30px;
+        }
+
+        .btn-main {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 12px;
+            padding: 18px 36px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            border: 1px solid transparent;
             position: relative;
             z-index: 10;
         }
 
-        .vs-header {
+        .btn-gold {
+            background: var(--primary);
+            color: #05070B;
+        }
+
+        .btn-gold:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-solid-dark {
+            background: #141C2B;
+            border: 1px solid #28354A;
+            color: var(--text-main);
+        }
+
+        .btn-solid-dark:hover {
+            background: #1D283D;
+            border-color: #3B4D6B;
+            transform: translateY(-2px);
+        }
+
+        .header-nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 48px);
+            max-width: 1200px;
+            z-index: 1000;
+            padding: 12px 28px;
+            background: #0A0E17;
+            border: 1px solid #1E293B;
+            border-radius: var(--radius-pill);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .brand-logo img {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .nav-items {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-item-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-item-link:hover {
+            color: var(--primary);
+        }
+
+        /* ==================================================
+           SECTION-BY-SECTION BACKGROUND STORYTELLING ARCHITECTURE
+           (Apple, Linear, Vercel Inspired - Zero Neon Glow)
+           ================================================== */
+        .bg-hero {
+            background: linear-gradient(180deg, #070A0F 0%, #05070B 100%);
+            position: relative;
+        }
+
+        .bg-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 24px 24px;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .bg-statement {
+            background: #040508;
+            position: relative;
+            z-index: 50;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+            box-shadow: 0 -30px 80px rgba(0, 0, 0, 0.98);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            will-change: transform;
+        }
+
+        .bg-editorial {
+            background: linear-gradient(135deg, #0B1118 0%, #080D14 100%);
+            position: relative;
+        }
+
+        .bg-editorial::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 48px 48px;
+            pointer-events: none;
+        }
+
+        .bg-stat {
+            background: radial-gradient(circle at center, #0F1722 0%, #06090E 75%);
+        }
+
+        .bg-comparison {
+            background: linear-gradient(90deg, #090D14 0%, #0E1520 100%);
+        }
+
+        .bg-preview {
+            background: linear-gradient(180deg, #090E16 0%, #0D131E 100%);
+            position: relative;
+        }
+
+        .bg-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(rgba(251, 191, 36, 0.04) 1px, transparent 1px);
+            background-size: 32px 32px;
+            pointer-events: none;
+        }
+
+        .bg-benefit {
+            background: #0A0F16;
+        }
+
+        .bg-workflow {
+            background: linear-gradient(90deg, #0B1018 0%, #0F1622 50%, #0B1018 100%);
+        }
+
+        .bg-testi {
+            background: radial-gradient(circle at center, #0B1017 0%, #05070B 80%);
+        }
+
+        .bg-faq {
+            background: #090D14;
+        }
+
+        .bg-form {
+            background: linear-gradient(180deg, #101826 0%, #0C121D 100%);
+        }
+
+        .bg-footer {
+            background: #040609;
+        }
+
+        .hero-block {
+            padding-top: 130px;
+            padding-bottom: 40px;
+            position: relative;
+            min-height: calc(100vh - 20px);
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 48px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-headline {
+            font-size: 50px;
+            font-weight: 800;
+            line-height: 1.14;
+            margin-bottom: 22px;
+        }
+
+        .hero-subtext {
+            font-size: 18px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 32px;
+            max-width: 590px;
+        }
+
+        .hero-stats-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 36px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .stat-num-val {
+            font-size: 32px;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-main);
+        }
+
+        .stat-lbl {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Hero Right Media Box (Solid Matte Finish) */
+        .hero-media-box {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-img-main {
+            width: 100%;
+            max-width: 440px;
+            max-height: 380px;
+            height: auto;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.8));
+        }
+
+        .floating-card {
+            position: absolute;
+            background: #111726;
+            border: 1px solid #232F45;
+            border-radius: 16px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 10;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+            animation: floatUpDown 4s infinite ease-in-out alternate;
+        }
+
+        .floating-card-1 {
+            top: 10%;
+            left: -20px;
+            animation-delay: 0s;
+        }
+
+        .floating-card-2 {
+            bottom: 10%;
+            right: -15px;
+            animation-delay: 2s;
+        }
+
+        @keyframes floatUpDown {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-12px);
+            }
+        }
+
+        /* ==================================================
+           SECTION 2: WHITESPACE & PURE STATEMENT
+           ================================================== */
+        .pure-statement-text {
+            font-size: 46px;
+            font-weight: 800;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+        }
+
+        /* ==================================================
+           SECTION 3: FULLSCREEN VISUAL IMPACT
+           ================================================== */
+        .editorial-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .editorial-content-left {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .sensory-badge-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .sensory-chip {
+            padding: 10px 20px;
+            border-radius: var(--radius-pill);
+            background: #111726;
+            border: 1px solid #232F45;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .editorial-img-wrap {
+            text-align: center;
+            position: relative;
+        }
+
+        .editorial-img-wrap img {
+            max-width: 100%;
+            height: auto;
+            max-height: 380px;
+            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.7));
+        }
+
+        /* ==================================================
+           SECTION 4: GIANT STATISTIC
+           ================================================== */
+        .giant-stat-wrapper {
+            text-align: center;
+            position: relative;
+            padding: 60px 0;
+        }
+
+        .giant-num {
+            font-size: 140px;
+            font-weight: 900;
+            font-family: 'Outfit', sans-serif;
+            color: var(--primary);
+            line-height: 1;
+            letter-spacing: -0.04em;
+            margin-bottom: 20px;
+        }
+
+        .giant-subtext {
+            font-size: 22px;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .giant-bg-brain {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 380px;
+            height: auto;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        /* ==================================================
+           SECTION 5: PERBANDINGAN TULISAN VS VISUAL
+           ================================================== */
+        .comparison-canvas-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: stretch;
+        }
+
+        .canvas-box {
+            padding: 10px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            position: relative;
+        }
+
+        .canvas-box-left {
+            border-right: 1px solid var(--border-subtle);
+            padding-right: 40px;
+        }
+
+        .canvas-box-right {
+            padding-left: 20px;
+        }
+
+        .tag-pill-bad {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: var(--radius-pill);
+            background: #2D1418;
+            color: #EF4444;
+            border: 1px solid #4D1F24;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .tag-pill-good {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: var(--radius-pill);
+            background: #2D2411;
+            color: var(--primary);
+            border: 1px solid #4D3F1B;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .canvas-stat-val {
+            font-size: 64px;
+            font-weight: 900;
+            font-family: 'Outfit', sans-serif;
+            margin-top: 30px;
+        }
+
+        /* --- SECTION 5: VS HEADER & 3D CAROUSEL SLIDER --- */
+        .vs-header-pill {
             display: flex;
             align-items: center;
             justify-content: center;
             width: 100%;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             position: relative;
         }
 
         .vs-bar-left {
             flex: 1;
-            background: #ffffff;
-            color: #FBBF24;
-            font-weight: 900;
-            font-size: 20px;
+            background: #141C2B;
+            border: 1px solid #28354A;
+            color: #EF4444;
+            font-weight: 800;
+            font-size: 16px;
             text-align: right;
-            padding: 15px 40px 15px 20px;
+            padding: 14px 32px 14px 20px;
             text-transform: uppercase;
             border-radius: 99px 0 0 99px;
             letter-spacing: 0.5px;
         }
 
-        .vs-circle {
-            width: 160px;
-            height: 160px;
-            background: #000000;
+        .vs-circle-pill {
+            width: 115px;
+            height: 115px;
+            background: #070A0F;
             border-radius: 50%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #FBBF24;
-            font-weight: 900;
-            font-size: 20px;
-            line-height: 1.2;
+            gap: 5px;
             z-index: 2;
-            margin: 0 -30px;
-            border: 8px solid #ffffff;
+            margin: 0 -20px;
+            border: 4px solid var(--primary);
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            padding: 8px;
         }
 
-        .vs-circle span {
-         margin-top: 17px;
+        .vs-pill-title {
+            font-size: 14px;
+            font-weight: 900;
+            color: var(--primary);
+            letter-spacing: 0.5px;
+            line-height: 1;
+        }
+
+        .vs-pill-mid {
+            font-size: 12px;
+            font-weight: 500;
             color: #ffffff;
+            line-height: 1;
         }
 
         .vs-bar-right {
             flex: 1;
-            background: #FBBF24;
-            color: #000000;
-            font-weight: 900;
-            font-size: 20px;
+            background: var(--primary);
+            color: #05070B;
+            font-weight: 800;
+            font-size: 16px;
             text-align: left;
-            padding: 15px 20px 15px 40px;
+            padding: 14px 20px 14px 32px;
             text-transform: uppercase;
             border-radius: 0 99px 99px 0;
             letter-spacing: 0.5px;
         }
 
-        .vs-content {
-            display: flex;
-            width: 100%;
-            max-width: 1170px;
-            margin: 0 auto;
-            justify-content: space-between;
-            align-items: stretch;
-            gap: 60px;
-        }
-
-        .vs-left-col {
-            flex: 1.2;
+        /* 3D Perspective Carousel Container */
+        .carousel-3d-wrapper {
+            margin-top: 50px;
+            background: #0E1420;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 48px 32px 36px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            text-align: left;
-        }
-
-        .vs-text-desc {
-            font-size: 22px;
-            line-height: 1.7;
-            color: #ffffff;
-            font-weight: 400;
-            margin-bottom: 40px;
-            text-align: left;
-        }
-
-        .vs-stat-box {
-            display: flex;
-            align-items: flex-end;
-            gap: 15px;
-            color: #ffffff;
-            justify-content: flex-start;
-        }
-
-        .vs-stat-num {
-            font-size: 90px;
-            font-weight: 900;
-            line-height: 0.8;
-            letter-spacing: -2px;
-        }
-
-        .vs-stat-label {
-            font-size: 32px;
-            font-weight: 400;
-            padding-bottom: 5px;
-            color: #ffffff;
-        }
-
-        .vs-right-col {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .vs-sketch-img {
-            width: 100%;
-            max-width: 320px;
-            height: auto;
-            object-fit: contain;
-            margin-bottom: 20px;
-        }
-
-        .vs-logo-watermark {
-            position: absolute;
-            bottom: 30px;
-            left: 30px;
-            width: 60px;
-            height: auto;
-            pointer-events: none;
-        }
-
-        .vs-logo-watermark img {
-            width: 100%;
-            height: auto;
-        }
-
-        .mobile-only {
-            display: none;
-        }
-
-        /* Section 2b */
-        .menulis-section {
-            color: #ffffff;
-            padding: 100px 5%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 10;
-        }
-
-        .menulis-title {
-            font-size: 64px;
-            font-weight: 900;
-            text-align: center;
-            line-height: 1.6;
-            letter-spacing: 1px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .menulis-line {
-            position: relative;
-            display: inline-block;
-            white-space: nowrap;
-        }
-
-        .menulis-logo-watermark {
-            position: absolute;
-            bottom: 30px;
-            left: 30px;
-            width: 60px;
-            height: auto;
-            pointer-events: none;
-        }
-
-        .menulis-logo-watermark img {
-            width: 100%;
-            height: auto;
-        }
-        .judul-vs{
-            color: #ffffff;
-            margin-bottom: 40px;
-        }
-        .garis {
-            background: rgba(243, 242, 242, 0.583);
-            width: 1px;
-            align-self: stretch;
-            margin: 0 10px;
-        }
-        /* Section 2a-2: Gerakan Revolusi Visual */
-        .gerakan-section {
-            color: #ffffff;
-            padding: 80px 8%; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 10;
-        }
-
-        .gerakan-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 80px;
-            width: 100%;
-            max-width: 1100px;
-        }
-
-        .gerakan-logo-col {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end;
-            max-width: 400px;
-        }
-
-        .gerakan-logo-col img {
-            width: 100%;
-            max-width: 320px;
-            height: auto;
-            object-fit: contain;
-        }
-
-        .gerakan-text-col {
-            flex: 1.5;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-align: left;
-            gap: 15px;
-        }
-
-        .gerakan-small-text {
-            font-size: 18px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            color: #ffffff;
-            text-transform: uppercase;
-        }
-
-        .gerakan-large-text {
-            font-size: 42px;
-            font-weight: 900;
-            color: #ffffff;
-            text-transform: uppercase;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 8px;
-            white-space: nowrap;
-        }
-
-        /* Mobile styles for Gerakan Section */
-        @media (max-width: 900px) {
-            .gerakan-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 40px;
-            }
-            .gerakan-logo-col {
-                justify-content: center;
-            }
-            .gerakan-text-col {
-                align-items: center;
-                text-align: center;
-            }
-            .gerakan-large-text {
-                font-size: 28px;
-            }
-            .gerakan-small-text {
-                font-size: 14px;
-            }
-        }
-
-        /* --- 3D SLIDESHOW SECTION --- */
-        .slideshow-section {
-            background: transparent;
-            padding: 80px 10%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 10;
-        }
-
-        .slideshow-layout {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 80px;
-            width: 100%;
-            max-width: 1100px;
-        }
-
-        .slideshow-text-col {
-            flex: 1.2;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-align: left;
-            gap: 24px;
-        }
-
-        .slideshow-title {
-            font-size: 42px;
-            font-weight: 900;
-            line-height: 1.3;
-            color: #ffffff;
-            letter-spacing: -0.5px;
-        }
-
-        .slideshow-desc {
-            font-size: 18px;
-            line-height: 1.7;
-            color: var(--text-dark);
-            font-weight: 400;
-        }
-
-        .slideshow-visual-col {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 520px;
-            position: relative;
-        }
-
-        /* 3D Vertical Slideshow Layout */
-        .carousel-3d-container {
-            perspective: 1200px;
-            height: 480px;
-            width: 100%;
-            display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
@@ -1206,592 +683,1161 @@
 
         .carousel-3d-viewport {
             position: relative;
-            width: 320px;
-            height: 180px;
-            transform-style: preserve-3d;
-        }
-
-        .carousel-3d-item {
-            position: absolute;
             width: 100%;
-            height: 100%;
-            border: 3px solid rgba(251, 191, 36, 0.3);
-            border-radius: 16px;
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            max-width: 500px;
+            height: 270px;
+            perspective: 1000px;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.8s ease, border-color 0.8s ease, box-shadow 0.8s ease;
-            padding: 15px;
+            margin-bottom: 24px;
         }
 
-        .carousel-3d-item img {
-            width: 100%;
-            height: 100%;
+        .carousel-3d-card {
+            position: absolute;
+            width: 320px;
+            height: 220px;
+            border-radius: 16px;
+            background: #121824;
+            border: 2px solid var(--border-subtle);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.6s ease, border-color 0.6s ease;
+        }
+
+        .carousel-3d-card img {
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
-            transition: transform 0.5s ease;
         }
 
-        /* 3D Vertical Positions with rotation and depth */
-        .carousel-3d-item.prev {
-            transform: translateY(-115%) translateZ(-180px) rotateX(25deg);
-            opacity: 0.45;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .carousel-3d-item.active {
-            transform: translateY(0) translateZ(80px) rotateX(0deg);
+        .carousel-3d-card.active {
+            transform: translateZ(80px) scale(1.08);
             opacity: 1;
             z-index: 3;
             border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(251, 191, 36, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
         }
 
-        .carousel-3d-item.next {
-            transform: translateY(115%) translateZ(-180px) rotateX(-25deg);
-            opacity: 0.45;
+        .carousel-3d-card.prev {
+            transform: translateX(-65%) translateZ(-120px) rotateY(25deg);
+            opacity: 0.5;
             z-index: 1;
             pointer-events: none;
         }
 
-        .carousel-3d-item.hidden-top {
-            transform: translateY(-230%) translateZ(-350px) rotateX(45deg);
+        .carousel-3d-card.next {
+            transform: translateX(65%) translateZ(-120px) rotateY(-25deg);
+            opacity: 0.5;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .carousel-3d-card.hidden {
+            transform: translateZ(-200px);
             opacity: 0;
             z-index: 0;
             pointer-events: none;
         }
 
-        .carousel-3d-item.hidden-bottom {
-            transform: translateY(230%) translateZ(-350px) rotateX(-45deg);
-            opacity: 0;
-            z-index: 0;
-            pointer-events: none;
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
-        /* Responsive Styles */
-        @media (max-width: 900px) {
-            .slideshow-section {
-                padding: 60px 5%;
+        .carousel-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #141C2B;
+            border: 1px solid #28354A;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            transition: var(--transition-smooth);
+        }
+
+        .carousel-btn:hover {
+            background: var(--primary);
+            color: #05070B;
+            border-color: var(--primary);
+        }
+
+        .carousel-dots {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #28354A;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .carousel-dot.active {
+            background: var(--primary);
+            width: 24px;
+            border-radius: 99px;
+        }
+
+        /* Responsive VS Header */
+        @media (max-width: 768px) {
+
+            .vs-bar-left,
+            .vs-bar-right {
+                font-size: 13px;
+                padding: 10px 14px;
             }
-            .slideshow-layout {
-                flex-direction: column;
-                text-align: center;
+
+            .vs-circle-pill {
+                width: 90px;
+                height: 90px;
+                font-size: 13px;
+                margin: 0 -15px;
+            }
+
+            .carousel-3d-card {
+                width: 260px;
+                height: 180px;
+            }
+        }
+
+        /* ==================================================
+           SECTION 6: GERAKAN REVOLUSI VISUAL
+           ================================================== */
+        .manifesto-banner {
+            background: #0E1420;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 64px 48px;
+            display: grid;
+            grid-template-columns: 0.7fr 1.3fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .scribble-text {
+            position: relative;
+            display: inline-block;
+            color: var(--primary);
+        }
+
+        .scribble-text svg {
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+        }
+
+        /* ==================================================
+           SECTION 7: PREVIEW E-BOOK
+           ================================================== */
+        .preview-sticky-wrap {
+            background: #0E1420;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 64px 48px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .preview-stack-display {
+            position: relative;
+            height: 360px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview-stack-card {
+            position: absolute;
+            width: 320px;
+            height: 220px;
+            border-radius: 16px;
+            background: #151D2A;
+            border: 1px solid var(--border-subtle);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+        }
+
+        .preview-stack-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .preview-stack-card.card-1 {
+            transform: translateZ(40px) scale(1.05);
+            border-color: var(--primary);
+            z-index: 3;
+        }
+
+        .preview-stack-card.card-2 {
+            transform: translateY(30px) rotate(5deg);
+            opacity: 0.7;
+            z-index: 2;
+        }
+
+        .preview-stack-card.card-3 {
+            transform: translateY(-30px) rotate(-5deg);
+            opacity: 0.4;
+            z-index: 1;
+        }
+
+        /* ==================================================
+           SECTION 8: BENEFIT (EDITORIAL LIST)
+           ================================================== */
+        .editorial-benefit-list {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .benefit-editorial-item {
+            display: grid;
+            grid-template-columns: 80px 1.5fr 2fr;
+            gap: 32px;
+            align-items: center;
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            transition: var(--transition-smooth);
+        }
+
+        .benefit-editorial-item:hover {
+            padding-left: 20px;
+            background: #0E1420;
+        }
+
+        .benefit-idx {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .benefit-heading {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .benefit-description {
+            font-size: 16px;
+            color: var(--text-muted);
+        }
+
+        /* ==================================================
+           SECTION 9: CARA KERJA
+           ================================================== */
+        .workflow-timeline {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            position: relative;
+        }
+
+        .workflow-step-node {
+            background: #0E1420;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 40px 32px;
+            position: relative;
+        }
+
+        .step-circle-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #05070B;
+            font-weight: 900;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        /* ==================================================
+           SECTION 10: TESTIMONI & FAQ
+           ================================================== */
+        .testi-editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .quote-editorial-box {
+            background: #0E1420;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .quote-icon {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .faq-editorial-list {
+            max-width: 840px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .faq-row {
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 28px 0;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .faq-header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .faq-toggle-icon {
+            font-size: 24px;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-content-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, margin-top 0.3s ease;
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .faq-row.active .faq-toggle-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-row.active .faq-content-body {
+            max-height: 300px;
+            margin-top: 16px;
+        }
+
+        /* ==================================================
+           SECTION 11 & 12: CTA & FORM ACCESS (SOLID FINISH)
+           ================================================== */
+        .cta-immersive-banner {
+            background: #141C2B;
+            border: 2px solid var(--primary);
+            border-radius: var(--radius-lg);
+            padding: 80px 48px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .form-glass-container {
+            max-width: 720px;
+            margin: 0 auto;
+            background: #0E1420;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 56px 48px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+        }
+
+        .form-input-field {
+            width: 100%;
+            padding: 18px 24px;
+            background: #141C2B;
+            border: 1px solid #28354A;
+            border-radius: 14px;
+            font-size: 16px;
+            color: var(--text-main);
+            outline: none;
+            transition: var(--transition-smooth);
+            margin-top: 8px;
+        }
+
+        .form-input-field:focus {
+            border-color: var(--primary);
+            background: #192336;
+        }
+
+        /* ==================================================
+           SECTION 13: FOOTER
+           ================================================== */
+        .footer-block {
+            background: #04060A;
+            border-top: 1px solid var(--border-subtle);
+            padding: 80px 0 40px;
+            margin-top: 120px;
+        }
+
+        .footer-grid-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 48px;
+            margin-bottom: 60px;
+        }
+
+        .social-btn-item {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: #141C2B;
+            border: 1px solid #28354A;
+            color: var(--text-main);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .social-btn-item:hover {
+            background: var(--primary);
+            color: #000;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+
+            .hero-layout,
+            .editorial-split,
+            .manifesto-banner,
+            .preview-sticky-wrap,
+            .comparison-canvas-grid {
+                grid-template-columns: 1fr;
                 gap: 40px;
             }
-            .slideshow-text-col {
-                align-items: center;
-                text-align: center;
-                gap: 16px;
+
+            .benefit-editorial-item {
+                grid-template-columns: 60px 1fr;
             }
-            .slideshow-title {
+
+            .benefit-description {
+                grid-column: span 2;
+            }
+
+            .workflow-timeline,
+            .testi-editorial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid-layout {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-headline {
+                font-size: 38px;
+            }
+
+            .pure-statement-text {
                 font-size: 30px;
             }
-            .slideshow-desc {
-                font-size: 16px;
+
+            .giant-num {
+                font-size: 80px;
             }
-            .slideshow-visual-col {
-                min-height: 420px;
-                width: 100%;
+
+            .nav-items {
+                display: none;
             }
-            .carousel-3d-viewport {
-                width: 280px;
-                height: 160px;
+
+            .workflow-timeline,
+            .testi-editorial-grid,
+            .footer-grid-layout {
+                grid-template-columns: 1fr;
             }
-            .carousel-3d-item.prev {
-                transform: translateY(-110%) translateZ(-150px) rotateX(25deg);
-            }
-            .carousel-3d-item.active {
-                transform: translateY(0) translateZ(60px) rotateX(0deg);
-            }
-            .carousel-3d-item.next {
-                transform: translateY(110%) translateZ(-150px) rotateX(-25deg);
+
+            .floating-card {
+                display: none;
             }
         }
     </style>
 </head>
 
 <body>
-    <div id="tsparticles" style="position: fixed; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.5;"></div>
-    <div class="grain-overlay"></div>
-    <div class="cursor-glow" id="cursorGlow"></div>
-    <!-- Section 1: Hero -->
-    <div class="full-section hero-section">
-        <div class="section-content">
-            <div class="hero-top">
-                <div class="hero-text-content gsap-fade-up">
-                    <div class="logo-box"><img class="logo-img" src="assets/revolusivisual.png" alt="Logo"
-                            style="width: 100%; height: 100%;">
+    <!-- Fixed Header Nav -->
+    <nav class="header-nav">
+        <a href="#" class="brand-logo">
+            <img src="assets/revolusivisual.png" alt="Logo Revolusi Visual">
+            <span>Revolusi Visual</span>
+        </a>
+        <ul class="nav-items">
+            <li><a href="#statement" class="nav-item-link">Mengapa Visual</a></li>
+            <li><a href="#fakta" class="nav-item-link">Statistik</a></li>
+            <li><a href="#komparasi" class="nav-item-link">Perbandingan</a></li>
+            <li><a href="#preview" class="nav-item-link">Preview PDF</a></li>
+            <li><a href="#faq" class="nav-item-link">FAQ</a></li>
+        </ul>
+        <a href="#form-akses" class="btn-main btn-gold" style="padding: 10px 24px; font-size: 14px;">Mulai Belajar</a>
+    </nav>
+
+    <!-- SECTION 1: HERO CINEMATIC -->
+    <section class="hero-block bg-hero">
+        <div class="screen-wrapper">
+            <div class="hero-layout">
+                <div>
+                    <h1 class="hero-headline">
+                        Anak Malas Belajar? Mungkin <span class="highlight">Metodenya</span> yang Salah, Bukan Otaknya.
+                    </h1>
+                    <p class="hero-subtext">
+                        Tinggalkan metode hafalan usang. Ubah ratusan halaman teks menjadi visual memukau yang bikin
+                        anak paham lebih cepat dan betah belajar.
+                    </p>
+                    <div class="btn-action-group">
+                        <a href="#form-akses" class="btn-main btn-gold">
+                            Mulai Belajar
+                            <i class="ri-arrow-right-line"></i>
+                        </a>
+                        <a href="#statement" class="btn-main btn-solid-dark">
+                            <i class="ri-play-circle-line"></i>
+                            Lihat Metode
+                        </a>
                     </div>
-                    <div class="hero-title-1">Anak Malas Belajar? Mungkin <span class="highlight">Metodenya</span> yang
-                        Salah, Bukan Otaknya.</div>
-                    <div class="hero-subtitle">Tinggalkan metode hafalan usang. Ubah ratusan halaman teks menjadi visual
-                        memukau yang bikin anak paham lebih cepat dan betah belajar.</div>
+                    <div class="hero-stats-bar">
+                        <div>
+                            <div class="stat-num-val"><span class="counter-num" data-target="1000">0</span>+</div>
+                            <div class="stat-lbl">Member Aktif</div>
+                        </div>
+                        <div>
+                            <div class="stat-num-val"><span class="counter-num" data-target="95">0</span>%</div>
+                            <div class="stat-lbl">Lebih Mudah Memahami</div>
+                        </div>
+                        <div>
+                            <div class="stat-num-val"><span class="counter-num" data-target="13">0</span>X</div>
+                            <div class="stat-lbl">Informasi Lebih Cepat Diproses</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="hero-img-placeholder rocket-container"
-                    style="justify-content: flex-end; padding-right: 0; position: relative;" data-tilt
-                    data-tilt-max="10" data-tilt-speed="400" data-tilt-perspective="1000">
-                    <img id="heroRocket" class="parallax-img mask-reveal" src="assets/orang_menguap.png"
-                        alt="Orang Menguap"
-                        style="width: 500px; height: auto; filter: drop-shadow(0 0 25px rgba(255,255,255,0.2)); transform: translateY(40px); position: relative; z-index: 5;">
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Section 2: Panca Indra -->
-    <div class="panca-section-container">
-        <div class="full-section panca-indra-pin">
-            <div class="section-content panca-indra panca-trigger">
-                <!-- Panca Kiri -->
-                <div class="panca-text panca-left">
-                    SEJATINYA <br class="desktop-br">CARA <br class="desktop-br">MANUSIA <br class="desktop-br">NGERESPON <br class="desktop-br">ITU PAKE
-                </div>
-                <!-- Panca Tengah -->
-                <div class="panca-img-placeholder panca-center" data-tilt data-tilt-max="15" data-tilt-speed="400"
-                    data-tilt-perspective="1000">
-                    <img class="parallax-img" src="assets/panca_indra_sketch.png" alt="Panca Indra Sketch"
-                        style="width: 100%; height: 100%;">
-                </div>
-                <!-- Panca Kanan -->
-                <div class="panca-text right panca-right" style="color: var(--primary);">
-                    MATA <br class="desktop-br">HIDUNG <br class="desktop-br">MULUT <br class="desktop-br">TELINGA <br class="desktop-br">RABA
+                <div class="hero-media-box">
+                    <img src="assets/orang_menguap.png" alt="Orang Menguap" class="hero-img-main" data-tilt
+                        data-tilt-max="6">
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Section 2a: Tulisan VS Visual -->
-    <div class="full-section vs-section">
-        <h1 class="judul-vs">kamu lebih paham mana</h1>
-        <div class="vs-header gsap-fade-up">
-            <div class="vs-bar-left desktop-only">PENJELASAN TULISAN</div>
-            <div class="vs-circle">
-                TULISAN<br><span>atau</span><br>VISUAL
+    <!-- SECTION 2: WHITESPACE & PURE STATEMENT -->
+    <section class="whitespace-block bg-statement" id="statement">
+        <div class="screen-wrapper">
+            <div class="gsap-fade-up">
+                <p
+                    style="color: var(--primary); font-weight: 700; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px;">
+                    PERNYATAAN UTAMA</p>
+                <h2 class="pure-statement-text">
+                    "SEJATINYA, OTAK MANUSIA <span class="highlight">TIDAK DIRANCANG</span> UNTUK MEMBACA DINDING TEKS
+                    TANPA KONTEKS."
+                </h2>
             </div>
-            <div class="vs-bar-right desktop-only">PENJELASAN GAMBAR/ VISUAL</div>
         </div>
-        
-        <div class="vs-content gsap-fade-up">
-            <div class="vs-left-col">
-                <div class="vs-bar-left mobile-only">PENJELASAN TULISAN</div>
-                <p class="vs-text-desc">
-                    Seorang anak sedang memegang balon dan tangan kanan bemegang pinggang, dia menggunakan celana panjang dan tersenyum. Suasana siang hari karena matahri bersinar dengan terang, terdapat 2 awan di langit Dia berdiri di rumput dan ada 3 pohon berbentuk segitiga dan 2 pohon berbentuk bulat di sebelah kiri dan kanannya.
+    </section>
+
+    <!-- SECTION 3: FULLSCREEN VISUAL IMPACT -->
+    <section class="section-block bg-editorial">
+        <div class="screen-wrapper">
+            <div class="editorial-split">
+                <div class="editorial-content-left gsap-fade-up">
+                    <h2 style="font-size: 40px; font-weight: 800;">Mengapa Banyak Orang <span class="highlight">Sulit
+                            Belajar?</span></h2>
+                    <p style="color: var(--text-muted); font-size: 18px; line-height: 1.6;">
+                        Ketika dipaksa membaca hafalan teks polos, otak mengalami kelelahan kognitif. Manusia merespons
+                        lingkungan secara alami melalui integrasi panca indra.
+                    </p>
+                    <div class="sensory-badge-list">
+                        <span class="sensory-chip"><i class="ri-eye-line"></i> MATA (VISUAL)</span>
+                        <span class="sensory-chip"><i class="ri-ear-line"></i> TELINGA</span>
+                        <span class="sensory-chip"><i class="ri-hand-heart-line"></i> RABA</span>
+                        <span class="sensory-chip"><i class="ri-emotion-happy-line"></i> MULUT</span>
+                        <span class="sensory-chip"><i class="ri-mental-health-line"></i> HIDUNG</span>
+                    </div>
+                </div>
+                <div class="editorial-img-wrap gsap-fade-up">
+                    <img src="assets/panca_indra_sketch.png" alt="Panca Indra Sketsa">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: GIANT STATISTIC -->
+    <section class="section-block bg-stat" id="fakta">
+        <div class="screen-wrapper">
+            <div class="giant-stat-wrapper gsap-fade-up">
+                <img src="assets/otak_transparent.png" alt="Otak Ambient" class="giant-bg-brain">
+                <div class="giant-num">60.000x</div>
+                <p class="giant-subtext">
+                    Otak manusia memproses informasi berbentuk gambar 60.000 kali lebih cepat dibandingkan sekadar
+                    membaca susunan teks mati.
                 </p>
-                <div class="vs-stat-box">
-                    <div class="vs-stat-num">
-                        <span style="font-size: 50px; font-weight: 900; vertical-align: middle; margin-right: 5px;">±</span><span class="vs-counter" data-target="506">0</span>
-                    </div>
-                    <div class="vs-stat-label">bentuk</div>
-                </div>
-            </div>
-            
-            <div class="garis"></div>
-            
-            <div class="vs-right-col">
-                <div class="vs-bar-right mobile-only">PENJELASAN GAMBAR/ VISUAL</div>
-                <img class="vs-sketch-img" src="assets/anak_balon_sketch.png" alt="Anak Balon Sketch">
-                <div class="vs-stat-box">
-                    <div class="vs-stat-num"><span class="vs-counter" data-target="44">0</span></div>
-                    <div class="vs-stat-label">bentuk</div>
-                </div>
             </div>
         </div>
-        
-    </div>
+    </section>
 
-    <!-- Section 2a-1: 3D Vertical Slideshow Section -->
-    <div class="full-section slideshow-section">
-        <div class="section-content slideshow-layout gsap-fade-up">
-            <div class="slideshow-text-col">
-                <h2 class="slideshow-title">Berjuang Masuk ke Dunia <span class="highlight">Pendidikan Indonesia</span></h2>
-                <p class="slideshow-desc">
-                    Kami berkomitmen menghadirkan metode pendidikan berbasis visual ke dalam sistem pembelajaran Indonesia. Tujuannya adalah membuat siswa jauh lebih mudah "mengerti" konsep pelajaran secara esensial, bukan sekadar menghafal materi tanpa pemahaman.
-                </p>
+    <!-- SECTION 5: PERBANDINGAN TULISAN VS VISUAL & 3D SLIDER -->
+    <section class="section-block bg-comparison" id="komparasi">
+        <div class="screen-wrapper">
+            <h2 style="font-size: 40px; font-weight: 800; text-align: center; margin-bottom: 16px;"
+                class="gsap-fade-up">Kamu Lebih Paham Mana?</h2>
+            <p style="color: var(--text-muted); font-size: 18px; text-align: center; max-width: 600px; margin: 0 auto 50px;"
+                class="gsap-fade-up">Perbandingan nyata antara beban teks polos vs kejelasan visual.</p>
+
+            <!-- VS Header Pill Bar -->
+            <div class="vs-header-pill gsap-fade-up">
+                <div class="vs-bar-left">PENJELASAN TULISAN</div>
+                <div class="vs-circle-pill">
+                    <span class="vs-pill-title">TULISAN</span>
+                    <span class="vs-pill-mid">atau</span>
+                    <span class="vs-pill-title">VISUAL</span>
+                </div>
+                <div class="vs-bar-right">PENJELASAN GAMBAR / VISUAL</div>
             </div>
-            <div class="slideshow-visual-col">
-                <div class="carousel-3d-container">
-                    <div class="carousel-3d-viewport">
-                        <div class="carousel-3d-item prev">
-                            <img src="assets/anak_balon_sketch.png" alt="Anak Balon Sketch">
-                        </div>
-                        <div class="carousel-3d-item active">
-                            <img src="assets/panca_indra_sketch.png" alt="Panca Indra Sketch">
-                        </div>
-                        <div class="carousel-3d-item next">
-                            <img src="assets/rocket_sketch.png" alt="Rocket Sketch">
-                        </div>
-                        <div class="carousel-3d-item hidden-bottom">
-                            <img src="assets/semuabisa.png" alt="Semua Bisa">
-                        </div>
+
+            <!-- Comparison Cards Grid -->
+            <div class="comparison-canvas-grid gsap-fade-up">
+                <!-- Left: Tulisan -->
+                <div class="canvas-box canvas-box-left">
+                    <div>
+                        <p style="color: var(--text-muted); font-size: 16px; line-height: 1.7;">
+                            "Seorang anak sedang memegang balon dan tangan kanan memegang pinggang, dia menggunakan
+                            celana panjang dan tersenyum. Suasana siang hari karena matahari bersinar terang, terdapat 2
+                            awan di langit. Dia berdiri di rumput dan ada 3 pohon berbentuk segitiga dan 2 pohon
+                            berbentuk bulat di sebelah kiri dan kanannya."
+                        </p>
+                    </div>
+                    <div>
+                        <div class="canvas-stat-val" style="color: #EF4444;">±<span class="counter-num"
+                                data-target="506">0</span></div>
+                        <div style="color: var(--text-muted); font-size: 14px; font-weight: 600;">Bentuk Kata</div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- Section 2a-2: Gerakan Revolusi Visual -->
-    <div class="full-section gerakan-section">
-        <div class="gerakan-content gsap-fade-up">
-            <div class="gerakan-logo-col">
-                <img src="assets/revolusivisual.png" alt="Revolusi Visual Logo">
-            </div>
-            <div class="gerakan-text-col">
-                <div class="gerakan-small-text">ADALAH SEBUAH GERAKAN MEMBUAT METODE</div>
-                <div class="gerakan-large-text">
-                    PENYAMPAIAN INFORMASI
-                    <svg viewBox="0 0 100 10" preserveAspectRatio="none" style="position: absolute; bottom: -5px; left: 0; width: 100%; height: 12px; pointer-events: none;">
-                        <path d="M 2 4 Q 48 6, 95 3 T 97 5" stroke="#FBBF24" stroke-width="4" fill="none" stroke-linecap="round" />
-                    </svg>
-                </div>
-                <div class="gerakan-large-text">
-                    AGAR MUDAH DIPAHAMI
-                    <svg viewBox="0 0 100 10" preserveAspectRatio="none" style="position: absolute; bottom: -5px; left: 0; width: 100%; height: 12px; pointer-events: none;">
-                        <path d="M 3 5 Q 50 3, 97 6 T 99 4" stroke="#FBBF24" stroke-width="4" fill="none" stroke-linecap="round" />
-                    </svg>
-                </div>
-                <div class="gerakan-small-text">MENGGUNAKAN</div>
-                <div class="gerakan-large-text">
-                    VISUAL/ GAMBAR .
-                    <svg viewBox="0 0 100 10" preserveAspectRatio="none" style="position: absolute; bottom: -5px; left: 0; width: 100%; height: 12px; pointer-events: none;">
-                        <path d="M 1 4 Q 45 6, 90 3 T 93 5" stroke="#FBBF24" stroke-width="4" fill="none" stroke-linecap="round" />
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Section 2b: Semua Orang Bisa Menulis Kan? -->
-    <div class="full-section menulis-section">
-        <div class="menulis-title gsap-fade-up">
-            <span class="menulis-line">
-                SEMUA ORANG
-                <svg viewBox="0 0 100 10" preserveAspectRatio="none" style="position: absolute; bottom: -5px; left: 0; width: 100%; height: 12px; pointer-events: none;">
-                    <path d="M 5 5 Q 50 2, 95 6 T 98 5" stroke="#FBBF24" stroke-width="4" fill="none" stroke-linecap="round" />
-                </svg>
-            </span>
-            <span class="menulis-line">
-                BISA MENULIS KAN?
-                <svg viewBox="0 0 100 10" preserveAspectRatio="none" style="position: absolute; bottom: -5px; left: 0; width: 100%; height: 12px; pointer-events: none;">
-                    <path d="M 2 4 Q 48 6, 95 3 T 97 5" stroke="#FBBF24" stroke-width="4" fill="none" stroke-linecap="round" />
-                </svg>
-            </span>
-        </div>
-        
-       
-    </div>
-
-    <!-- Section 3: Faktanya -->
-    <div class="full-section faktanya-section-container" style="position: relative;">
-        <div class="section-content faktanya-layout gsap-fade-up" style="position: relative; z-index: 2;">
-            <div class="faktanya-img-col" data-tilt data-tilt-max="10" data-tilt-speed="400"
-                data-tilt-perspective="1000">
-                <img class="parallax-img mask-reveal" src="assets/otak_transparent.png" alt="Otak Image"
-                    style="width: 100%; height: auto; border-radius: 20px;">
-            </div>
-            <div class="faktanya-text-col">
-                <div class="faktanya-header">Faktanya</div>
-                <div class="faktanya-percent">0%</div>
-                <div class="faktanya-desc">
-                    Informasi yang terkirim<br>ke otak adalah<br>
-                    <span>Visual / Gambar</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Section 4: Form (GSAP PIN & SCROLL) -->
-    <div class="form-section-container form-pin-trigger">
-        <div class="form-bg"></div>
-        <div class="sticky-title-wrapper form-title-pin">
-            <div class="form-title">Mau Tau Lebih?</div>
-        </div>
-
-        <div class="p scroll-up-form-wrapper">
-            <div class=" form-wrapper gsap-fade-up">
-                <div class="form-card">
-                    <div class="form-heading"
-                        style="font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 20px;">
-                        Dapatkan Akses Instan PDF Premium<br>
-                        'Revi Brain' Siap Cetak
+                <!-- Right: Visual -->
+                <div class="canvas-box canvas-box-right">
+                    <div style="display: flex; flex-direction: column; flex: 1; justify-content: space-between;">
+                        <div>
+                        </div>
+                        <div
+                            style="text-align: center; margin: 15px 0; display: flex; align-items: center; justify-content: center; flex: 1;">
+                            <img src="assets/anak_balon_sketch.png" alt="Anak Balon Sketsa"
+                                style="max-height: 175px; max-width: 230px; width: auto; height: auto; object-fit: contain; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.8));">
+                        </div>
                     </div>
-
-                    <form action="#" method="POST" style="max-width: 400px; position: relative; z-index: 3;">
-                        <div class="form-group" style="margin-bottom: 15px;">
-                            <label
-                                style="display: block; color: #fff; font-size: 16px; margin-bottom: 5px;">Namamu</label>
-                            <input type="text" class="form-input" placeholder="andrian dito">
-                        </div>
-                        <div class="form-group" style="margin-bottom: 15px;">
-                            <label
-                                style="display: block; color: #fff; font-size: 16px; margin-bottom: 5px;">Nomor</label>
-                            <input type="number" class="form-input" placeholder="08283...">
-                        </div>
-                        <div class="form-group" style="margin-bottom: 35px;">
-                            <label style="display: block; color: #fff; font-size: 16px; margin-bottom: 5px;">Email
-                            </label>
-                            <input type="email" class="form-input" placeholder="andriandito@gmail.com">
-                        </div>
-                        <button class="btn-submit" type="submit">
-                            Kirim
-                        </button>
-                    </form>
+                    <div>
+                        <div class="canvas-stat-val" style="color: var(--primary);"><span class="counter-num"
+                                data-target="44">0</span></div>
+                        <div style="color: var(--primary); font-size: 14px; font-weight: 600;">Bentuk Visual</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Section 5: Footer -->
-    <div class="full-section footer-section">
-        <div class="section-content">
-            <div class="footer-img-placeholder gsap-fade-up">
-                <img src="assets/semuabisa.png" alt="Placeholder Image" style="width: 100%; height: auto;">
-
-            </div>
-
-            <div class="footer-bottom gsap-fade-up">
-                <div class="footer-logo-img">
-                    <img class="logo-img" src="assets/revolusivisual.png" alt="Logo" style="width: 100%; height: 100%;">
+    <!-- SECTION 6: GERAKAN REVOLUSI VISUAL -->
+    <section class="section-block bg-manifesto">
+        <div class="screen-wrapper">
+            <div class="manifesto-banner gsap-fade-up">
+                <div style="text-align: center;">
+                    <img src="assets/revolusivisual.png" alt="Logo Manifesto" style="width: 180px; height: auto;">
                 </div>
-                <div class="footer-info">
-                    <div class="footer-info-title">REVOLUSI VISUAL</div>
-                    <p class="footer-contact">andriandito@gmail.com</p>
-                    <p class="footer-contact">+62 811 861 384</p>
+                <div>
+                    <span
+                        style="color: var(--primary); font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">GERAKAN
+                        EDUKASI NASIONAL</span>
+                    <h2 style="font-size: 32px; font-weight: 800; line-height: 1.3; margin-top: 10px;">
+                        Membuat Metode <span class="scribble-text">Penyampaian Informasi<svg viewBox="0 0 100 10"
+                                preserveAspectRatio="none">
+                                <path d="M 2 4 Q 48 6, 95 3 T 97 5" stroke="#FBBF24" stroke-width="4" fill="none"
+                                    stroke-linecap="round" />
+                            </svg></span> Agar Mudah Dipahami Menggunakan Gambar.
+                    </h2>
+                    <p style="color: var(--text-muted); font-size: 16px; margin-top: 16px;">
+                        Kami berkomitmen menghadirkan metode pendidikan berbasis visual ke dalam sistem pembelajaran
+                        Indonesia agar siswa mengerti esensi pelajaran secara alami.
+                    </p>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- GSAP Core & ScrollTrigger Plugin -->
+    <!-- SECTION 7: PREVIEW E-BOOK -->
+    <section class="section-block bg-preview" id="preview">
+        <div class="screen-wrapper">
+            <div class="preview-sticky-wrap gsap-fade-up">
+                <div>
+                    <div class="badge-pill"><i class="ri-file-pdf-line"></i> E-Book HD Siap Cetak</div>
+                    <h2 style="font-size: 36px; font-weight: 800; margin-bottom: 16px;">Ilustrasi Interaktif Pemantik
+                        Pikiran</h2>
+                    <p style="color: var(--text-muted); font-size: 16px; margin-bottom: 24px; line-height: 1.6;">
+                        Setiap lembar e-book dirancang dengan sketsa ringkas yang menggugah rasa ingin tahu anak tanpa
+                        kejenuhan.
+                    </p>
+                    <a href="#form-akses" class="btn-main btn-gold">Dapatkan PDF Sekarang</a>
+                </div>
+                <div class="preview-stack-display">
+                    <div class="preview-stack-card card-3">
+                        <img src="assets/rocket_sketch.png" alt="Sketsa Roket">
+                    </div>
+                    <div class="preview-stack-card card-2">
+                        <img src="assets/panca_indra_sketch.png" alt="Sketsa Panca Indra">
+                    </div>
+                    <div class="preview-stack-card card-1">
+                        <img src="assets/anak_balon_sketch.png" alt="Sketsa Anak Balon">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: BENEFIT -->
+    <section class="section-block bg-benefit">
+        <div class="screen-wrapper">
+            <h2 style="font-size: 40px; font-weight: 800; margin-bottom: 16px;" class="gsap-fade-up">Dampak Nyata <span
+                    class="highlight">Revolusi Visual</span></h2>
+            <p style="color: var(--text-muted); font-size: 18px; margin-bottom: 60px;" class="gsap-fade-up">Keunggulan
+                mendasar metode visual dibanding cara hafalan konvensional.</p>
+
+            <div class="editorial-benefit-list gsap-fade-up">
+                <div class="benefit-editorial-item">
+                    <div class="benefit-idx">01</div>
+                    <div class="benefit-heading">Pemahaman 10x Lebih Cepat</div>
+                    <div class="benefit-description">Konsep abstrak disederhanakan menjadi bentuk visual intuitif
+                        sehingga anak paham seketika.</div>
+                </div>
+                <div class="benefit-editorial-item">
+                    <div class="benefit-idx">02</div>
+                    <div class="benefit-heading">Bebas Stress & Hafalan Buta</div>
+                    <div class="benefit-description">Menghilangkan beban stres anak akibat keharusan menghafal ratusan
+                        kalimat tanpa makna.</div>
+                </div>
+                <div class="benefit-editorial-item">
+                    <div class="benefit-idx">03</div>
+                    <div class="benefit-heading">Daya Ingat Jangka Panjang</div>
+                    <div class="benefit-description">Memori visual tersimpan kuat dalam sistem memori jangka panjang
+                        (long-term memory).</div>
+                </div>
+                <div class="benefit-editorial-item">
+                    <div class="benefit-idx">04</div>
+                    <div class="benefit-heading">Format PDF HD Siap Cetak</div>
+                    <div class="benefit-description">Dapat diunduh dan dicetak dengan mudah kapan pun untuk sesi belajar
+                        mandiri di rumah.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 9: CARA KERJA -->
+    <section class="section-block bg-workflow">
+        <div class="screen-wrapper">
+            <h2 style="font-size: 40px; font-weight: 800; text-align: center; margin-bottom: 60px;"
+                class="gsap-fade-up">3 Langkah Mudah <span class="highlight">Mulai Belajar</span></h2>
+
+            <div class="workflow-timeline gsap-fade-up">
+                <div class="workflow-step-node">
+                    <div class="step-circle-badge">1</div>
+                    <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">Isi Form Akses</h3>
+                    <p style="color: var(--text-muted); font-size: 15px;">Masukkan nama, WhatsApp, dan email aktif Anda
+                        pada formulir resmi.</p>
+                </div>
+                <div class="workflow-step-node">
+                    <div class="step-circle-badge">2</div>
+                    <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">Unduh E-Book PDF</h3>
+                    <p style="color: var(--text-muted); font-size: 15px;">Link akses langsung dikirimkan secara otomatis
+                        ke WhatsApp & Email Anda.</p>
+                </div>
+                <div class="workflow-step-node">
+                    <div class="step-circle-badge">3</div>
+                    <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">Praktikkan 15 Menit</h3>
+                    <p style="color: var(--text-muted); font-size: 15px;">Dampingi anak belajar 15 menit sehari dan
+                        lihat lonjakan pemahamannya!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 10: TESTIMONI & FAQ -->
+    <section class="section-block bg-testi" id="faq">
+        <div class="screen-wrapper">
+            <h2 style="font-size: 40px; font-weight: 800; text-align: center; margin-bottom: 60px;"
+                class="gsap-fade-up">Suara Orang Tua & <span class="highlight">Pertanyaan FAQ</span></h2>
+
+            <div class="testi-editorial-grid gsap-fade-up" style="margin-bottom: 80px;">
+                <div class="quote-editorial-box">
+                    <div>
+                        <i class="ri-double-quotes-l quote-icon"></i>
+                        <p style="font-size: 16px; font-style: italic; margin-bottom: 24px;">"Anak saya biasanya baru
+                            belajar 5 menit sudah mengeluh pusing. Pakai sketsa Revolusi Visual malah dia yang minta
+                            dijelasin terus!"</p>
+                    </div>
+                    <div style="font-weight: 700;">Bunda Nita — <span
+                            style="color: var(--primary); font-weight: 500;">Orang Tua SD</span></div>
+                </div>
+
+                <div class="quote-editorial-box">
+                    <div>
+                        <i class="ri-double-quotes-l quote-icon"></i>
+                        <p style="font-size: 16px; font-style: italic; margin-bottom: 24px;">"Metode ini luar biasa
+                            memperjelas konsep IPA yang terkesan rumit bagi anak-anak di kelas. Belajar jadi sangat
+                            interaktif."</p>
+                    </div>
+                    <div style="font-weight: 700;">Pak Surya — <span
+                            style="color: var(--primary); font-weight: 500;">Guru Sekolah</span></div>
+                </div>
+
+                <div class="quote-editorial-box">
+                    <div>
+                        <i class="ri-double-quotes-l quote-icon"></i>
+                        <p style="font-size: 16px; font-style: italic; margin-bottom: 24px;">"Nilai pemahaman anak saya
+                            naik drastis setelah belajar lewat gambar. Tanpa perlu drama suruh belajar tiap malam!"</p>
+                    </div>
+                    <div style="font-weight: 700;">Mama Maya — <span
+                            style="color: var(--primary); font-weight: 500;">Orang Tua SMP</span></div>
+                </div>
+            </div>
+
+            <!-- FAQ List -->
+            <div class="faq-editorial-list gsap-fade-up">
+                <div class="faq-row">
+                    <div class="faq-header-bar">
+                        <span>Apakah e-book ini bisa langsung dicetak (print)?</span>
+                        <i class="ri-add-line faq-toggle-icon"></i>
+                    </div>
+                    <div class="faq-content-body">
+                        Ya, modul e-book Revolusi Visual diformat dalam PDF High Definition yang siap dicetak di kertas
+                        A4 maupun diajarkan langsung via HP/Tablet.
+                    </div>
+                </div>
+
+                <div class="faq-row">
+                    <div class="faq-header-bar">
+                        <span>Untuk rentang usia berapa metode ini cocok?</span>
+                        <i class="ri-add-line faq-toggle-icon"></i>
+                    </div>
+                    <div class="faq-content-body">
+                        Sangat ideal untuk anak usia 6 hingga 15 tahun (SD - SMP), namun pendekatan visual ini efektif
+                        untuk siapapun yang ingin paham cepat.
+                    </div>
+                </div>
+
+                <div class="faq-row">
+                    <div class="faq-header-bar">
+                        <span>Bagaimana cara mendapatkan filenya?</span>
+                        <i class="ri-add-line faq-toggle-icon"></i>
+                    </div>
+                    <div class="faq-content-body">
+                        Cukup isi nama, nomor WhatsApp, dan email pada form di bawah. Link download akan dikirimkan
+                        otomatis secara instan.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 11 & 12: CTA & FORM ACCESS -->
+    <section class="section-block bg-form" id="form-akses">
+        <div class="screen-wrapper">
+            <div class="cta-immersive-banner gsap-fade-up" style="margin-bottom: 60px;">
+                <h2 style="font-size: 42px; font-weight: 800; margin-bottom: 16px;">Siap Mengubah Cara Belajar Anak
+                    Anda?</h2>
+                <p style="color: var(--text-muted); font-size: 18px; max-width: 600px; margin: 0 auto;">Bergabunglah
+                    bersama 1.000+ orang tua yang telah beralih ke metode edukasi visual modern.</p>
+            </div>
+
+            <div class="form-glass-container gsap-fade-up">
+                <div style="text-align: center; margin-bottom: 32px;">
+                    <span class="badge-pill"><i class="ri-gift-line"></i> Akses PDF Gratis</span>
+                    <h2 style="font-size: 32px; font-weight: 800; margin-top: 10px;">Formulir Akses Instan PDF 'Revi
+                        Brain'</h2>
+                </div>
+
+                <form action="#" method="POST"
+                    onsubmit="event.preventDefault(); alert('Terima kasih! Link download PDF Revi Brain telah dikirimkan ke WhatsApp & Email Anda.');">
+                    <div style="margin-bottom: 20px;">
+                        <label style="font-size: 14px; font-weight: 600;">Nama Lengkap</label>
+                        <input type="text" class="form-input-field" placeholder="Andrian Dito" required>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="font-size: 14px; font-weight: 600;">Nomor WhatsApp Aktif</label>
+                        <input type="tel" class="form-input-field" placeholder="08123456789" required>
+                    </div>
+                    <div style="margin-bottom: 32px;">
+                        <label style="font-size: 14px; font-weight: 600;">Alamat Email</label>
+                        <input type="email" class="form-input-field" placeholder="andriandito@gmail.com" required>
+                    </div>
+                    <button type="submit" class="btn-main btn-gold"
+                        style="width: 100%; padding: 18px; font-size: 17px;">
+                        <i class="ri-download-cloud-line"></i> Kirim & Dapatkan PDF Instan
+                    </button>
+                </form>
+
+                <div
+                    style="display: flex; justify-content: center; gap: 24px; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 13px;">
+                    <span><i class="ri-shield-check-line" style="color: var(--primary);"></i> Data 100% Terjaga</span>
+                    <span><i class="ri-thunderstorms-line" style="color: var(--primary);"></i> Akses Langsung VIA
+                        WA</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 13: FOOTER -->
+    <footer class="footer-block bg-footer">
+        <div class="screen-wrapper">
+            <div class="footer-grid-layout">
+                <div>
+                    <a href="#" class="brand-logo">
+                        <img src="assets/revolusivisual.png" alt="Logo Footer">
+                        <span>Revolusi Visual</span>
+                    </a>
+                    <p
+                        style="color: var(--text-muted); font-size: 14px; margin-top: 16px; line-height: 1.6; max-width: 300px;">
+                        Gerakan transformasi edukasi berbasis visual untuk menciptakan generasi pemelajar yang cerdas,
+                        kreatif, dan bahagia.
+                    </p>
+                    <div style="display: flex; gap: 12px; margin-top: 20px;">
+                        <a href="#" class="social-btn-item"><i class="ri-instagram-line"></i></a>
+                        <a href="#" class="social-btn-item"><i class="ri-youtube-line"></i></a>
+                        <a href="#" class="social-btn-item"><i class="ri-tiktok-line"></i></a>
+                        <a href="#" class="social-btn-item"><i class="ri-whatsapp-line"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 20px;">Navigasi</h4>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px;">
+                        <li><a href="#" class="nav-item-link">Beranda</a></li>
+                        <li><a href="#statement" class="nav-item-link">Mengapa Visual</a></li>
+                        <li><a href="#fakta" class="nav-item-link">Statistik</a></li>
+                        <li><a href="#komparasi" class="nav-item-link">Perbandingan</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 20px;">Informasi</h4>
+                    <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px;">
+                        <li><a href="#faq" class="nav-item-link">FAQ</a></li>
+                        <li><a href="#form-akses" class="nav-item-link">Unduh PDF</a></li>
+                        <li><a href="#" class="nav-item-link">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 20px;">Kontak</h4>
+                    <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">
+                        <i class="ri-mail-line" style="color: var(--primary);"></i> andriandito@gmail.com
+                    </p>
+                    <p style="color: var(--text-muted); font-size: 14px;">
+                        <i class="ri-phone-line" style="color: var(--primary);"></i> +62 811 861 384
+                    </p>
+                </div>
+            </div>
+
+            <div
+                style="padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; font-size: 13px; color: var(--text-dim);">
+                <div>© 2026 Revolusi Visual. Hak Cipta Dilindungi.</div>
+                <div>Designed with Solid High-Contrast Modern Theme</div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP & TILT SCRIPTS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // 1. ANIMASI UMUM (Fade Up)
-        gsap.utils.toArray('.gsap-fade-up').forEach(element => {
-            gsap.from(element, {
+        // ==================================================
+        // HERO SECTION PREMIUM MOTION (Apple / Linear Grade)
+        // ==================================================
+
+        // 1. Hero Initial Page Load Timeline
+        const heroTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+        heroTl
+            .from(".header-nav", { y: -30, opacity: 0, duration: 0.8, clearProps: "all" })
+            .from(".hero-block .badge-pill", { y: 15, opacity: 0, duration: 0.6, clearProps: "all" }, "-=0.4")
+            .from(".hero-headline", { y: 35, opacity: 0, duration: 1.0, ease: "power4.out", clearProps: "all" }, "-=0.4")
+            .from(".hero-subtext", { y: 20, opacity: 0, duration: 0.8, clearProps: "all" }, "-=0.6")
+            .from(".btn-action-group", { y: 15, opacity: 0, duration: 0.6, ease: "power2.out", clearProps: "all" }, "-=0.5")
+            .from(".btn-action-group .btn-main", { opacity: 0, y: 10, stagger: 0.1, duration: 0.4, clearProps: "all" }, "-=0.4")
+            .from(".hero-img-main", { scale: 0.95, opacity: 0, duration: 1.2, clearProps: "all" }, "-=0.9");
+
+        // 2. Interactive Hero 2.5D Mouse Parallax
+        const heroSection = document.querySelector('.hero-block');
+        const heroMedia = document.querySelector('.hero-img-main');
+        const heroBadge = document.querySelector('.hero-block .badge-pill');
+        const heroBgDots = document.querySelector('.bg-hero');
+
+        if (heroSection) {
+            heroSection.addEventListener('mousemove', (e) => {
+                const { left, top, width, height } = heroSection.getBoundingClientRect();
+                const x = (e.clientX - left - width / 2) / (width / 2);
+                const y = (e.clientY - top - height / 2) / (height / 2);
+
+                if (heroMedia) gsap.to(heroMedia, { x: x * 18, y: y * 18, duration: 0.9, ease: "power2.out", overwrite: "auto" });
+                if (heroBadge) gsap.to(heroBadge, { x: x * 28, y: y * 28, duration: 0.7, ease: "power2.out", overwrite: "auto" });
+            });
+
+            heroSection.addEventListener('mouseleave', () => {
+                if (heroMedia) gsap.to(heroMedia, { x: 0, y: 0, duration: 1.2, ease: "power2.out", overwrite: "auto" });
+                if (heroBadge) gsap.to(heroBadge, { x: 0, y: 0, duration: 1.2, ease: "power2.out", overwrite: "auto" });
+            });
+        }
+
+        // 3. Attio Style Physical Panel Overlap (Hero Pinned Sharp & Section 2 Covers 100%)
+        ScrollTrigger.create({
+            trigger: ".hero-block",
+            start: "top top",
+            endTrigger: "#statement",
+            end: "top top",
+            pin: true,
+            pinSpacing: false
+        });
+
+        gsap.fromTo("#statement",
+            { yPercent: 40 },
+            {
+                yPercent: 0,
+                ease: "none",
                 scrollTrigger: {
-                    trigger: element,
-                    start: "top 85%",
+                    trigger: "#statement",
+                    start: "top bottom",
+                    end: "top top",
+                    scrub: true
+                }
+            }
+        );
+
+        // 4. Fade Up Animations for rest of sections
+        gsap.utils.toArray('.gsap-fade-up').forEach(el => {
+            if (el.closest('.hero-block')) return; // Exclude hero elements handled above
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 88%",
                     toggleActions: "play none none reverse"
                 },
-                y: 80,
+                y: 40,
                 opacity: 0,
                 duration: 1,
                 ease: "power3.out"
             });
         });
 
-        // 2. ANIMASI ENTERING PANCA INDRA (Fly-in Elements)
-        const tlPanca = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".panca-trigger",
-                start: "top 75%",
-                toggleActions: "play none none reverse"
-            }
-        });
-        tlPanca.from(".panca-left", { x: -100, opacity: 0, duration: 1, ease: "power3.out" }, 0)
-            .from(".panca-center", { y: 100, opacity: 0, duration: 1, ease: "power3.out" }, 0.2)
-            .from(".panca-right", { x: 100, opacity: 0, duration: 1, ease: "power3.out" }, 0.4);
-
-
-
-        // 4. ANIMASI STICKY TITLE FORM SECTION
-        // Pindahkan title pin ke atas agar dibuat lebih dulu oleh GSAP
-        ScrollTrigger.create({
-            trigger: ".form-pin-trigger",
-            start: "top top",
-            end: "bottom top",
-            pin: ".form-title-pin",
-            pinSpacing: false
-        });
-
-        // Form pin (akan menutupi title karena dibuat setelahnya)
-        ScrollTrigger.create({
-            trigger: ".form-pin-trigger",
-            start: "top top",
-            end: "+=50%",
-            pin: ".scroll-up-form-wrapper",
-            pinSpacing: true
-        });
-
-        // Fade out title saat form menggulung naik
-        gsap.to(".form-title", {
-            scrollTrigger: {
-                trigger: ".form-pin-trigger",
-                start: "top top",
-                end: "+=40%",
-                scrub: true
-            },
-            opacity: 0,
-            y: -50
-        });
-        // Counter Animation for Faktanya 90%
-        let counterElement = document.querySelector(".faktanya-percent");
-        let countObj = { val: 0 };
-        gsap.to(countObj, {
-            val: 90,
-            roundProps: "val",
-            duration: 2.5,
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: ".faktanya-section-container",
-                start: "top 75%", // Mulai animasi saat section terlihat 25% dari bawah
-                toggleActions: "play none none none"
-            },
-            onUpdate: function () {
-                counterElement.innerText = countObj.val + "%";
-            }
-        });
-
-        // Counter Animation for VS Section
-        gsap.utils.toArray(".vs-counter").forEach(counter => {
+        // 2. Counter Animation
+        gsap.utils.toArray(".counter-num").forEach(counter => {
             let targetVal = parseInt(counter.getAttribute("data-target"));
             let cObj = { val: 0 };
             gsap.to(cObj, {
                 val: targetVal,
                 roundProps: "val",
-                duration: 2.5,
-                ease: "power3.out",
+                duration: 2,
+                ease: "power2.out",
                 scrollTrigger: {
-                    trigger: ".vs-section",
-                    start: "top 75%",
-                    toggleActions: "play none none none"
+                    trigger: counter,
+                    start: "top 90%"
                 },
                 onUpdate: function () {
                     counter.innerText = cObj.val;
                 }
             });
         });
-        // 3. Mouse-tracking Glow
-        const cursorGlow = document.getElementById('cursorGlow');
-        document.addEventListener('mousemove', (e) => {
-            cursorGlow.style.left = e.clientX + 'px';
-            cursorGlow.style.top = e.clientY + 'px';
-        });
-        // 4. Parallax Scroll
-        gsap.utils.toArray('.parallax-img').forEach(img => {
-            gsap.to(img, {
-                yPercent: 15,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: img.parentElement,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: true
+
+        // 3. FAQ Accordion Toggle
+        document.querySelectorAll('.faq-row').forEach(row => {
+            row.addEventListener('click', () => {
+                const isActive = row.classList.contains('active');
+                document.querySelectorAll('.faq-row').forEach(r => r.classList.remove('active'));
+                if (!isActive) {
+                    row.classList.add('active');
                 }
             });
         });
 
-        // 5. Masking Reveal Halus
-        gsap.utils.toArray('.mask-reveal').forEach(el => {
-            gsap.fromTo(el,
-                { clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" },
-                {
-                    clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
-                    duration: 1.5,
-                    ease: "power3.inOut",
-                    scrollTrigger: {
-                        trigger: el,
-                        start: "top 85%",
-                        toggleActions: "play none none none"
-                    }
-                }
-            );
-        });
+        // 4. Interactive 3D Carousel Slider Logic
+        (function init3DCarousel() {
+            const cards = document.querySelectorAll('.carousel-3d-card');
+            const dots = document.querySelectorAll('.carousel-dot');
+            const prevBtn = document.getElementById('prevSlide');
+            const nextBtn = document.getElementById('nextSlide');
+            if (cards.length === 0) return;
 
-        // 6. 3D Vertical Slideshow Carousel Logic
-        function init3dCarousel() {
-            const items = document.querySelectorAll('.carousel-3d-item');
-            if (items.length === 0) return;
-            
             let currentIndex = 0;
-            
-            function updateCarousel() {
-                items.forEach((item, index) => {
-                    item.classList.remove('prev', 'active', 'next', 'hidden-top', 'hidden-bottom');
-                    
-                    let diff = index - currentIndex;
-                    
-                    // Handle circular indexing logic
-                    if (diff < -1) {
-                        if (diff === -(items.length - 1)) {
-                            diff = 1;
-                        } else {
-                            diff = -2;
-                        }
-                    } else if (diff > 1) {
-                        if (diff === items.length - 1) {
-                            diff = -1;
-                        } else {
-                            diff = 2;
-                        }
-                    }
-                    
+            const total = cards.length;
+
+            function updateCarousel(index) {
+                currentIndex = (index + total) % total;
+                cards.forEach((card, i) => {
+                    card.classList.remove('active', 'prev', 'next', 'hidden');
+                    let diff = (i - currentIndex + total) % total;
                     if (diff === 0) {
-                        item.classList.add('active');
-                    } else if (diff === -1) {
-                        item.classList.add('prev');
+                        card.classList.add('active');
                     } else if (diff === 1) {
-                        item.classList.add('next');
-                    } else if (diff < -1) {
-                        item.classList.add('hidden-top');
+                        card.classList.add('next');
+                    } else if (diff === total - 1) {
+                        card.classList.add('prev');
                     } else {
-                        item.classList.add('hidden-bottom');
+                        card.classList.add('hidden');
                     }
                 });
+
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
             }
-            
-            updateCarousel();
-            
-            setInterval(() => {
-                currentIndex = (currentIndex + 1) % items.length;
-                updateCarousel();
-            }, 3000);
-        }
 
-        // Initialize slideshow
-        document.addEventListener('DOMContentLoaded', () => {
-            init3dCarousel();
-        });
-        // Back up init in case DOMContentLoaded already fired
-        if (document.readyState === 'interactive' || document.readyState === 'complete') {
-            init3dCarousel();
-        }
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => updateCarousel(currentIndex - 1));
+            }
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => updateCarousel(currentIndex + 1));
+            }
 
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
-    <!-- tsParticles -->
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
-    <script>
-        tsParticles.load("tsparticles", {
-            fpsLimit: 60,
-            particles: {
-                number: { value: 60, density: { enable: true, value_area: 800 } },
-                color: { value: "#ffffff" },
-                links: { enable: true, color: "#ffffff", distance: 150, opacity: 0.2, width: 1 },
-                move: { enable: true, speed: 1.5, direction: "none", random: false, straight: false, outModes: { default: "bounce" } },
-                size: { value: 3, random: true },
-                opacity: { value: 0.5 }
-            },
-            interactivity: {
-                events: {
-                    onClick: { enable: false, mode: [] },
-                    onHover: { enable: true, mode: "grab" },
-                    resize: true
-                },
-                modes: {
-                    grab: { distance: 200, links: { opacity: 0.5 } }
-                }
-            },
-            detectRetina: true
-        });
+            dots.forEach((dot, i) => {
+                dot.addEventListener('click', () => updateCarousel(i));
+            });
+
+            // Auto rotation every 3.5s
+            let autoSlide = setInterval(() => updateCarousel(currentIndex + 1), 3500);
+
+            const wrapper = document.querySelector('.carousel-3d-wrapper');
+            if (wrapper) {
+                wrapper.addEventListener('mouseenter', () => clearInterval(autoSlide));
+                wrapper.addEventListener('mouseleave', () => {
+                    clearInterval(autoSlide);
+                    autoSlide = setInterval(() => updateCarousel(currentIndex + 1), 3500);
+                });
+            }
+        })();
     </script>
 </body>
 
