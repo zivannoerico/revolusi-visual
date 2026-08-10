@@ -228,103 +228,32 @@
         }
 
         /* ==================================================
-           SECTION-BY-SECTION BACKGROUND STORYTELLING ARCHITECTURE
-           (Apple, Linear, Vercel Inspired - Zero Neon Glow)
+           PLAIN SOLID BACKGROUND ARCHITECTURE
            ================================================== */
-        .bg-hero {
-            background: linear-gradient(180deg, #070A0F 0%, #05070B 100%);
+        .bg-hero,
+        .bg-statement,
+        .bg-editorial,
+        .bg-stat,
+        .bg-comparison,
+        .bg-preview,
+        .bg-benefit,
+        .bg-workflow,
+        .bg-testi,
+        .bg-faq,
+        .bg-form,
+        .bg-footer {
+            background: var(--bg-void);
             position: relative;
         }
 
-        .bg-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-            background-size: 24px 24px;
-            pointer-events: none;
-            opacity: 0.6;
+        .bg-hero::before,
+        .bg-editorial::before,
+        .bg-preview::before {
+            display: none;
         }
 
         .bg-statement {
-            background: #040508;
-            position: relative;
             z-index: 50;
-            border-top-left-radius: 40px;
-            border-top-right-radius: 40px;
-            box-shadow: 0 -30px 80px rgba(0, 0, 0, 0.98);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            will-change: transform;
-        }
-
-        .bg-editorial {
-            background: linear-gradient(135deg, #0B1118 0%, #080D14 100%);
-            position: relative;
-        }
-
-        .bg-editorial::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 48px 48px;
-            pointer-events: none;
-        }
-
-        .bg-stat {
-            background: radial-gradient(circle at center, #0F1722 0%, #06090E 75%);
-        }
-
-        .bg-comparison {
-            background: linear-gradient(90deg, #090D14 0%, #0E1520 100%);
-        }
-
-        .bg-preview {
-            background: linear-gradient(180deg, #090E16 0%, #0D131E 100%);
-            position: relative;
-        }
-
-        .bg-preview::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: radial-gradient(rgba(251, 191, 36, 0.04) 1px, transparent 1px);
-            background-size: 32px 32px;
-            pointer-events: none;
-        }
-
-        .bg-benefit {
-            background: #0A0F16;
-        }
-
-        .bg-workflow {
-            background: linear-gradient(90deg, #0B1018 0%, #0F1622 50%, #0B1018 100%);
-        }
-
-        .bg-testi {
-            background: radial-gradient(circle at center, #0B1017 0%, #05070B 80%);
-        }
-
-        .bg-faq {
-            background: #090D14;
-        }
-
-        .bg-form {
-            background: linear-gradient(180deg, #101826 0%, #0C121D 100%);
-        }
-
-        .bg-footer {
-            background: #040609;
         }
 
         .hero-block {
@@ -338,25 +267,25 @@
 
         .hero-layout {
             display: grid;
-            grid-template-columns: 1.15fr 0.85fr;
+            grid-template-columns: 0.95fr 1.05fr;
             gap: 48px;
             align-items: center;
             width: 100%;
         }
 
         .hero-headline {
-            font-size: 50px;
+            font-size: 38px;
             font-weight: 800;
-            line-height: 1.14;
-            margin-bottom: 22px;
+            line-height: 1.18;
+            margin-bottom: 18px;
         }
 
         .hero-subtext {
-            font-size: 18px;
+            font-size: 16px;
             color: var(--text-muted);
             line-height: 1.6;
-            margin-bottom: 32px;
-            max-width: 590px;
+            margin-bottom: 28px;
+            max-width: 560px;
         }
 
         .hero-stats-bar {
@@ -369,7 +298,7 @@
         }
 
         .stat-num-val {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 800;
             font-family: 'Outfit', sans-serif;
             color: var(--text-main);
@@ -391,8 +320,8 @@
 
         .hero-img-main {
             width: 100%;
-            max-width: 440px;
-            max-height: 380px;
+            max-width: 580px;
+            max-height: 520px;
             height: auto;
             object-fit: contain;
             position: relative;
@@ -493,6 +422,7 @@
             max-width: 100%;
             height: auto;
             max-height: 380px;
+            border-radius: 20px;
             filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.7));
         }
 
@@ -667,13 +597,13 @@
             letter-spacing: 0.5px;
         }
 
-        /* 3D Perspective Carousel Container */
+        /* 3D Perspective Carousel Container (Frameless) */
         .carousel-3d-wrapper {
             margin-top: 50px;
-            background: #0E1420;
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: 48px 32px 36px;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 30px 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -697,29 +627,29 @@
             position: absolute;
             width: 320px;
             height: 220px;
-            border-radius: 16px;
-            background: #121824;
-            border: 2px solid var(--border-subtle);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            background: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.6s ease, border-color 0.6s ease;
+            padding: 16px;
+            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.6s ease;
+            overflow: hidden;
         }
 
         .carousel-3d-card img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
+            border-radius: 12px;
         }
 
         .carousel-3d-card.active {
             transform: translateZ(80px) scale(1.08);
             opacity: 1;
             z-index: 3;
-            border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
         }
 
         .carousel-3d-card.prev {
@@ -814,13 +744,14 @@
         }
 
         /* ==================================================
-           SECTION 6: GERAKAN REVOLUSI VISUAL
+           SECTION 6: GERAKAN REVOLUSI VISUAL (OPEN DESIGN)
            ================================================== */
         .manifesto-banner {
-            background: #0E1420;
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: 64px 48px;
+            background: transparent;
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            border-radius: 0;
+            padding: 60px 0;
             display: grid;
             grid-template-columns: 0.7fr 1.3fr;
             gap: 48px;
@@ -842,13 +773,14 @@
         }
 
         /* ==================================================
-           SECTION 7: PREVIEW E-BOOK
+           SECTION 7: PREVIEW E-BOOK (OPEN DESIGN)
            ================================================== */
         .preview-sticky-wrap {
-            background: #0E1420;
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: 64px 48px;
+            background: transparent;
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            border-radius: 0;
+            padding: 60px 0;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
@@ -865,28 +797,29 @@
 
         .preview-stack-card {
             position: absolute;
-            width: 320px;
-            height: 220px;
-            border-radius: 16px;
-            background: #151D2A;
-            border: 1px solid var(--border-subtle);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+            width: 300px;
+            height: 230px;
+            border-radius: 20px;
+            background: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
             padding: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: var(--transition-smooth);
+            overflow: hidden;
         }
 
         .preview-stack-card img {
             width: 100%;
             height: 100%;
             object-fit: contain;
+            border-radius: 12px;
         }
 
         .preview-stack-card.card-1 {
             transform: translateZ(40px) scale(1.05);
-            border-color: var(--primary);
             z-index: 3;
         }
 
@@ -923,7 +856,7 @@
 
         .benefit-editorial-item:hover {
             padding-left: 20px;
-            background: #0E1420;
+            background: rgba(255, 255, 255, 0.02);
         }
 
         .benefit-idx {
@@ -944,60 +877,72 @@
         }
 
         /* ==================================================
-           SECTION 9: CARA KERJA
+           SECTION 9: CARA KERJA (LINE ACCENT WORKFLOW)
            ================================================== */
         .workflow-timeline {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
+            gap: 40px;
             position: relative;
         }
 
         .workflow-step-node {
-            background: #0E1420;
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-md);
-            padding: 40px 32px;
+            background: transparent;
+            border: none;
+            border-top: 2px solid var(--border-subtle);
+            border-radius: 0;
+            padding: 32px 0 0 0;
             position: relative;
+            transition: var(--transition-smooth);
+        }
+
+        .workflow-step-node:hover {
+            border-top-color: var(--primary);
         }
 
         .step-circle-badge {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             background: var(--primary);
             color: #05070B;
             font-weight: 900;
-            font-size: 20px;
+            font-size: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         /* ==================================================
-           SECTION 10: TESTIMONI & FAQ
+           SECTION 10: TESTIMONI & FAQ (QUOTE LINES)
            ================================================== */
         .testi-editorial-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
+            gap: 40px;
         }
 
         .quote-editorial-box {
-            background: #0E1420;
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-md);
-            padding: 36px;
+            background: transparent;
+            border: none;
+            border-left: 2px solid var(--border-subtle);
+            border-radius: 0;
+            padding: 8px 0 8px 24px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: var(--transition-smooth);
+        }
+
+        .quote-editorial-box:hover {
+            border-left-color: var(--primary);
         }
 
         .quote-icon {
-            font-size: 36px;
+            font-size: 32px;
             color: var(--primary);
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .faq-editorial-list {
@@ -1047,25 +992,26 @@
         }
 
         /* ==================================================
-           SECTION 11 & 12: CTA & FORM ACCESS (SOLID FINISH)
+           SECTION 11 & 12: CTA & FORM ACCESS (OPEN EDITORIAL)
            ================================================== */
         .cta-immersive-banner {
-            background: #141C2B;
-            border: 2px solid var(--primary);
-            border-radius: var(--radius-lg);
-            padding: 80px 48px;
+            background: transparent;
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            border-radius: 0;
+            padding: 60px 0;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            box-shadow: none;
         }
 
         .form-glass-container {
             max-width: 720px;
             margin: 0 auto;
-            background: #0E1420;
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-lg);
-            padding: 56px 48px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            padding: 20px 0;
+            box-shadow: none;
         }
 
         .form-input-field {
@@ -1200,7 +1146,7 @@
         <a href="#form-akses" class="btn-main btn-gold" style="padding: 10px 24px; font-size: 14px;">Mulai Belajar</a>
     </nav>
 
-    <!-- SECTION 1: HERO CINEMATIC -->
+    <!-- SECTION 1: HERO -->
     <section class="hero-block bg-hero">
         <div class="screen-wrapper">
             <div class="hero-layout">
@@ -1246,7 +1192,7 @@
         </div>
     </section>
 
-    <!-- SECTION 2: WHITESPACE & PURE STATEMENT -->
+    <!-- SECTION 2: pertanyaan utama -->
     <section class="whitespace-block bg-statement" id="statement">
         <div class="screen-wrapper">
             <div class="gsap-fade-up">
@@ -1261,7 +1207,7 @@
         </div>
     </section>
 
-    <!-- SECTION 3: FULLSCREEN VISUAL IMPACT -->
+    <!-- SECTION 3: mengapa -->
     <section class="section-block bg-editorial">
         <div class="screen-wrapper">
             <div class="editorial-split">
