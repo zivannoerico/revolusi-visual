@@ -1228,52 +1228,59 @@
         }
 
         @media (max-width: 768px) {
-            .hero-headline {
-                font-size: 36px;
-            }
+            /* Layout & Spacing */
+            .screen-wrapper { padding: 0 20px; }
+            .header-nav { width: calc(100% - 40px); padding: 12px 20px; }
+            .section-block { padding: 60px 0; }
+            .pure-statement-wrapper { padding: 80px 0; }
+            .giant-stat-section { padding: 80px 0; }
+            .manifesto-editorial-wrap { padding: 60px 0; }
+            .workflow-section { padding: 60px 0; }
+            .footer-block { margin-top: 60px; padding: 60px 0 30px; }
+            .hero-block { height: auto; min-height: auto; padding-top: 130px; padding-bottom: 40px; }
+            .cta-immersive-banner { padding: 60px 0 20px; }
 
-            .pure-statement-text {
-                font-size: 28px;
-            }
+            /* Typography */
+            .hero-headline { font-size: 32px; }
+            .pure-statement-text { font-size: 24px; }
+            .section-headline { font-size: 26px; }
 
-            .nav-items {
-                display: none;
-            }
+            /* Buttons */
+            .btn-action-group { flex-direction: column; width: 100%; }
+            .btn-main { width: 100%; justify-content: center; }
 
-            .workflow-grid,
-            .footer-grid-layout {
-                grid-template-columns: 1fr;
-            }
+            /* Grids */
+            .hero-stats-bar { grid-template-columns: 1fr; gap: 20px; text-align: center; }
+            .comparison-slide-inner { grid-template-columns: 1fr; gap: 32px; padding: 16px 0; }
+            .comparison-side.visual { border-left: none; padding-left: 0; border-top: 1px solid var(--border-subtle); padding-top: 24px; }
+            .workflow-grid, .footer-grid-layout { grid-template-columns: 1fr; }
 
-            .pdf-sticky-container {
-                min-height: auto;
-                padding: 60px 0;
+            /* Horizontal Scroll Native on Mobile */
+            .comparison-horizontal-viewport { 
+                overflow-x: auto; 
+                scroll-snap-type: x mandatory; 
+                -webkit-overflow-scrolling: touch; 
+                scrollbar-width: none; /* hide scrollbar for Firefox */
             }
+            .comparison-horizontal-viewport::-webkit-scrollbar { display: none; } /* hide scrollbar for Chrome/Safari */
+            .comparison-slide { scroll-snap-align: center; }
 
-            .pdf-showcase-stage {
-                flex-direction: column;
-                gap: 20px;
-            }
+            /* Header & Navigation */
+            .nav-items { display: none; }
+            .brand-logo span { display: none; } /* Hanya tampilkan icon logo di mobile */
 
-            .pdf-display-frame {
-                height: 320px;
-                padding: 16px;
-            }
+            /* PDF Preview */
+            .pdf-sticky-container { min-height: auto; padding: 60px 0; }
+            .pdf-showcase-stage { flex-direction: column; gap: 20px; }
+            .pdf-display-frame { height: 320px; padding: 16px; }
+            .pdf-page-view { inset: 16px; }
+            .pdf-progress-indicator { flex-direction: row; gap: 20px; }
+            .pdf-progress-step.is-active::after { left: 50%; top: -8px; transform: translateX(-50%); }
 
-            .pdf-page-view {
-                inset: 16px;
-            }
-
-            .pdf-progress-indicator {
-                flex-direction: row;
-                gap: 20px;
-            }
-
-            .pdf-progress-step.is-active::after {
-                left: 50%;
-                top: -8px;
-                transform: translateX(-50%);
-            }
+            /* Benefits List */
+            .benefit-editorial-item { grid-template-columns: 1fr; gap: 12px; padding: 24px 16px; }
+            .benefit-idx { font-size: 16px; }
+            .benefit-description { grid-column: span 1; }
         }
     </style>
 </head>
@@ -2061,29 +2068,37 @@
             const steps = gsap.utils.toArray('.pdf-progress-step');
             if (!section || !stickyContainer || views.length === 0) return;
 
+            const totalPages = views.length;
+
+            function updatePdfPage(activeIndex) {
+                views.forEach((view, i) => {
+                    if (i === activeIndex) {
+                        view.classList.add('is-active');
+                    } else {
+                        view.classList.remove('is-active');
+                    }
+                });
+
+                steps.forEach((step, i) => {
+                    if (i === activeIndex) {
+                        step.classList.add('is-active');
+                    } else {
+                        step.classList.remove('is-active');
+                    }
+                });
+            }
+
+            // Click navigation works on all screen sizes
+            steps.forEach((step, idx) => {
+                step.addEventListener('click', () => {
+                    updatePdfPage(idx);
+                });
+            });
+
             let mm = gsap.matchMedia();
 
+            // Desktop Scroll Pinning
             mm.add("(min-width: 769px)", () => {
-                const totalPages = views.length;
-
-                function updatePdfPage(activeIndex) {
-                    views.forEach((view, i) => {
-                        if (i === activeIndex) {
-                            view.classList.add('is-active');
-                        } else {
-                            view.classList.remove('is-active');
-                        }
-                    });
-
-                    steps.forEach((step, i) => {
-                        if (i === activeIndex) {
-                            step.classList.add('is-active');
-                        } else {
-                            step.classList.remove('is-active');
-                        }
-                    });
-                }
-
                 ScrollTrigger.create({
                     trigger: section,
                     start: "top top",
@@ -2094,18 +2109,28 @@
                     anticipatePin: 1,
                     onUpdate: (self) => {
                         const progress = self.progress;
-                        // Map 0 -> 1 progress smoothly across N pages
                         let idx = Math.floor(progress * totalPages);
                         if (idx >= totalPages) idx = totalPages - 1;
                         updatePdfPage(idx);
                     }
                 });
+            });
 
-                // Allow clicking progress steps to jump view smoothly
-                steps.forEach((step, idx) => {
-                    step.addEventListener('click', () => {
+            // Mobile Scroll Pinning
+            mm.add("(max-width: 768px)", () => {
+                ScrollTrigger.create({
+                    trigger: section,
+                    start: "top 15%",
+                    end: () => `+=${totalPages * 60}%`,
+                    pin: stickyContainer,
+                    pinSpacing: true,
+                    scrub: 0.5,
+                    onUpdate: (self) => {
+                        const progress = self.progress;
+                        let idx = Math.floor(progress * totalPages);
+                        if (idx >= totalPages) idx = totalPages - 1;
                         updatePdfPage(idx);
-                    });
+                    }
                 });
             });
         }
