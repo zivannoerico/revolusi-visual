@@ -230,7 +230,7 @@
         }
 
         /* ==================================================
-           ALTERNATING SOLID BACKGROUND SYSTEM (SELANG-SELING)
+           ALTERNATING SOLID BACKGROUND SYSTEM
            ================================================== */
         .bg-hero {
             background-color: #070A0F;
@@ -251,6 +251,14 @@
         .bg-stat {
             background-color: #0E1420;
             position: relative;
+        }
+
+        .bg-giant-stat {
+            background-color: #070A0F;
+            position: relative;
+            padding: 120px 0;
+            text-align: center;
+            overflow: hidden;
         }
 
         .bg-comparison {
@@ -278,14 +286,18 @@
             position: relative;
         }
 
-        .bg-testi,
-        .bg-faq {
+        .bg-testi {
             background-color: #0E1420;
             position: relative;
         }
 
-        .bg-form {
+        .bg-faq {
             background-color: #070A0F;
+            position: relative;
+        }
+
+        .bg-form {
+            background-color: #0E1420;
             position: relative;
         }
 
@@ -294,32 +306,7 @@
             position: relative;
         }
 
-        .bg-hero::before,
-        .bg-editorial::before,
-        .bg-preview::before {
-            display: none;
-        }
-
-        /* Kosa Gambar Interactive Tabs */
-        .kosa-tab-btn {
-            padding: 10px 20px;
-            border-radius: var(--radius-pill);
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid var(--border-subtle);
-            color: var(--text-muted);
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-        }
-
-        .kosa-tab-btn.active,
-        .kosa-tab-btn:hover {
-            background: var(--primary);
-            color: #05070B;
-            border-color: var(--primary);
-        }
-
+        /* Hero Container */
         .hero-block {
             padding-top: 110px;
             padding-bottom: 50px;
@@ -327,6 +314,7 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
+            will-change: opacity, transform;
         }
 
         .hero-blur-wrapper {
@@ -379,7 +367,6 @@
             margin-top: 4px;
         }
 
-        /* Hero Right Media Box (Solid Matte Finish) */
         .hero-media-box {
             position: relative;
             display: flex;
@@ -399,56 +386,25 @@
             filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.8));
         }
 
-        .floating-card {
-            position: absolute;
-            background: #111726;
-            border: 1px solid #232F45;
-            border-radius: 16px;
-            padding: 14px 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            z-index: 10;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-            animation: floatUpDown 4s infinite ease-in-out alternate;
-        }
-
-        .floating-card-1 {
-            top: 10%;
-            left: -20px;
-            animation-delay: 0s;
-        }
-
-        .floating-card-2 {
-            bottom: 10%;
-            right: -15px;
-            animation-delay: 2s;
-        }
-
-        @keyframes floatUpDown {
-            0% {
-                transform: translateY(0);
-            }
-
-            100% {
-                transform: translateY(-12px);
-            }
-        }
-
         /* ==================================================
            SECTION 2: WHITESPACE & PURE STATEMENT
            ================================================== */
+        .pure-statement-wrapper {
+            padding: 160px 0;
+            text-align: center;
+        }
+
         .pure-statement-text {
             font-size: 46px;
             font-weight: 800;
-            max-width: 900px;
+            max-width: 920px;
             margin: 0 auto;
             line-height: 1.3;
             letter-spacing: -0.02em;
         }
 
         /* ==================================================
-           SECTION 3: FULLSCREEN VISUAL IMPACT
+           SECTION 3: MENGAPA BANYAK ORANG SULIT BELAJAR
            ================================================== */
         .editorial-split {
             display: grid;
@@ -496,31 +452,55 @@
             filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.7));
         }
 
-        /* ==================================================
-           SECTION 4: GIANT STATISTIC
-           ================================================== */
-        .giant-stat-wrapper {
-            text-align: center;
-            position: relative;
-            padding: 60px 0;
+        /* Kosa Gambar Interactive Tabs */
+        .kosa-tab-btn {
+            padding: 10px 20px;
+            border-radius: var(--radius-pill);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition-smooth);
         }
 
-        .giant-num {
-            font-size: 140px;
+        .kosa-tab-btn.active,
+        .kosa-tab-btn:hover {
+            background: var(--primary);
+            color: #05070B;
+            border-color: var(--primary);
+        }
+
+        /* ==================================================
+           SECTION 4: 60.000X GIANT STATISTIC (VISUAL BREATHING ROOM)
+           ================================================== */
+        .giant-stat-section {
+            padding: 140px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: #070A0F;
+        }
+
+        .giant-num-display {
+            font-size: clamp(100px, 14vw, 170px);
             font-weight: 900;
             font-family: 'Outfit', sans-serif;
             color: var(--primary);
-            line-height: 1;
-            letter-spacing: -0.04em;
-            margin-bottom: 20px;
+            line-height: 0.95;
+            letter-spacing: -0.05em;
+            margin-bottom: 24px;
+            will-change: transform;
         }
 
         .giant-subtext {
-            font-size: 22px;
+            font-size: clamp(18px, 2vw, 24px);
             color: var(--text-muted);
-            max-width: 680px;
+            max-width: 720px;
             margin: 0 auto;
             line-height: 1.5;
+            font-weight: 500;
         }
 
         .giant-bg-brain {
@@ -528,9 +508,9 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 380px;
+            width: 420px;
             height: auto;
-            opacity: 0.1;
+            opacity: 0.06;
             pointer-events: none;
         }
 
@@ -625,7 +605,8 @@
             align-items: center;
             border-top: 1px solid var(--border-subtle);
             border-bottom: 1px solid var(--border-subtle);
-            padding: 22px 0;
+            padding: 28px 0;
+            position: relative;
         }
 
         .comparison-case-label {
@@ -739,90 +720,40 @@
             z-index: 3;
         }
 
-        .comparison-slide-inner {
-            position: relative;
-        }
-
-        @media (max-width: 768px) {
-            .bg-comparison {
-                height: auto;
-                min-height: auto;
-                padding-top: 96px;
-                padding-bottom: 60px;
-                scroll-margin-top: 80px;
-            }
-
-            .comparison-horizontal-viewport {
-                overflow: visible;
-            }
-
-            .comparison-horizontal-track {
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-                gap: 40px;
-            }
-
-            .comparison-slide {
-                width: 100%;
-                min-width: 100%;
-                max-width: 100%;
-                flex: 1 1 auto;
-                padding: 0 18px;
-            }
-
-            .comparison-scroll-progress {
-                display: none;
-            }
-
-            .comparison-horizontal-header {
-                width: calc(100% - 36px);
-            }
-
-            .comparison-slide-inner {
-                grid-template-columns: 1fr;
-                gap: 24px;
-                min-height: 64vh;
-            }
-
-            .comparison-side {
-                min-height: auto;
-            }
-
-            .comparison-side.visual {
-                border-left: 0;
-                border-top: 1px solid var(--border-subtle);
-                padding-left: 0;
-                padding-top: 24px;
-            }
-
-            .comparison-copy {
-                font-size: 15px;
-                line-height: 1.6;
-            }
-
-            .comparison-image-frame {
-                height: 220px;
-            }
-
-            .comparison-case-number {
-                top: 50%;
-            }
+        /* Internal subtle content animation for comparison slides */
+        .comparison-slide-inner .comparison-side {
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
 
         /* ==================================================
-           SECTION 6: GERAKAN REVOLUSI VISUAL (OPEN DESIGN)
+           SECTION 6: MANIFESTO (EDITORIAL STATEMENT NO CARDS)
            ================================================== */
-        .manifesto-banner {
-            background: transparent;
+        .manifesto-editorial-wrap {
+            padding: 90px 0;
             border-top: 1px solid var(--border-subtle);
             border-bottom: 1px solid var(--border-subtle);
-            border-radius: 0;
-            padding: 60px 0;
             display: grid;
             grid-template-columns: 0.7fr 1.3fr;
-            gap: 48px;
+            gap: 60px;
             align-items: center;
+        }
+
+        .manifesto-brand-side {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .manifesto-brand-side img {
+            width: 140px;
+            height: auto;
+        }
+
+        .manifesto-content-side {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
 
         .scribble-text {
@@ -840,77 +771,130 @@
         }
 
         /* ==================================================
-           SECTION 7: PREVIEW E-BOOK (OPEN DESIGN)
+           SECTION 7: PREVIEW PDF (EDITORIAL PRODUCT SHOWCASE)
            ================================================== */
-        .preview-sticky-wrap {
-            background: transparent;
-            border-top: 1px solid var(--border-subtle);
-            border-bottom: 1px solid var(--border-subtle);
-            border-radius: 0;
-            padding: 60px 0;
+        .pdf-showcase-section {
+            position: relative;
+            background-color: #070A0F;
+        }
+
+        .pdf-sticky-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 80px 0;
+        }
+
+        .pdf-showcase-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 0.9fr 1.1fr;
             gap: 60px;
             align-items: center;
+            width: 100%;
         }
 
-        .preview-stack-display {
+        .pdf-text-stable {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .pdf-showcase-stage {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 36px;
             position: relative;
-            height: 360px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 100%;
         }
 
-        .preview-stack-card {
-            position: absolute;
-            width: 300px;
-            height: 230px;
-            border-radius: 20px;
+        /* Large Frame Container for PDF Page Display */
+        .pdf-display-frame {
+            position: relative;
+            width: min(540px, 100%);
+            height: clamp(380px, 58vh, 520px);
             background: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-            padding: 16px;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: var(--transition-smooth);
-            overflow: hidden;
         }
 
-        .preview-stack-card img {
+        .pdf-page-view {
+            position: absolute;
+            inset: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(18px);
+            pointer-events: none;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .pdf-page-view.is-active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .pdf-page-view img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            border-radius: 12px;
+            border-radius: 8px;
         }
 
-        .preview-stack-card.card-1 {
-            transform: translateZ(40px) scale(1.05);
-            z-index: 3;
+        /* Editorial Vertical Progress Counter */
+        .pdf-progress-indicator {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            align-items: center;
+            position: relative;
         }
 
-        .preview-stack-card.card-2 {
-            background: #0E1420;
-            border: 1px solid #1E293B;
-            transform: translateY(30px) rotate(5deg);
-            opacity: 0.85;
-            z-index: 2;
+        .pdf-progress-step {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--text-dim);
+            letter-spacing: 0.05em;
+            transition: color 0.4s ease, transform 0.4s ease;
+            position: relative;
+            cursor: pointer;
         }
 
-        .preview-stack-card.card-3 {
-            transform: translateY(-30px) rotate(-5deg);
-            opacity: 0.4;
-            z-index: 1;
+        .pdf-progress-step.is-active {
+            color: var(--primary);
+            transform: scale(1.25);
+        }
+
+        .pdf-progress-step.is-active::after {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: var(--primary);
         }
 
         /* ==================================================
-           SECTION 8: BENEFIT (EDITORIAL LIST)
+           SECTION 8: BENEFIT (EDITORIAL LIST ACTIVE STATE)
            ================================================== */
         .editorial-benefit-list {
             display: flex;
             flex-direction: column;
             border-top: 1px solid var(--border-subtle);
+            margin-top: 40px;
         }
 
         .benefit-editorial-item {
@@ -918,26 +902,37 @@
             grid-template-columns: 80px 1.5fr 2fr;
             gap: 32px;
             align-items: center;
-            padding: 40px 0;
+            padding: 40px 24px;
             border-bottom: 1px solid var(--border-subtle);
-            transition: var(--transition-smooth);
+            transition: background 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
+            position: relative;
         }
 
-        .benefit-editorial-item:hover {
-            padding-left: 20px;
-            background: rgba(255, 255, 255, 0.02);
+        .benefit-editorial-item.is-active {
+            background: rgba(251, 191, 36, 0.04);
+            border-bottom-color: var(--primary);
         }
 
         .benefit-idx {
             font-size: 24px;
             font-weight: 800;
-            color: var(--primary);
+            color: var(--text-dim);
             font-family: 'Outfit', sans-serif;
+            transition: color 0.4s ease;
+        }
+
+        .benefit-editorial-item.is-active .benefit-idx {
+            color: var(--primary);
         }
 
         .benefit-heading {
             font-size: 24px;
             font-weight: 700;
+            transition: color 0.4s ease;
+        }
+
+        .benefit-editorial-item.is-active .benefit-heading {
+            color: var(--text-main);
         }
 
         .benefit-description {
@@ -946,74 +941,129 @@
         }
 
         /* ==================================================
-           SECTION 9: CARA KERJA (LINE ACCENT WORKFLOW)
+           SECTION 9: CARA KERJA (VISUAL TIMELINE LINE ACCENT)
            ================================================== */
-        .workflow-timeline {
+        .workflow-section {
+            padding: 110px 0;
+        }
+
+        .workflow-timeline-container {
+            position: relative;
+            margin-top: 60px;
+        }
+
+        /* Active tracking progress line */
+        .workflow-line-bg {
+            position: absolute;
+            top: 24px;
+            left: 50px;
+            right: 50px;
+            height: 2px;
+            background: var(--border-subtle);
+            z-index: 1;
+        }
+
+        .workflow-line-active {
+            position: absolute;
+            top: 24px;
+            left: 50px;
+            width: 0%;
+            height: 2px;
+            background: var(--primary);
+            z-index: 2;
+            transition: width 0.1s linear;
+            will-change: width;
+        }
+
+        .workflow-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 40px;
             position: relative;
+            z-index: 3;
         }
 
-        .workflow-step-node {
-            background: transparent;
-            border: none;
-            border-top: 2px solid var(--border-subtle);
-            border-radius: 0;
-            padding: 32px 0 0 0;
+        .workflow-node {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
             position: relative;
-            transition: var(--transition-smooth);
-        }
-
-        .workflow-step-node:hover {
-            border-top-color: var(--primary);
         }
 
         .step-circle-badge {
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            background: var(--primary);
-            color: #05070B;
+            background: #141C2B;
+            border: 2px solid var(--border-subtle);
+            color: var(--text-muted);
             font-weight: 900;
             font-size: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            transition: all 0.4s ease;
+        }
+
+        .workflow-node.is-active .step-circle-badge {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #05070B;
+        }
+
+        .workflow-node-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            transition: color 0.4s ease;
+        }
+
+        .workflow-node.is-active .workflow-node-title {
+            color: var(--primary);
+        }
+
+        .workflow-node-desc {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.6;
         }
 
         /* ==================================================
-           SECTION 10: TESTIMONI & FAQ (QUOTE LINES)
+           SECTION 10: TESTIMONIAL & FAQ
            ================================================== */
-        .testi-editorial-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
+        .testimonial-single-wrapper {
+            padding: 80px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 90px;
         }
 
-        .quote-editorial-box {
-            background: transparent;
-            border: none;
-            border-left: 2px solid var(--border-subtle);
-            border-radius: 0;
-            padding: 8px 0 8px 24px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: var(--transition-smooth);
+        .testimonial-main-quote {
+            font-size: clamp(26px, 3.2vw, 40px);
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.35;
+            color: var(--text-main);
+            max-width: 900px;
+            margin: 0 auto 32px;
+            letter-spacing: -0.02em;
         }
 
-        .quote-editorial-box:hover {
-            border-left-color: var(--primary);
+        .testimonial-author-info {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-muted);
         }
 
-        .quote-icon {
-            font-size: 32px;
+        .testimonial-author-info span {
             color: var(--primary);
-            margin-bottom: 12px;
+            font-weight: 500;
         }
 
+        /* ==================================================
+           SECTION 11: FAQ (EDITORIAL ACCORDION)
+           ================================================== */
         .faq-editorial-list {
             max-width: 840px;
             margin: 0 auto;
@@ -1026,6 +1076,10 @@
             padding: 28px 0;
             cursor: pointer;
             transition: var(--transition-smooth);
+        }
+
+        .faq-row:first-child {
+            border-top: 1px solid var(--border-subtle);
         }
 
         .faq-header-bar {
@@ -1045,10 +1099,11 @@
         .faq-content-body {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s ease, margin-top 0.3s ease;
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), margin-top 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
             color: var(--text-muted);
             font-size: 16px;
-            line-height: 1.6;
+            line-height: 1.65;
         }
 
         .faq-row.active .faq-toggle-icon {
@@ -1058,29 +1113,39 @@
         .faq-row.active .faq-content-body {
             max-height: 300px;
             margin-top: 16px;
+            opacity: 1;
         }
 
         /* ==================================================
-           SECTION 11 & 12: CTA & FORM ACCESS (OPEN EDITORIAL)
+           SECTION 12: CTA & FORM ACCESS
            ================================================== */
         .cta-immersive-banner {
-            background: transparent;
-            border-top: 1px solid var(--border-subtle);
-            border-bottom: 1px solid var(--border-subtle);
-            border-radius: 0;
-            padding: 60px 0;
+            padding: 80px 0 40px;
             text-align: center;
-            box-shadow: none;
+        }
+
+        .cta-headline {
+            font-size: clamp(32px, 4vw, 52px);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .cta-subtext {
+            color: var(--text-muted);
+            font-size: 18px;
+            max-width: 620px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
         .form-glass-container {
             max-width: 720px;
-            margin: 0 auto;
+            margin: 40px auto 0;
             background: transparent;
             border: none;
             border-radius: 0;
             padding: 20px 0;
-            box-shadow: none;
         }
 
         .form-input-field {
@@ -1140,12 +1205,10 @@
 
         /* Responsive Breakpoints */
         @media (max-width: 1024px) {
-
             .hero-layout,
             .editorial-split,
-            .manifesto-banner,
-            .preview-sticky-wrap,
-            .comparison-canvas-grid {
+            .manifesto-editorial-wrap,
+            .pdf-showcase-grid {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
@@ -1158,41 +1221,69 @@
                 grid-column: span 2;
             }
 
-            .workflow-timeline,
-            .testi-editorial-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .workflow-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
             }
 
             .footer-grid-layout {
                 grid-template-columns: 1fr 1fr;
             }
+
+            .workflow-line-bg, .workflow-line-active {
+                display: none;
+            }
         }
 
         @media (max-width: 768px) {
             .hero-headline {
-                font-size: 38px;
+                font-size: 36px;
             }
 
             .pure-statement-text {
-                font-size: 30px;
-            }
-
-            .giant-num {
-                font-size: 80px;
+                font-size: 28px;
             }
 
             .nav-items {
                 display: none;
             }
 
-            .workflow-timeline,
-            .testi-editorial-grid,
+            .workflow-grid,
             .footer-grid-layout {
                 grid-template-columns: 1fr;
             }
 
-            .floating-card {
-                display: none;
+            .pdf-sticky-container {
+                min-height: auto;
+                padding: 60px 0;
+            }
+
+            .pdf-showcase-stage {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .pdf-display-frame {
+                height: 320px;
+                padding: 16px;
+            }
+
+            .pdf-page-view {
+                inset: 16px;
+            }
+
+            .pdf-progress-indicator {
+                flex-direction: row;
+                gap: 20px;
+            }
+
+            .pdf-progress-step.is-active::after {
+                left: 50%;
+                top: -8px;
+                transform: translateX(-50%);
+            }
+                width: 260px;
+                height: 300px;
             }
         }
     </style>
@@ -1262,41 +1353,75 @@
         </div>
     </section>
 
-    <!-- SECTION 2: pertanyaan utama -->
-    <section class="whitespace-block bg-statement" id="statement">
+    <!-- SECTION 2: STATEMENT / PERNYATAAN UTAMA (TYPOGRAPHY-DRIVEN TRANSITION) -->
+    <section class="pure-statement-wrapper bg-statement" id="statement">
         <div class="screen-wrapper">
-            <div class="gsap-fade-up">
-                <p
-                    style="color: var(--primary); font-weight: 700; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px;">
-                    PERNYATAAN UTAMA</p>
+            <div class="statement-reveal">
+                <p style="color: var(--primary); font-weight: 700; font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 24px;">
+                    PERNYATAAN UTAMA
+                </p>
                 <h2 class="pure-statement-text">
-                    "SEJATINYA, OTAK MANUSIA <span class="highlight">TIDAK DIRANCANG</span> UNTUK MEMBACA DINDING TEKS
-                    TANPA KONTEKS."
+                    "SEJATINYA, OTAK MANUSIA <span class="highlight">TIDAK DIRANCANG</span> UNTUK MEMBACA DINDING TEKS TANPA KONTEKS."
                 </h2>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 3: mengapa -->
-    <section class="section-block bg-editorial">
+    <!-- SECTION 3: MENGAPA BANYAK ORANG SULIT BELAJAR (STAGGERED SCROLL REVEAL) -->
+    <section class="section-block bg-editorial" id="mengapa">
         <div class="screen-wrapper">
             <div class="editorial-split">
-                <div class="editorial-content-left gsap-fade-up">
-                    <h2 style="font-size: 40px; font-weight: 800;">Mengapa Banyak Orang <span class="highlight">Sulit
-                            Belajar?</span></h2>
-                    <p style="color: var(--text-muted); font-size: 18px; line-height: 1.6;">
+                <div class="editorial-content-left">
+                    <h2 class="reveal-head" style="font-size: 40px; font-weight: 800;">
+                        Mengapa Banyak Orang <span class="highlight">Sulit Belajar?</span>
+                    </h2>
+                    <p class="reveal-body" style="color: var(--text-muted); font-size: 18px; line-height: 1.6;">
                         Ketika dipaksa membaca hafalan teks polos, otak mengalami kelelahan kognitif. Manusia merespons
                         lingkungan secara alami melalui integrasi panca indra.
                     </p>
-                    <div class="sensory-badge-list">
+                    <div class="sensory-badge-list reveal-detail">
                         <span class="sensory-chip"><i class="ri-eye-line"></i> MATA (VISUAL)</span>
                         <span class="sensory-chip"><i class="ri-ear-line"></i> TELINGA</span>
                         <span class="sensory-chip"><i class="ri-hand-heart-line"></i> RABA</span>
                         <span class="sensory-chip"><i class="ri-emotion-happy-line"></i> MULUT</span>
                         <span class="sensory-chip"><i class="ri-mental-health-line"></i> HIDUNG</span>
                     </div>
+
+                    <!-- FORMULA KOSA GAMBAR -->
+                    <div class="kosa-gambar-block reveal-detail" id="kosa-gambar" style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border-subtle);">
+                        <span style="color: var(--primary); font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;">FORMULA KOSA GAMBAR</span>
+                        <h3 style="font-size: 24px; font-weight: 800; line-height: 1.2; margin-top: 8px;">
+                            "Tuh Kan, <span class="highlight">Semua Orang Bisa Menggambar!</span>"
+                        </h3>
+                        <p style="color: var(--text-muted); font-size: 15px; line-height: 1.6; margin-top: 8px;">
+                            Menulis huruf <em>A, B, O, U, H</em> sebenarnya adalah kegiatan menggambar bentuk huruf!
+                        </p>
+                        <div style="display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap;">
+                            <button class="kosa-tab-btn active" onclick="switchKosaTab('bentuk-dasar')">1. 3 Bentuk Dasar</button>
+                            <button class="kosa-tab-btn" onclick="switchKosaTab('rekonstruksi-huruf')">2. Menulis = Menggambar</button>
+                            <button class="kosa-tab-btn" onclick="switchKosaTab('kasta-gambar')">3. Kasta Gambar</button>
+                        </div>
+                        <div id="tab-bentuk-dasar" class="kosa-tab-content" style="margin-top: 14px;">
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 14px 18px;">
+                                <h4 style="font-size: 15px; color: var(--primary); margin-bottom: 4px;">Bulat &#9675;, Kotak &#9633;, Segitiga &#9651;</h4>
+                                <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Dari 3 bentuk sederhana ini, Anda bisa membentuk objek apa saja: Jam Dinding, Buku, Pizza, Gelas, hingga HP.</p>
+                            </div>
+                        </div>
+                        <div id="tab-rekonstruksi-huruf" class="kosa-tab-content" style="display: none; margin-top: 14px;">
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 14px 18px;">
+                                <h4 style="font-size: 15px; color: var(--primary); margin-bottom: 4px;">Garis + Lengkung + Titik</h4>
+                                <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Huruf <strong>A</strong> = 2 Garis Panjang + 1 Garis Pendek. Huruf <strong>O</strong> = 1 Lengkungan Bulat.</p>
+                            </div>
+                        </div>
+                        <div id="tab-kasta-gambar" class="kosa-tab-content" style="display: none; margin-top: 14px;">
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 14px 18px;">
+                                <h4 style="font-size: 15px; color: var(--primary); margin-bottom: 4px;">Doodle &rarr; Sketch &rarr; Art</h4>
+                                <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Dunia edukasi tidak butuh lukisan mahakarya (Art). Cukup tingkat <strong>Sketch (Membuat Bentuk)</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="editorial-img-wrap gsap-fade-up" style="text-align: center;">
+                <div class="editorial-img-wrap reveal-visual" style="text-align: center;">
                     <img src="assets/panca_indra_sketch.png" alt="Panca Indra Sketsa"
                         style="max-height: 480px; width: 100%; max-width: 520px; object-fit: contain; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));">
                 </div>
@@ -1304,81 +1429,25 @@
         </div>
     </section>
 
-    <!-- SECTION 4: FORMULA KOSA GAMBAR (DARI PRESENTASI PDF REVOLUSI VISUAL) -->
-    <section class="section-block bg-stat" id="kosa-gambar">
+    <!-- SECTION 4: 60.000X (VISUAL BREATHING ROOM) -->
+    <section class="giant-stat-section bg-giant-stat" id="fakta">
+        <img src="assets/otak_transparent.png" alt="Otak Background" class="giant-bg-brain">
         <div class="screen-wrapper">
-            <div class="editorial-split">
-                <div class="editorial-content-left gsap-fade-up">
-                    <span
-                        style="color: var(--primary); font-weight: 700; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase;">FORMULA
-                        KOSA GAMBAR</span>
-                    <h2 style="font-size: 38px; font-weight: 800; line-height: 1.2; margin-top: 8px;">
-                        "Tuh Kan, <span class="highlight">Semua Orang Bisa Menggambar!</span>"
-                    </h2>
-                    <p style="color: var(--text-muted); font-size: 16px; line-height: 1.6; margin-top: 12px;">
-                        Kita sering tidak pede menggambar bukan karena tidak berbakat, melainkan karena <strong>kurang
-                            Kosa Gambar</strong>. Menulis huruf <em>A, B, O, U, H</em> sebenarnya adalah kegiatan
-                        menggambar bentuk huruf!
-                    </p>
-                    <div style="display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
-                        <button class="kosa-tab-btn active" onclick="switchKosaTab('bentuk-dasar')">1. 3 Bentuk
-                            Dasar</button>
-                        <button class="kosa-tab-btn" onclick="switchKosaTab('rekonstruksi-huruf')">2. Menulis =
-                            Menggambar</button>
-                        <button class="kosa-tab-btn" onclick="switchKosaTab('kasta-gambar')">3. Kasta Gambar</button>
-                    </div>
-
-                    <!-- Tab Content 1 -->
-                    <div id="tab-bentuk-dasar" class="kosa-tab-content" style="margin-top: 16px;">
-                        <div
-                            style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 18px 22px;">
-                            <h4 style="font-size: 17px; color: var(--primary); margin-bottom: 6px;">Bulat &#9675;, Kotak
-                                &#9633;, Segitiga &#9651;</h4>
-                            <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">Dari 3 bentuk
-                                sederhana ini, Anda bisa membentuk objek apa saja: Jam Dinding, Buku, Pizza, Gelas,
-                                hingga HP dalam hitungan detik.</p>
-                        </div>
-                    </div>
-
-                    <!-- Tab Content 2 -->
-                    <div id="tab-rekonstruksi-huruf" class="kosa-tab-content" style="display: none; margin-top: 16px;">
-                        <div
-                            style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 18px 22px;">
-                            <h4 style="font-size: 17px; color: var(--primary); margin-bottom: 6px;">Garis + Lengkung +
-                                Titik</h4>
-                            <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">Huruf
-                                <strong>A</strong> = 2 Garis Panjang + 1 Garis Pendek. Huruf <strong>O</strong> = 1
-                                Lengkungan Bulat. Jika Anda bisa menulis, Anda SUDAH menggambar setiap hari!</p>
-                        </div>
-                    </div>
-
-                    <!-- Tab Content 3 -->
-                    <div id="tab-kasta-gambar" class="kosa-tab-content" style="display: none; margin-top: 16px;">
-                        <div
-                            style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 18px 22px;">
-                            <h4 style="font-size: 17px; color: var(--primary); margin-bottom: 6px;">Doodle &rarr; Sketch
-                                &rarr; Art</h4>
-                            <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">Dunia edukasi tidak
-                                butuh lukisan mahakarya (Art). Cukup tingkat <strong>Sketch (Membuat Bentuk)</strong>
-                                yang bisa dibuat oleh siapa saja.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="editorial-img-wrap gsap-fade-up" style="text-align: center;">
-                    <img src="assets/semuabisa.png" alt="Semua Bisa Pasti Gambar"
-                        style="max-height: 480px; width: 100%; max-width: 540px; border-radius: 20px; background: #ffffff; padding: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); object-fit: contain;">
-                </div>
+            <div class="giant-stat-content">
+                <div class="giant-num-display">60.000x</div>
+                <p class="giant-subtext">
+                    Otak manusia memproses informasi visual <span class="highlight">60.000 kali lebih cepat</span> dibandingkan membaca teks biasa.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 5: TULISAN VS VISUAL — HORIZONTAL SCROLL -->
+    <!-- SECTION 5: TULISAN VS VISUAL — HORIZONTAL STORYTELLING -->
     <section class="section-block bg-comparison" id="komparasi">
         <div class="comparison-horizontal-header">
-            <div class="badge-pill gsap-fade-up" style="margin-bottom: 14px;">Perbandingan Nyata</div>
-            <h2 class="gsap-fade-up">Tulisan <span class="highlight">vs</span> Visual</h2>
-            <p class="gsap-fade-up">Tiga contoh dari materi Revolusi Visual. Geser dengan scroll untuk melihat berapa
-                banyak bentuk yang harus dijelaskan dengan kata dibandingkan dengan gambar.</p>
+            <div class="badge-pill" style="margin-bottom: 14px;">Perbandingan Nyata</div>
+            <h2>Tulisan <span class="highlight">vs</span> Visual</h2>
+            <p>Tiga contoh dari materi Revolusi Visual. Geser dengan scroll untuk melihat berapa banyak bentuk yang harus dijelaskan dengan kata dibandingkan dengan gambar.</p>
             <div class="comparison-scroll-progress" aria-hidden="true"><span></span></div>
         </div>
 
@@ -1466,123 +1535,125 @@
         </div>
     </section>
 
-    <!-- SECTION 6: GERAKAN REVOLUSI VISUAL -->
+    <!-- SECTION 6: MANIFESTO (EDITORIAL STATEMENT NO CARDS) -->
     <section class="section-block bg-manifesto">
         <div class="screen-wrapper">
-            <div class="manifesto-banner gsap-fade-up">
-                <div style="text-align: center;">
-                    <img src="assets/revolusivisual.png" alt="Logo Manifesto" style="width: 180px; height: auto;">
+            <div class="manifesto-editorial-wrap">
+                <div class="manifesto-brand-side">
+                    <img src="assets/revolusivisual.png" alt="Logo Manifesto">
+                    <span style="color: var(--primary); font-weight: 800; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;">GERAKAN EDUKASI NASIONAL</span>
                 </div>
-                <div>
-                    <span
-                        style="color: var(--primary); font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">GERAKAN
-                        EDUKASI NASIONAL</span>
-                    <h2 style="font-size: 32px; font-weight: 800; line-height: 1.3; margin-top: 10px;">
-                        Membuat Metode <span class="scribble-text">Penyampaian Informasi<svg viewBox="0 0 100 10"
-                                preserveAspectRatio="none">
-                                <path d="M 2 4 Q 48 6, 95 3 T 97 5" stroke="#FBBF24" stroke-width="4" fill="none"
-                                    stroke-linecap="round" />
-                            </svg></span> Agar Mudah Dipahami Menggunakan Gambar.
+                <div class="manifesto-content-side">
+                    <h2 class="manifesto-headline" style="font-size: 34px; font-weight: 800; line-height: 1.3;">
+                        Membuat Metode <span class="scribble-text">Penyampaian Informasi<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M 2 4 Q 48 6, 95 3 T 97 5" stroke="#FBBF24" stroke-width="4" fill="none" stroke-linecap="round" /></svg></span> Agar Mudah Dipahami Menggunakan Gambar.
                     </h2>
-                    <p style="color: var(--text-muted); font-size: 16px; margin-top: 16px;">
-                        Kami berkomitmen menghadirkan metode pendidikan berbasis visual ke dalam sistem pembelajaran
-                        Indonesia agar siswa mengerti esensi pelajaran secara alami.
+                    <p style="color: var(--text-muted); font-size: 17px; line-height: 1.6;">
+                        Kami berkomitmen menghadirkan metode pendidikan berbasis visual ke dalam sistem pembelajaran Indonesia agar siswa mengerti esensi pelajaran secara alami.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 7: PREVIEW E-BOOK -->
-    <section class="section-block bg-preview" id="preview">
-        <div class="screen-wrapper">
-            <div class="preview-sticky-wrap gsap-fade-up">
-                <div>
-                    <div class="badge-pill"><i class="ri-file-pdf-line"></i> E-Book HD Siap Cetak</div>
-                    <h2 style="font-size: 36px; font-weight: 800; margin-bottom: 16px;">Ilustrasi Interaktif Pemantik
-                        Pikiran</h2>
-                    <p style="color: var(--text-muted); font-size: 16px; margin-bottom: 24px; line-height: 1.6;">
-                        Setiap lembar e-book dirancang dengan sketsa ringkas yang menggugah rasa ingin tahu anak tanpa
-                        kejenuhan.
-                    </p>
-                    <a href="#form-akses" class="btn-main btn-gold">Dapatkan PDF Sekarang</a>
-                </div>
-                <div class="preview-stack-display">
-                    <div class="preview-stack-card card-3">
-                        <img src="assets/rocket_sketch.png" alt="Sketsa Roket">
+    <!-- SECTION 7: PREVIEW PDF (EDITORIAL PRODUCT SHOWCASE STICKY) -->
+    <section class="pdf-showcase-section bg-preview" id="preview">
+        <div class="pdf-sticky-container">
+            <div class="screen-wrapper" style="width: 100%;">
+                <div class="pdf-showcase-grid">
+                    <div class="pdf-text-stable">
+                        <div class="badge-pill"><i class="ri-file-pdf-line"></i> E-Book HD Siap Cetak</div>
+                        <h2 style="font-size: 38px; font-weight: 800; margin-bottom: 16px; line-height: 1.2;">
+                            Ilustrasi Interaktif <span class="highlight">Pemantik Pikiran</span>
+                        </h2>
+                        <p style="color: var(--text-muted); font-size: 17px; margin-bottom: 28px; line-height: 1.65;">
+                            Setiap lembar e-book dirancang dengan sketsa ringkas yang menggugah rasa ingin tahu anak tanpa kejenuhan. Gulir untuk mengeksplorasi cuplikan modul.
+                        </p>
+                        <a href="#form-akses" class="btn-main btn-gold">Dapatkan PDF Sekarang</a>
                     </div>
-                    <div class="preview-stack-card card-2">
-                        <img src="assets/panca_indra_sketch.png" alt="Sketsa Panca Indra">
-                    </div>
-                    <div class="preview-stack-card card-1">
-                        <img src="assets/anak_balon_sketch.png" alt="Sketsa Anak Balon">
+
+                    <div class="pdf-showcase-stage">
+                        <div class="pdf-display-frame">
+                            <div class="pdf-page-view is-active" data-page="1">
+                                <img src="assets/anak_balon_sketch.png" alt="Cuplikan PDF Halaman 01 - Anak dan Balon">
+                            </div>
+                            <div class="pdf-page-view" data-page="2">
+                                <img src="assets/panca_indra_sketch.png" alt="Cuplikan PDF Halaman 02 - Panca Indra">
+                            </div>
+                            <div class="pdf-page-view" data-page="3">
+                                <img src="assets/rocket_sketch.png" alt="Cuplikan PDF Halaman 03 - Sketsa Roket">
+                            </div>
+                            <div class="pdf-page-view" data-page="4">
+                                <img src="assets/semuabisa.png" alt="Cuplikan PDF Halaman 04 - Formula Kosa Gambar">
+                            </div>
+                        </div>
+
+                        <div class="pdf-progress-indicator" aria-label="Halaman PDF">
+                            <span class="pdf-progress-step is-active" data-step="1">01</span>
+                            <span class="pdf-progress-step" data-step="2">02</span>
+                            <span class="pdf-progress-step" data-step="3">03</span>
+                            <span class="pdf-progress-step" data-step="4">04</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 8: BENEFIT -->
+    <!-- SECTION 8: BENEFIT (EDITORIAL LIST ACTIVE STATE) -->
     <section class="section-block bg-benefit">
         <div class="screen-wrapper">
-            <h2 style="font-size: 40px; font-weight: 800; margin-bottom: 16px;" class="gsap-fade-up">Dampak Nyata <span
-                    class="highlight">Revolusi Visual</span></h2>
-            <p style="color: var(--text-muted); font-size: 18px; margin-bottom: 60px;" class="gsap-fade-up">Keunggulan
-                mendasar metode visual dibanding cara hafalan konvensional.</p>
+            <h2 style="font-size: 40px; font-weight: 800; margin-bottom: 12px;">Dampak Nyata <span class="highlight">Revolusi Visual</span></h2>
+            <p style="color: var(--text-muted); font-size: 18px;">Keunggulan mendasar metode visual dibanding cara hafalan konvensional.</p>
 
-            <div class="editorial-benefit-list gsap-fade-up">
-                <div class="benefit-editorial-item">
+            <div class="editorial-benefit-list">
+                <div class="benefit-editorial-item" data-benefit="1">
                     <div class="benefit-idx">01</div>
                     <div class="benefit-heading">Pemahaman 10x Lebih Cepat</div>
-                    <div class="benefit-description">Konsep abstrak disederhanakan menjadi bentuk visual intuitif
-                        sehingga anak paham seketika.</div>
+                    <div class="benefit-description">Konsep abstrak disederhanakan menjadi bentuk visual intuitif sehingga anak paham seketika.</div>
                 </div>
-                <div class="benefit-editorial-item">
+                <div class="benefit-editorial-item" data-benefit="2">
                     <div class="benefit-idx">02</div>
                     <div class="benefit-heading">Bebas Stress & Hafalan Buta</div>
-                    <div class="benefit-description">Menghilangkan beban stres anak akibat keharusan menghafal ratusan
-                        kalimat tanpa makna.</div>
+                    <div class="benefit-description">Menghilangkan beban stres anak akibat keharusan menghafal ratusan kalimat tanpa makna.</div>
                 </div>
-                <div class="benefit-editorial-item">
+                <div class="benefit-editorial-item" data-benefit="3">
                     <div class="benefit-idx">03</div>
                     <div class="benefit-heading">Daya Ingat Jangka Panjang</div>
-                    <div class="benefit-description">Memori visual tersimpan kuat dalam sistem memori jangka panjang
-                        (long-term memory).</div>
+                    <div class="benefit-description">Memori visual tersimpan kuat dalam sistem memori jangka panjang (long-term memory).</div>
                 </div>
-                <div class="benefit-editorial-item">
+                <div class="benefit-editorial-item" data-benefit="4">
                     <div class="benefit-idx">04</div>
                     <div class="benefit-heading">Format PDF HD Siap Cetak</div>
-                    <div class="benefit-description">Dapat diunduh dan dicetak dengan mudah kapan pun untuk sesi belajar
-                        mandiri di rumah.</div>
+                    <div class="benefit-description">Dapat diunduh dan dicetak dengan mudah kapan pun untuk sesi belajar mandiri di rumah.</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 9: CARA KERJA -->
-    <section class="section-block bg-workflow">
+    <!-- SECTION 9: CARA KERJA (VISUAL TIMELINE LINE ACCENT) -->
+    <section class="workflow-section bg-workflow">
         <div class="screen-wrapper">
-            <h2 style="font-size: 40px; font-weight: 800; text-align: center; margin-bottom: 60px;"
-                class="gsap-fade-up">3 Langkah Mudah <span class="highlight">Mulai Belajar</span></h2>
+            <h2 style="font-size: 40px; font-weight: 800; text-align: center;">3 Langkah Mudah <span class="highlight">Mulai Belajar</span></h2>
 
-            <div class="workflow-timeline gsap-fade-up">
-                <div class="workflow-step-node">
-                    <div class="step-circle-badge">1</div>
-                    <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">Isi Form Akses</h3>
-                    <p style="color: var(--text-muted); font-size: 15px;">Masukkan nama, WhatsApp, dan email aktif Anda
-                        pada formulir resmi.</p>
-                </div>
-                <div class="workflow-step-node">
-                    <div class="step-circle-badge">2</div>
-                    <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">Unduh E-Book PDF</h3>
-                    <p style="color: var(--text-muted); font-size: 15px;">Link akses langsung dikirimkan secara otomatis
-                        ke WhatsApp & Email Anda.</p>
-                </div>
-                <div class="workflow-step-node">
-                    <div class="step-circle-badge">3</div>
-                    <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 10px;">Praktikkan 15 Menit</h3>
-                    <p style="color: var(--text-muted); font-size: 15px;">Dampingi anak belajar 15 menit sehari dan
-                        lihat lonjakan pemahamannya!</p>
+            <div class="workflow-timeline-container">
+                <div class="workflow-line-bg"></div>
+                <div class="workflow-line-active"></div>
+                <div class="workflow-grid">
+                    <div class="workflow-node" data-step="1">
+                        <div class="step-circle-badge">01</div>
+                        <h3 class="workflow-node-title">Isi Form Akses</h3>
+                        <p class="workflow-node-desc">Masukkan nama, WhatsApp, dan email aktif Anda pada formulir resmi.</p>
+                    </div>
+                    <div class="workflow-node" data-step="2">
+                        <div class="step-circle-badge">02</div>
+                        <h3 class="workflow-node-title">Unduh E-Book PDF</h3>
+                        <p class="workflow-node-desc">Link akses langsung dikirimkan secara otomatis ke WhatsApp & Email Anda.</p>
+                    </div>
+                    <div class="workflow-node" data-step="3">
+                        <div class="step-circle-badge">03</div>
+                        <h3 class="workflow-node-title">Praktikkan 15 Menit</h3>
+                        <p class="workflow-node-desc">Dampingi anak belajar 15 menit sehari dan lihat lonjakan pemahamannya!</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1591,96 +1662,68 @@
     <!-- SECTION 10: TESTIMONI & FAQ -->
     <section class="section-block bg-testi" id="faq">
         <div class="screen-wrapper">
-            <h2 style="font-size: 40px; font-weight: 800; text-align: center; margin-bottom: 60px;"
-                class="gsap-fade-up">Suara Orang Tua & <span class="highlight">Pertanyaan FAQ</span></h2>
-
-            <div class="testi-editorial-grid gsap-fade-up" style="margin-bottom: 80px;">
-                <div class="quote-editorial-box">
-                    <div>
-                        <i class="ri-double-quotes-l quote-icon"></i>
-                        <p style="font-size: 16px; font-style: italic; margin-bottom: 24px;">"Anak saya biasanya baru
-                            belajar 5 menit sudah mengeluh pusing. Pakai sketsa Revolusi Visual malah dia yang minta
-                            dijelasin terus!"</p>
-                    </div>
-                    <div style="font-weight: 700;">Bunda Nita — <span
-                            style="color: var(--primary); font-weight: 500;">Orang Tua SD</span></div>
-                </div>
-
-                <div class="quote-editorial-box">
-                    <div>
-                        <i class="ri-double-quotes-l quote-icon"></i>
-                        <p style="font-size: 16px; font-style: italic; margin-bottom: 24px;">"Metode ini luar biasa
-                            memperjelas konsep IPA yang terkesan rumit bagi anak-anak di kelas. Belajar jadi sangat
-                            interaktif."</p>
-                    </div>
-                    <div style="font-weight: 700;">Pak Surya — <span
-                            style="color: var(--primary); font-weight: 500;">Guru Sekolah</span></div>
-                </div>
-
-                <div class="quote-editorial-box">
-                    <div>
-                        <i class="ri-double-quotes-l quote-icon"></i>
-                        <p style="font-size: 16px; font-style: italic; margin-bottom: 24px;">"Nilai pemahaman anak saya
-                            naik drastis setelah belajar lewat gambar. Tanpa perlu drama suruh belajar tiap malam!"</p>
-                    </div>
-                    <div style="font-weight: 700;">Mama Maya — <span
-                            style="color: var(--primary); font-weight: 500;">Orang Tua SMP</span></div>
+            <!-- SINGLE MAIN TESTIMONIAL FOCUS -->
+            <div class="testimonial-single-wrapper">
+                <i class="ri-double-quotes-l" style="font-size: 42px; color: var(--primary); display: block; margin-bottom: 20px;"></i>
+                <blockquote class="testimonial-main-quote">
+                    "Anak saya biasanya baru belajar 5 menit sudah mengeluh pusing. Pakai sketsa Revolusi Visual malah dia yang minta dijelasin terus!"
+                </blockquote>
+                <div class="testimonial-author-info">
+                    Bunda Nita — <span>Orang Tua SD</span>
                 </div>
             </div>
 
-            <!-- FAQ List -->
-            <div class="faq-editorial-list gsap-fade-up">
-                <div class="faq-row">
-                    <div class="faq-header-bar">
-                        <span>Apakah e-book ini bisa langsung dicetak (print)?</span>
-                        <i class="ri-add-line faq-toggle-icon"></i>
-                    </div>
-                    <div class="faq-content-body">
-                        Ya, modul e-book Revolusi Visual diformat dalam PDF High Definition yang siap dicetak di kertas
-                        A4 maupun diajarkan langsung via HP/Tablet.
-                    </div>
-                </div>
+            <!-- FAQ SECTION -->
+            <div class="faq-editorial-container" style="padding-top: 40px;">
+                <h2 style="font-size: 36px; font-weight: 800; text-align: center; margin-bottom: 48px;">Pertanyaan <span class="highlight">FAQ</span></h2>
 
-                <div class="faq-row">
-                    <div class="faq-header-bar">
-                        <span>Untuk rentang usia berapa metode ini cocok?</span>
-                        <i class="ri-add-line faq-toggle-icon"></i>
+                <div class="faq-editorial-list">
+                    <div class="faq-row">
+                        <div class="faq-header-bar">
+                            <span>Apakah e-book ini bisa langsung dicetak (print)?</span>
+                            <i class="ri-add-line faq-toggle-icon"></i>
+                        </div>
+                        <div class="faq-content-body">
+                            Ya, modul e-book Revolusi Visual diformat dalam PDF High Definition yang siap dicetak di kertas A4 maupun diajarkan langsung via HP/Tablet.
+                        </div>
                     </div>
-                    <div class="faq-content-body">
-                        Sangat ideal untuk anak usia 6 hingga 15 tahun (SD - SMP), namun pendekatan visual ini efektif
-                        untuk siapapun yang ingin paham cepat.
-                    </div>
-                </div>
 
-                <div class="faq-row">
-                    <div class="faq-header-bar">
-                        <span>Bagaimana cara mendapatkan filenya?</span>
-                        <i class="ri-add-line faq-toggle-icon"></i>
+                    <div class="faq-row">
+                        <div class="faq-header-bar">
+                            <span>Untuk rentang usia berapa metode ini cocok?</span>
+                            <i class="ri-add-line faq-toggle-icon"></i>
+                        </div>
+                        <div class="faq-content-body">
+                            Sangat ideal untuk anak usia 6 hingga 15 tahun (SD - SMP), namun pendekatan visual ini efektif untuk siapapun yang ingin paham cepat.
+                        </div>
                     </div>
-                    <div class="faq-content-body">
-                        Cukup isi nama, nomor WhatsApp, dan email pada form di bawah. Link download akan dikirimkan
-                        otomatis secara instan.
+
+                    <div class="faq-row">
+                        <div class="faq-header-bar">
+                            <span>Bagaimana cara mendapatkan filenya?</span>
+                            <i class="ri-add-line faq-toggle-icon"></i>
+                        </div>
+                        <div class="faq-content-body">
+                            Cukup isi nama, nomor WhatsApp, dan email pada form di bawah. Link download akan dikirimkan otomatis secara instan.
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 11 & 12: CTA & FORM ACCESS -->
+    <!-- SECTION 12: CTA & FORM ACCESS (PAGE CLIMAX) -->
     <section class="section-block bg-form" id="form-akses">
         <div class="screen-wrapper">
-            <div class="cta-immersive-banner gsap-fade-up" style="margin-bottom: 60px;">
-                <h2 style="font-size: 42px; font-weight: 800; margin-bottom: 16px;">Siap Mengubah Cara Belajar Anak
-                    Anda?</h2>
-                <p style="color: var(--text-muted); font-size: 18px; max-width: 600px; margin: 0 auto;">Bergabunglah
-                    bersama 1.000+ orang tua yang telah beralih ke metode edukasi visual modern.</p>
+            <div class="cta-immersive-banner">
+                <h2 class="cta-headline">Siap Mengubah Cara Belajar Anak Anda?</h2>
+                <p class="cta-subtext">Bergabunglah bersama 1.000+ orang tua yang telah beralih ke metode edukasi visual modern.</p>
             </div>
 
-            <div class="form-glass-container gsap-fade-up">
+            <div class="form-glass-container">
                 <div style="text-align: center; margin-bottom: 32px;">
                     <span class="badge-pill"><i class="ri-gift-line"></i> Akses PDF Gratis</span>
-                    <h2 style="font-size: 32px; font-weight: 800; margin-top: 10px;">Formulir Akses Instan PDF 'Revi
-                        Brain'</h2>
+                    <h2 style="font-size: 32px; font-weight: 800; margin-top: 10px;">Formulir Akses Instan PDF 'Revi Brain'</h2>
                 </div>
 
                 <form action="#" method="POST"
@@ -1706,8 +1749,7 @@
                 <div
                     style="display: flex; justify-content: center; gap: 24px; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 13px;">
                     <span><i class="ri-shield-check-line" style="color: var(--primary);"></i> Data 100% Terjaga</span>
-                    <span><i class="ri-thunderstorms-line" style="color: var(--primary);"></i> Akses Langsung VIA
-                        WA</span>
+                    <span><i class="ri-thunderstorms-line" style="color: var(--primary);"></i> Akses Langsung VIA WA</span>
                 </div>
             </div>
         </div>
@@ -1773,82 +1815,106 @@
         </div>
     </footer>
 
-    <!-- GSAP & TILT SCRIPTS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
         // ==================================================
-        // HERO SECTION PREMIUM MOTION (Apple / Linear Grade)
+        // 1. HERO TRANSITION (Smooth Opening Scene Fade)
         // ==================================================
-
-        // 1. Hero Scroll Motion: Physical Panel Overlap ("Paralaks Menimpa") + Direct Target Element Blur (0px -> 32px)
-        let heroScrollContext;
-
-        function initHeroScrollAnimation() {
-            if (heroScrollContext) heroScrollContext.revert();
-
+        function initHeroMotion() {
             const heroBlock = document.querySelector('.hero-block');
             if (!heroBlock) return;
 
-            const heroTargets = document.querySelectorAll('.hero-headline, .hero-subtext, .btn-action-group, .hero-stats-bar, .hero-img-main');
+            let mm = gsap.matchMedia();
 
-            heroScrollContext = gsap.context(() => {
-                const scrollConfig = {
-                    trigger: heroBlock,
-                    start: "top top",
-                    endTrigger: "#statement",
-                    end: "top top",
-                    scrub: 0.5,
-                    invalidateOnRefresh: true
-                };
-
-                // Pin Hero Section so Section 2 (#statement) slides UP physically OVER Hero ("Paralaks Menimpa")
-                ScrollTrigger.create({
-                    ...scrollConfig,
-                    pin: true,
-                    pinSpacing: false
-                });
-
-                // Direct Target Element Blur & Opacity Controller (Guaranteed to render in Chrome/Edge)
-                ScrollTrigger.create({
-                    ...scrollConfig,
-                    onUpdate: (self) => {
-                        const p = self.progress;
-                        const blurPx = (p * 32).toFixed(1);
-                        const op = Math.max(0, 1 - p * 1.5).toFixed(2);
-                        heroTargets.forEach(el => {
-                            if (el) {
-                                if (blurPx > 0.5) {
-                                    el.style.filter = `blur(${blurPx}px)`;
-                                    el.style.webkitFilter = `blur(${blurPx}px)`;
-                                } else {
-                                    el.style.filter = 'none';
-                                    el.style.webkitFilter = 'none';
-                                }
-                                el.style.opacity = op;
-                            }
-                        });
+            mm.add("(min-width: 769px)", () => {
+                // Starts fading out gracefully at ~35% scroll progress
+                gsap.to(heroBlock, {
+                    opacity: 0,
+                    y: -40,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: heroBlock,
+                        start: "35% top",
+                        end: "bottom top",
+                        scrub: 0.5,
+                        invalidateOnRefresh: true
                     }
                 });
-
-                // Multi-Layer 3D Depth Exit on inner elements
-                const tl = gsap.timeline({ scrollTrigger: scrollConfig });
-
-                tl.to(".hero-headline", { y: -260, ease: "none", duration: 1 }, 0)
-                  .to(".hero-subtext", { y: -290, ease: "none", duration: 1 }, 0)
-                  .to(".btn-action-group", { y: -320, ease: "none", duration: 1 }, 0)
-                  .to(".hero-stats-bar", { y: -300, ease: "none", duration: 1 }, 0)
-                  .to(".hero-img-main", { y: -200, ease: "none", duration: 1 }, 0);
             });
         }
+        initHeroMotion();
 
-        initHeroScrollAnimation();
+        // ==================================================
+        // 2. STATEMENT REVEAL (Typography-driven transition)
+        // ==================================================
+        function initStatementMotion() {
+            const el = document.querySelector('.statement-reveal');
+            if (!el) return;
 
-        // 4. PDF CASES — VERTICAL SCROLL DRIVES HORIZONTAL COMPARISON
+            gsap.from(el, {
+                opacity: 0,
+                y: 30,
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 85%",
+                    once: true
+                }
+            });
+        }
+        initStatementMotion();
+
+        // ==================================================
+        // 3. MENGAPA BANYAK ORANG SULIT BELAJAR (Staggered Reveal)
+        // ==================================================
+        function initMengapaMotion() {
+            const sec = document.querySelector('#mengapa');
+            if (!sec) return;
+
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: sec,
+                    start: "top 80%",
+                    once: true
+                }
+            });
+
+            tl.from(".reveal-head", { opacity: 0, x: -30, duration: 0.7, ease: "power2.out" })
+              .from(".reveal-body", { opacity: 0, x: -20, duration: 0.6, ease: "power2.out" }, "-=0.4")
+              .from(".reveal-visual", { opacity: 0, x: 40, duration: 0.8, ease: "power2.out" }, "-=0.5")
+              .from(".reveal-detail", { opacity: 0, y: 20, duration: 0.6, ease: "power2.out" }, "-=0.4");
+        }
+        initMengapaMotion();
+
+        // ==================================================
+        // 4. 60.000X GIANT STAT (Subtle Scroll Parallax)
+        // ==================================================
+        function initGiantStatMotion() {
+            const num = document.querySelector('.giant-num-display');
+            const sec = document.querySelector('.giant-stat-section');
+            if (!num || !sec) return;
+
+            gsap.to(num, {
+                y: -30,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: sec,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 1
+                }
+            });
+        }
+        initGiantStatMotion();
+
+        // ==================================================
+        // 5. TULISAN VS VISUAL (Horizontal Storytelling Track)
+        // ==================================================
         function initComparisonHorizontalScroll() {
             const section = document.querySelector('#komparasi');
             const track = document.querySelector('.comparison-horizontal-track');
@@ -1869,10 +1935,10 @@
                         start: 'top top',
                         end: () => `+=${getDistance()}`,
                         pin: true,
-                        scrub: 1,
+                        scrub: 0.8,
                         snap: {
                             snapTo: 1 / (slides.length - 1),
-                            duration: { min: 0.15, max: 0.35 },
+                            duration: { min: 0.2, max: 0.4 },
                             delay: 0.05,
                             ease: 'power1.inOut'
                         },
@@ -1883,6 +1949,26 @@
                                 progress.style.transform = `translateX(${self.progress * 200}%)`;
                             }
                         }
+                    }
+                });
+
+                // Subtle entry transition for internal contents of active slide
+                slides.forEach((slide, idx) => {
+                    const textSide = slide.querySelector('.comparison-side.text');
+                    const visualSide = slide.querySelector('.comparison-side.visual');
+                    if (textSide && visualSide) {
+                        gsap.from([textSide, visualSide], {
+                            opacity: 0.4,
+                            y: 15,
+                            duration: 0.5,
+                            ease: "power2.out",
+                            scrollTrigger: {
+                                trigger: slide,
+                                containerAnimation: tween,
+                                start: "left center",
+                                toggleActions: "play reverse play reverse"
+                            }
+                        });
                     }
                 });
 
@@ -1898,28 +1984,193 @@
                 if (progress) progress.style.transform = "";
             });
         }
-
         initComparisonHorizontalScroll();
 
-        // 5. Fade Up Animations for rest of sections
-        gsap.utils.toArray('.gsap-fade-up').forEach(el => {
-            if (el.closest('.hero-block')) return; // Exclude hero elements
+        // ==================================================
+        // 6. MANIFESTO (Editorial Headline Entry)
+        // ==================================================
+        function initManifestoMotion() {
+            const el = document.querySelector('.manifesto-editorial-wrap');
+            if (!el) return;
 
-            gsap.from(el, {
+            gsap.from(".manifesto-headline", {
                 opacity: 0,
-                y: 35,
-                duration: 0.8,
+                y: 24,
+                duration: 0.9,
                 ease: "power2.out",
                 scrollTrigger: {
                     trigger: el,
-                    start: "top 90%",
-                    toggleActions: "play none none none",
+                    start: "top 80%",
                     once: true
+                }
+            });
+        }
+        initManifestoMotion();
+
+        // ==================================================
+        // 7. PREVIEW PDF (Editorial Product Showcase Sticky Progression)
+        // ==================================================
+        function initPdfShowcaseMotion() {
+            const section = document.querySelector('.pdf-showcase-section');
+            const stickyContainer = document.querySelector('.pdf-sticky-container');
+            const views = gsap.utils.toArray('.pdf-page-view');
+            const steps = gsap.utils.toArray('.pdf-progress-step');
+            if (!section || !stickyContainer || views.length === 0) return;
+
+            let mm = gsap.matchMedia();
+
+            mm.add("(min-width: 769px)", () => {
+                const totalPages = views.length;
+
+                function updatePdfPage(activeIndex) {
+                    views.forEach((view, i) => {
+                        if (i === activeIndex) {
+                            view.classList.add('is-active');
+                        } else {
+                            view.classList.remove('is-active');
+                        }
+                    });
+
+                    steps.forEach((step, i) => {
+                        if (i === activeIndex) {
+                            step.classList.add('is-active');
+                        } else {
+                            step.classList.remove('is-active');
+                        }
+                    });
+                }
+
+                ScrollTrigger.create({
+                    trigger: section,
+                    start: "top top",
+                    end: () => `+=${totalPages * 100}%`,
+                    pin: stickyContainer,
+                    pinSpacing: true,
+                    scrub: 0.5,
+                    anticipatePin: 1,
+                    onUpdate: (self) => {
+                        const progress = self.progress;
+                        // Map 0 -> 1 progress smoothly across N pages
+                        let idx = Math.floor(progress * totalPages);
+                        if (idx >= totalPages) idx = totalPages - 1;
+                        updatePdfPage(idx);
+                    }
+                });
+
+                // Allow clicking progress steps to jump view smoothly
+                steps.forEach((step, idx) => {
+                    step.addEventListener('click', () => {
+                        updatePdfPage(idx);
+                    });
+                });
+            });
+        }
+        initPdfShowcaseMotion();
+
+        // ==================================================
+        // 8. BENEFIT (Editorial List Sequential Active State)
+        // ==================================================
+        function initBenefitActiveState() {
+            const items = gsap.utils.toArray('.benefit-editorial-item');
+            if (items.length === 0) return;
+
+            items.forEach((item) => {
+                ScrollTrigger.create({
+                    trigger: item,
+                    start: "top 65%",
+                    end: "bottom 45%",
+                    onEnter: () => item.classList.add('is-active'),
+                    onLeave: () => item.classList.remove('is-active'),
+                    onEnterBack: () => item.classList.add('is-active'),
+                    onLeaveBack: () => item.classList.remove('is-active')
+                });
+            });
+        }
+        initBenefitActiveState();
+
+        // ==================================================
+        // 9. CARA KERJA (Visual Timeline Line Accent Progress)
+        // ==================================================
+        function initWorkflowMotion() {
+            const container = document.querySelector('.workflow-timeline-container');
+            const activeLine = document.querySelector('.workflow-line-active');
+            const nodes = gsap.utils.toArray('.workflow-node');
+            if (!container || !activeLine || nodes.length === 0) return;
+
+            gsap.to(activeLine, {
+                width: "100%",
+                ease: "none",
+                scrollTrigger: {
+                    trigger: container,
+                    start: "top 70%",
+                    end: "bottom 60%",
+                    scrub: 0.5,
+                    onUpdate: self => {
+                        const p = self.progress;
+                        nodes.forEach((node, i) => {
+                            const threshold = i / (nodes.length - 1);
+                            if (p >= threshold - 0.1) {
+                                node.classList.add('is-active');
+                            } else {
+                                node.classList.remove('is-active');
+                            }
+                        });
+                    }
+                }
+            });
+        }
+        initWorkflowMotion();
+
+        // ==================================================
+        // 10. TESTIMONIAL (Smooth Single Focus Entry)
+        // ==================================================
+        function initTestimonialMotion() {
+            const wrapper = document.querySelector('.testimonial-single-wrapper');
+            if (!wrapper) return;
+
+            gsap.from(wrapper, {
+                opacity: 0,
+                y: 30,
+                duration: 0.9,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: wrapper,
+                    start: "top 80%",
+                    once: true
+                }
+            });
+        }
+        initTestimonialMotion();
+
+        // ==================================================
+        // 11. FAQ ACCORDION
+        // ==================================================
+        document.querySelectorAll('.faq-row').forEach(row => {
+            row.addEventListener('click', () => {
+                const isActive = row.classList.contains('active');
+                document.querySelectorAll('.faq-row').forEach(r => r.classList.remove('active'));
+                if (!isActive) {
+                    row.classList.add('active');
                 }
             });
         });
 
-        // 6. Counter Animation
+        // ==================================================
+        // 12. KOSA GAMBAR TAB SWITCHER
+        // ==================================================
+        function switchKosaTab(tabId) {
+            document.querySelectorAll('.kosa-tab-content').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.kosa-tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            const targetContent = document.getElementById('tab-' + tabId);
+            if (targetContent) targetContent.style.display = 'block';
+
+            if (window.event && window.event.currentTarget) {
+                window.event.currentTarget.classList.add('active');
+            }
+        }
+
+        // Counter Animation for Hero stats
         gsap.utils.toArray(".counter-num").forEach(counter => {
             let targetVal = parseInt(counter.getAttribute("data-target"));
             let cObj = { val: 0 };
@@ -1940,36 +2191,10 @@
             });
         });
 
-        // 7. FAQ Accordion Toggle
-        document.querySelectorAll('.faq-row').forEach(row => {
-            row.addEventListener('click', () => {
-                const isActive = row.classList.contains('active');
-                document.querySelectorAll('.faq-row').forEach(r => r.classList.remove('active'));
-                if (!isActive) {
-                    row.classList.add('active');
-                }
-            });
-        });
-
-        // 8. Interactive Kosa Gambar Tab Switcher Logic
-        function switchKosaTab(tabId) {
-            document.querySelectorAll('.kosa-tab-content').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.kosa-tab-btn').forEach(btn => btn.classList.remove('active'));
-
-            const targetContent = document.getElementById('tab-' + tabId);
-            if (targetContent) targetContent.style.display = 'block';
-
-            if (window.event && window.event.currentTarget) {
-                window.event.currentTarget.classList.add('active');
-            }
-        }
-
-        // 9. Ensure Full Layout & ScrollTrigger Refresh on Page Load
+        // Refresh ScrollTrigger on Load
         window.addEventListener("load", () => {
             ScrollTrigger.refresh(true);
         });
-
-        // Initial refresh call after setup
         ScrollTrigger.refresh(true);
     </script>
 </body>
