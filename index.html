@@ -1312,59 +1312,112 @@
         }
 
         @media (max-width: 768px) {
-            /* Layout & Spacing */
-            .screen-wrapper { padding: 0 20px; }
-            .header-nav { width: calc(100% - 40px); padding: 12px 20px; }
-            .section-block { padding: 60px 0; }
-            .pure-statement-wrapper { padding: 80px 0; }
-            .giant-stat-section { padding: 80px 0; }
-            .manifesto-editorial-wrap { padding: 60px 0; }
-            .workflow-section { padding: 60px 0; }
-            .footer-block { margin-top: 60px; padding: 60px 0 30px; }
-            .hero-block { height: auto; min-height: auto; padding-top: 130px; padding-bottom: 40px; }
-            .cta-immersive-banner { padding: 60px 0 20px; }
+            /* Layout & Spacing Umum */
+            .screen-wrapper { padding: 0 24px; }
+            .section-block { padding: 80px 0; }
+            .pure-statement-wrapper { padding: 60px 0; min-height: auto; }
+            .giant-stat-section { padding: 90px 0; }
+            .manifesto-editorial-wrap { padding: 80px 0; }
+            .workflow-section { padding: 80px 0; }
+            .footer-block { margin-top: 40px; padding: 50px 0 30px; }
+            .cta-immersive-banner { padding: 40px 0 20px; }
+
+            /* Header & Nav */
+            .header-nav { width: calc(100% - 32px); padding: 10px 16px; border-radius: 100px; top: 16px; }
+            .nav-items { display: none; }
+            .brand-logo span { display: inline-block; font-size: 15px; } /* Kembalikan teks logo, sesuaikan ukuran */
+            .brand-logo img { width: 30px; height: 30px; }
+            .header-nav .btn-main { width: auto; padding: 8px 16px !important; font-size: 13px !important; border-radius: 100px; }
+
+            /* Hero Section */
+            .hero-block { height: auto; min-height: auto; padding-top: 100px; padding-bottom: 30px; }
+            .hero-layout { display: flex; flex-direction: column; }
+            .hero-media-box { order: -1; margin-top: 0; margin-bottom: 24px; max-width: 280px; margin-left: auto; margin-right: auto; }
+            .hero-headline { font-size: 28px; line-height: 1.3; text-align: center; }
+            .hero-subtext { font-size: 15px; line-height: 1.6; margin-bottom: 24px; text-align: center; }
+            .hero-stats-bar { 
+                display: grid;
+                grid-template-columns: repeat(3, 1fr); 
+                gap: 8px; 
+                text-align: center; 
+                margin-top: 32px; 
+                padding-top: 24px; 
+            }
+            .stat-num-val { font-size: 20px; }
+            .stat-lbl { font-size: 11px; line-height: 1.3; }
 
             /* Typography */
-            .hero-headline { font-size: 32px; }
-            .pure-statement-text { font-size: 24px; }
-            .section-headline { font-size: 26px; }
+            .pure-statement-text { font-size: 22px; line-height: 1.4; }
+            .section-headline { font-size: 24px; line-height: 1.3; margin-bottom: 12px; text-align: center; }
+            .giant-num-display { font-size: 64px; }
+            .giant-subtext { font-size: 16px; }
 
-            /* Buttons */
-            .btn-action-group { flex-direction: column; width: 100%; }
-            .btn-main { width: 100%; justify-content: center; }
+            /* Buttons & Actions (kecuali di navbar) */
+            .btn-action-group { flex-direction: column; width: 100%; gap: 12px; }
+            .btn-action-group .btn-main { width: 100%; justify-content: center; padding: 14px 24px; font-size: 15px; }
 
-            /* Grids */
-            .hero-stats-bar { grid-template-columns: 1fr; gap: 20px; text-align: center; }
-            .comparison-slide-inner { grid-template-columns: 1fr; gap: 32px; padding: 16px 0; }
-            .comparison-side.visual { border-left: none; padding-left: 0; border-top: 1px solid var(--border-subtle); padding-top: 24px; }
-            .workflow-grid, .footer-grid-layout { grid-template-columns: 1fr; }
+            /* Kosa Gambar / Tabs */
+            .kosa-tab-btn { flex: 1 1 100%; text-align: center; justify-content: center; }
 
-            /* Horizontal Scroll Native on Mobile */
+            /* Editorial Split (Mengapa Visual) */
+            .editorial-split { display: flex; flex-direction: column; }
+            .editorial-img-wrap { order: -1; margin-bottom: 24px; margin-top: 0; }
+            .editorial-content-left { text-align: center; }
+            .sensory-badge-list { justify-content: center; }
+
+            /* Grids (Workflow, Footer, Manifesto) */
+            .workflow-grid, .footer-grid-layout, .manifesto-editorial-wrap { grid-template-columns: 1fr; gap: 24px; }
+            .manifesto-editorial-wrap { padding: 0 !important; border-top: none; }
+            
+            /* Comparison Section (Horizontal Native Scroll) */
+            .bg-comparison { min-height: auto; padding-bottom: 20px; }
+            .comparison-slide-inner { grid-template-columns: 1fr; gap: 24px; padding: 20px 24px; display: flex; flex-direction: column; }
+            .comparison-case-number {
+                position: relative;
+                left: auto;
+                top: auto;
+                transform: none;
+                margin: 0 auto;
+                z-index: 2;
+            }
+            .comparison-side.visual { border-left: none; padding-left: 0; border-top: 1px solid var(--border-subtle); padding-top: 20px; }
             .comparison-horizontal-viewport { 
                 overflow-x: auto; 
                 scroll-snap-type: x mandatory; 
                 -webkit-overflow-scrolling: touch; 
-                scrollbar-width: none; /* hide scrollbar for Firefox */
+                scrollbar-width: none; 
             }
-            .comparison-horizontal-viewport::-webkit-scrollbar { display: none; } /* hide scrollbar for Chrome/Safari */
+            .comparison-horizontal-viewport::-webkit-scrollbar { display: none; }
             .comparison-slide { scroll-snap-align: center; }
 
-            /* Header & Navigation */
-            .nav-items { display: none; }
-            .brand-logo span { display: none; } /* Hanya tampilkan icon logo di mobile */
-
             /* PDF Preview */
-            .pdf-sticky-container { min-height: auto; padding: 60px 0; }
-            .pdf-showcase-stage { flex-direction: column; gap: 20px; }
-            .pdf-display-frame { height: 320px; padding: 16px; }
-            .pdf-page-view { inset: 16px; }
-            .pdf-progress-indicator { flex-direction: row; gap: 20px; }
+            .pdf-sticky-container { min-height: auto; padding: 20px 0; }
+            .pdf-showcase-grid { display: flex; flex-direction: column; gap: 20px; }
+            .pdf-showcase-stage { order: -1; width: 100%; flex-direction: column; gap: 16px; }
+            .pdf-text-stable { width: 100%; }
+            
+            .pdf-display-frame { height: 260px; padding: 8px; width: 100%; max-width: 320px; margin: 0 auto; }
+            .pdf-page-view { inset: 8px; }
+            
+            .pdf-progress-indicator { flex-direction: row; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
             .pdf-progress-step.is-active::after { left: 50%; top: -8px; transform: translateX(-50%); }
 
+            /* Dynamic Text Resizing for Mobile */
+            .dynamic-slide h3 { font-size: 22px !important; line-height: 1.3 !important; }
+            .dynamic-slide p { font-size: 15px !important; line-height: 1.5 !important; }
+
             /* Benefits List */
-            .benefit-editorial-item { grid-template-columns: 1fr; gap: 12px; padding: 24px 16px; }
-            .benefit-idx { font-size: 16px; }
-            .benefit-description { grid-column: span 1; }
+            .benefit-editorial-item { grid-template-columns: 1fr; gap: 8px; padding: 20px 16px; }
+            .benefit-idx { font-size: 14px; margin-bottom: 4px; }
+            .benefit-description { grid-column: span 1; font-size: 15px; }
+
+            /* Formulir / Form Access */
+            .form-glass-container { padding: 28px 20px !important; border-radius: 20px !important; }
+            .form-input-field { padding: 14px; font-size: 14px; }
+            
+            /* Testimonial */
+            .testimonial-single-wrapper { padding: 32px 20px; border-radius: 20px; }
+            .testimonial-quote { font-size: 18px; }
         }
     </style>
 </head>
@@ -1411,7 +1464,7 @@
                         </div>
                         <div class="hero-stats-bar">
                             <div>
-                                <div class="stat-num-val"><span class="counter-num" data-target="1000">0</span>+</div>
+                                <div class="stat-num-val"><span class="counter-num" data-target="999">0</span>+</div>
                                 <div class="stat-lbl">Member Aktif</div>
                             </div>
                             <div>
@@ -1854,7 +1907,7 @@
         <div class="screen-wrapper">
             <div class="cta-immersive-banner">
                 <h2 class="cta-headline">Siap Mengubah Cara Belajar Anak Anda?</h2>
-                <p class="cta-subtext">Bergabunglah bersama 1.000+ orang tua yang telah beralih ke metode edukasi visual modern.</p>
+                <p class="cta-subtext">Bergabunglah bersama 999+ orang tua yang telah beralih ke metode edukasi visual modern.</p>
             </div>
 
             <div class="form-glass-container glass-panel" style="padding: 48px; border-radius: 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
@@ -2270,7 +2323,7 @@
             mm.add("(max-width: 768px)", () => {
                 ScrollTrigger.create({
                     trigger: section,
-                    start: "top 15%",
+                    start: "top 5%",
                     end: () => `+=${totalPages * 60}%`,
                     pin: stickyContainer,
                     pinSpacing: true,
