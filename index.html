@@ -780,11 +780,16 @@
             width: 100%;
         }
 
+        /* ==================================================
+           SECTION 7: PREVIEW PDF — DYNAMIC TEXT TRANSITIONS
+           ================================================== */
+
+        /* Container teks kiri yang stabil — teks di dalamnya berubah */
         .pdf-text-stable {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            gap: 16px;
+            gap: 20px;
         }
 
         .pdf-showcase-stage {
@@ -804,20 +809,19 @@
             background: transparent;
             border-radius: 20px;
             padding: 24px;
-            box-shadow: none;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* Berikan background putih pada semua halaman preview PDF */
+        /* Background putih pada setiap halaman preview PDF */
         .pdf-page-view {
             position: absolute;
-            inset: 0; /* Perluas ke tepi frame */
+            inset: 0;
             background: #ffffff;
             border-radius: 20px;
-            padding: 24px; /* Kembalikan padding ke dalam view */
+            padding: 24px;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
@@ -840,6 +844,86 @@
             height: 100%;
             object-fit: contain;
             border-radius: 8px;
+        }
+
+        /* Editorial Vertical Progress Counter */
+        .pdf-dynamic-content {
+            position: relative;
+            min-height: 160px;
+        }
+
+        .pdf-dynamic-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+            will-change: opacity, transform;
+        }
+
+        .pdf-dynamic-slide.is-active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            position: relative; /* ambil tinggi dari slide aktif */
+        }
+
+        .pdf-slide-label {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .pdf-slide-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(24px, 2.5vw, 32px);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .pdf-slide-desc {
+            font-size: 16px;
+            line-height: 1.65;
+            color: var(--text-muted);
+        }
+
+        /* Page counter badge */
+        .pdf-page-counter {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dim);
+            letter-spacing: 0.1em;
+            margin-top: 4px;
+        }
+
+        .pdf-page-counter-bar {
+            width: 80px;
+            height: 2px;
+            background: var(--border-subtle);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .pdf-page-counter-fill {
+            height: 100%;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* Editorial Vertical Progress Counter */
@@ -1551,35 +1635,91 @@
         </div>
     </section>
 
-    <!-- SECTION 7: PREVIEW PDF (EDITORIAL PRODUCT SHOWCASE STICKY) -->
+    <!-- SECTION 7: PREVIEW PDF — SCROLL-DRIVEN INTERACTIVE SHOWCASE -->
     <section class="pdf-showcase-section bg-preview" id="preview">
         <div class="pdf-sticky-container">
             <div class="screen-wrapper" style="width: 100%;">
                 <div class="pdf-showcase-grid">
+
+                    <!-- LEFT: Static badge + dynamic text per halaman -->
                     <div class="pdf-text-stable">
-                        <div class="badge-pill"><i class="ri-file-pdf-line"></i> E-Book HD Siap Cetak</div>
-                        <h2 class="section-headline">
-                            Ilustrasi Interaktif <span class="highlight">Pemantik Pikiran</span>
-                        </h2>
-                        <p style="color: var(--text-muted); font-size: 17px; margin-bottom: 28px; line-height: 1.65;">
-                            Setiap lembar e-book dirancang dengan sketsa ringkas yang menggugah rasa ingin tahu anak tanpa kejenuhan. Gulir untuk mengeksplorasi cuplikan modul.
-                        </p>
-                        <a href="#form-akses" class="btn-main btn-gold">Dapatkan PDF Sekarang</a>
+                        <div class="badge-pill"><i class="ri-book-open-line"></i> E-Book HD Siap Cetak</div>
+
+                        <!-- Page counter -->
+                        <div class="pdf-page-counter">
+                            <span id="pdf-current-page">01</span>
+                            <div class="pdf-page-counter-bar">
+                                <div class="pdf-page-counter-fill" id="pdf-progress-fill" style="width: 25%;"></div>
+                            </div>
+                            <span>/ 04</span>
+                        </div>
+
+                        <!-- Dynamic teks yang berubah setiap halaman scroll -->
+                        <div class="pdf-dynamic-content">
+
+                            <!-- HALAMAN 01: Kosa Gambar -->
+                            <div class="pdf-dynamic-slide is-active" data-slide="1">
+                                <div class="pdf-slide-label">Modul 01 — Kosa Gambar</div>
+                                <h2 class="pdf-slide-title">
+                                    Semua Orang <span class="highlight">Bisa Menggambar</span> Sejak Lahir
+                                </h2>
+                                <p class="pdf-slide-desc">
+                                    Menulis huruf A, B, O sebenarnya adalah kegiatan menggambar! Modul ini membuktikan bahwa kemampuan visual sudah ada dalam diri setiap anak — tinggal diasah dengan 3 bentuk dasar: bulat, kotak, segitiga.
+                                </p>
+                            </div>
+
+                            <!-- HALAMAN 02: Otak & Visual -->
+                            <div class="pdf-dynamic-slide" data-slide="2">
+                                <div class="pdf-slide-label">Modul 02 — Cara Otak Belajar</div>
+                                <h2 class="pdf-slide-title">
+                                    Otak Memproses <span class="highlight">Gambar 60.000x</span> Lebih Cepat
+                                </h2>
+                                <p class="pdf-slide-desc">
+                                    Saat anak membaca teks, otak harus menerjemahkan kata-kata secara berurutan. Saat melihat gambar, pemahaman terjadi instan. Modul ini menjelaskan ilmu di balik kekuatan visual dalam proses belajar.
+                                </p>
+                            </div>
+
+                            <!-- HALAMAN 03: Metode Belajar Visual -->
+                            <div class="pdf-dynamic-slide" data-slide="3">
+                                <div class="pdf-slide-label">Modul 03 — Metode Belajar Visual</div>
+                                <h2 class="pdf-slide-title">
+                                    Dari Teks Membosankan <span class="highlight">Jadi Sketsa</span> Menarik
+                                </h2>
+                                <p class="pdf-slide-desc">
+                                    Pelajaran IPA, Sejarah, Matematika — semua bisa divisualisasikan! Modul ini mengajarkan teknik sketchnote yang mengubah catatan panjang membosankan menjadi ringkasan visual yang mudah diingat dalam menit.
+                                </p>
+                            </div>
+
+                            <!-- HALAMAN 04: Mind Map & Catatan Visual -->
+                            <div class="pdf-dynamic-slide" data-slide="4">
+                                <div class="pdf-slide-label">Modul 04 — Peta Pikiran</div>
+                                <h2 class="pdf-slide-title">
+                                    Mind Map: <span class="highlight">Satu Gambar</span>, Seribu Koneksi
+                                </h2>
+                                <p class="pdf-slide-desc">
+                                    Peta pikiran atau mind map adalah teknik paling efektif untuk memahami hubungan antar konsep. Dengan metode ini, anak bisa meringkas satu bab pelajaran hanya dalam satu halaman penuh gambar dan warna.
+                                </p>
+                            </div>
+
+                        </div><!-- /pdf-dynamic-content -->
+
+                        <a href="#form-akses" class="btn-main btn-gold">Dapatkan PDF Gratis <i class="ri-arrow-right-line"></i></a>
                     </div>
 
+                    <!-- RIGHT: Gambar frame + progress indicator -->
                     <div class="pdf-showcase-stage">
                         <div class="pdf-display-frame">
                             <div class="pdf-page-view is-active" data-page="1">
-                                <img src="assets/anak_balon_sketch.png" alt="Cuplikan PDF Halaman 01 - Anak dan Balon">
+                                <img src="assets/sketch_bentuk_dasar.png" alt="Modul 01: Kosa Gambar — 3 Bentuk Dasar">
                             </div>
                             <div class="pdf-page-view" data-page="2">
-                                <img src="assets/panca_indra_sketch.png" alt="Cuplikan PDF Halaman 02 - Panca Indra">
+                                <img src="assets/sketch_otak_visual.png" alt="Modul 02: Otak memproses gambar lebih cepat">
                             </div>
                             <div class="pdf-page-view" data-page="3">
-                                <img src="assets/rocket_sketch.png" alt="Cuplikan PDF Halaman 03 - Sketsa Roket">
+                                <img src="assets/sketch_belajar_visual.png" alt="Modul 03: Metode belajar visual sketchnote">
                             </div>
                             <div class="pdf-page-view" data-page="4">
-                                <img src="assets/semuabisa.png" alt="Cuplikan PDF Halaman 04 - Formula Kosa Gambar">
+                                <img src="assets/sketch_mindmap.png" alt="Modul 04: Mind Map peta pikiran">
                             </div>
                         </div>
 
@@ -1590,6 +1730,7 @@
                             <span class="pdf-progress-step" data-step="4">04</span>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -2059,40 +2200,49 @@
         initManifestoMotion();
 
         // ==================================================
-        // 7. PREVIEW PDF (Editorial Product Showcase Sticky Progression)
+        // 7. PREVIEW PDF — Scroll-Driven Interactive Showcase
+        //    Teks kiri berubah dynamis sesuai halaman aktif.
         // ==================================================
         function initPdfShowcaseMotion() {
-            const section = document.querySelector('.pdf-showcase-section');
+            const section         = document.querySelector('.pdf-showcase-section');
             const stickyContainer = document.querySelector('.pdf-sticky-container');
-            const views = gsap.utils.toArray('.pdf-page-view');
-            const steps = gsap.utils.toArray('.pdf-progress-step');
+            const views           = gsap.utils.toArray('.pdf-page-view');
+            const steps           = gsap.utils.toArray('.pdf-progress-step');
+            const dynamicSlides   = gsap.utils.toArray('.pdf-dynamic-slide');
+            const counterEl       = document.getElementById('pdf-current-page');
+            const fillEl          = document.getElementById('pdf-progress-fill');
             if (!section || !stickyContainer || views.length === 0) return;
 
             const totalPages = views.length;
 
             function updatePdfPage(activeIndex) {
+                // Update gambar kanan
                 views.forEach((view, i) => {
-                    if (i === activeIndex) {
-                        view.classList.add('is-active');
-                    } else {
-                        view.classList.remove('is-active');
-                    }
+                    view.classList.toggle('is-active', i === activeIndex);
                 });
 
+                // Update progress indicator dots
                 steps.forEach((step, i) => {
-                    if (i === activeIndex) {
-                        step.classList.add('is-active');
-                    } else {
-                        step.classList.remove('is-active');
-                    }
+                    step.classList.toggle('is-active', i === activeIndex);
                 });
+
+                // Update teks kiri (dynamic slides)
+                dynamicSlides.forEach((slide, i) => {
+                    slide.classList.toggle('is-active', i === activeIndex);
+                });
+
+                // Update page counter & progress bar
+                if (counterEl) {
+                    counterEl.textContent = String(activeIndex + 1).padStart(2, '0');
+                }
+                if (fillEl) {
+                    fillEl.style.width = `${((activeIndex + 1) / totalPages) * 100}%`;
+                }
             }
 
-            // Click navigation works on all screen sizes
+            // Klik progress step untuk jump ke halaman (berlaku di semua ukuran layar)
             steps.forEach((step, idx) => {
-                step.addEventListener('click', () => {
-                    updatePdfPage(idx);
-                });
+                step.addEventListener('click', () => updatePdfPage(idx));
             });
 
             let mm = gsap.matchMedia();
@@ -2100,16 +2250,16 @@
             // Desktop Scroll Pinning
             mm.add("(min-width: 769px)", () => {
                 ScrollTrigger.create({
-                    trigger: section,
-                    start: "top top",
-                    end: () => `+=${totalPages * 100}%`,
-                    pin: stickyContainer,
-                    pinSpacing: true,
-                    scrub: 0.5,
+                    trigger    : section,
+                    start      : "top top",
+                    end        : () => `+=${totalPages * 100}%`,
+                    pin        : stickyContainer,
+                    pinSpacing : true,
+                    scrub      : 0.5,
                     anticipatePin: 1,
+                    invalidateOnRefresh: true,
                     onUpdate: (self) => {
-                        const progress = self.progress;
-                        let idx = Math.floor(progress * totalPages);
+                        let idx = Math.floor(self.progress * totalPages);
                         if (idx >= totalPages) idx = totalPages - 1;
                         updatePdfPage(idx);
                     }
@@ -2126,8 +2276,7 @@
                     pinSpacing: true,
                     scrub: 0.5,
                     onUpdate: (self) => {
-                        const progress = self.progress;
-                        let idx = Math.floor(progress * totalPages);
+                        let idx = Math.floor(self.progress * totalPages);
                         if (idx >= totalPages) idx = totalPages - 1;
                         updatePdfPage(idx);
                     }
