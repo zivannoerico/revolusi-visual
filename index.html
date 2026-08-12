@@ -22,14 +22,15 @@
         :root {
             --primary: #FBBF24;
             --primary-hover: #F59E0B;
+            --primary-glow: rgba(251, 191, 36, 0.4);
 
             --bg-void: #070A0F;
-            --bg-surface: #0E1420;
-            --bg-card: #121824;
-            --bg-card-hover: #172030;
+            --bg-surface: rgba(14, 20, 32, 0.4); /* Glassmorphism surface */
+            --bg-card: rgba(18, 24, 36, 0.6);
+            --bg-card-hover: rgba(23, 32, 48, 0.8);
 
-            --border-subtle: #1E293B;
-            --border-highlight: #FBBF24;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-highlight: rgba(251, 191, 36, 0.3);
 
             --text-main: #F8FAFC;
             --text-muted: #94A3B8;
@@ -39,7 +40,7 @@
             --radius-md: 16px;
             --radius-pill: 99px;
 
-            --transition-smooth: all 0.3s ease;
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -58,17 +59,35 @@
         }
 
         body {
-            background-color: var(--bg-void);
+            /* Premium Radial Gradient Background */
+            background: radial-gradient(circle at 50% 0%, #151a28 0%, var(--bg-void) 40%, var(--bg-void) 100%);
+            background-attachment: fixed;
             color: var(--text-main);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             line-height: 1.6;
         }
+        
+        /* Glassmorphism Utilities */
+        .glass-panel {
+            background: var(--bg-surface);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border-subtle);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
         /* Layout Grid System */
         .screen-wrapper {
             width: 100%;
-            max-width: 1280px;
+            max-width: 1200px; /* Disamakan dengan header-nav */
             margin: 0 auto;
             padding: 0 32px;
             position: relative;
@@ -95,6 +114,13 @@
             color: var(--text-main);
             line-height: 1.15;
             letter-spacing: -0.03em;
+        }
+
+        .section-headline {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 16px;
         }
 
         .highlight {
@@ -152,25 +178,29 @@
         }
 
         .btn-gold {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, #F59E0B 100%);
             color: #05070B;
+            box-shadow: 0 4px 20px var(--primary-glow);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .btn-gold:hover {
-            background: var(--primary-hover);
-            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(251, 191, 36, 0.6);
+            transform: translateY(-3px) scale(1.02);
         }
 
         .btn-solid-dark {
-            background: #141C2B;
-            border: 1px solid #28354A;
+            background: rgba(20, 28, 43, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-subtle);
             color: var(--text-main);
         }
 
         .btn-solid-dark:hover {
-            background: #1D283D;
-            border-color: #3B4D6B;
-            transform: translateY(-2px);
+            background: rgba(29, 40, 61, 0.8);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
         .header-nav {
@@ -181,16 +211,16 @@
             width: calc(100% - 48px);
             max-width: 1200px;
             z-index: 1000;
-            padding: 12px 28px;
+            padding: 12px 32px; /* Disamakan dengan padding screen-wrapper */
             background: rgba(14, 20, 32, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border-subtle);
             border-radius: var(--radius-pill);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
         .brand-logo {
@@ -230,80 +260,27 @@
         }
 
         /* ==================================================
-           ALTERNATING SOLID BACKGROUND SYSTEM
+           ALTERNATING SOLID BACKGROUND SYSTEM (REMOVED - TRANSPARENT)
            ================================================== */
-        .bg-hero {
-            background-color: #070A0F;
-            position: relative;
-        }
-
-        .bg-statement {
-            background-color: #0E1420;
-            position: relative;
-            z-index: 2;
-        }
-
-        .bg-editorial {
-            background-color: #070A0F;
-            position: relative;
-        }
-
-        .bg-stat {
-            background-color: #0E1420;
+        .bg-hero, .bg-statement, .bg-editorial, .bg-stat, 
+        .bg-comparison, .bg-manifesto, .bg-preview, .bg-benefit, 
+        .bg-workflow, .bg-testi, .bg-faq, .bg-form {
+            background-color: transparent;
             position: relative;
         }
 
         .bg-giant-stat {
-            background-color: #070A0F;
+            background-color: transparent;
             position: relative;
             padding: 120px 0;
             text-align: center;
             overflow: hidden;
         }
 
-        .bg-comparison {
-            background-color: #070A0F;
-            position: relative;
-        }
-
-        .bg-manifesto {
-            background-color: #0E1420;
-            position: relative;
-        }
-
-        .bg-preview {
-            background-color: #070A0F;
-            position: relative;
-        }
-
-        .bg-benefit {
-            background-color: #0E1420;
-            position: relative;
-        }
-
-        .bg-workflow {
-            background-color: #070A0F;
-            position: relative;
-        }
-
-        .bg-testi {
-            background-color: #0E1420;
-            position: relative;
-        }
-
-        .bg-faq {
-            background-color: #070A0F;
-            position: relative;
-        }
-
-        .bg-form {
-            background-color: #0E1420;
-            position: relative;
-        }
-
         .bg-footer {
             background-color: #05070B;
             position: relative;
+            border-top: 1px solid var(--border-subtle);
         }
 
         /* ==================================================
@@ -401,18 +378,16 @@
             text-align: center;
             position: relative;
             z-index: 2;
-            background-color: #0E1420;
-            /* Shadow di atas agar transisi terasa natural saat naik */
-            box-shadow: 0 -20px 60px rgba(7, 10, 15, 0.8);
+            background-color: transparent;
         }
 
         .pure-statement-text {
-            font-size: 46px;
+            font-size: 36px;
             font-weight: 800;
             max-width: 920px;
             margin: 0 auto;
-            line-height: 1.3;
-            letter-spacing: -0.02em;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
         }
 
         /* ==================================================
@@ -492,11 +467,11 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            background: #070A0F;
+            background: transparent;
         }
 
         .giant-num-display {
-            font-size: clamp(100px, 14vw, 170px);
+            font-size: clamp(80px, 12vw, 120px);
             font-weight: 900;
             font-family: 'Outfit', sans-serif;
             color: var(--primary);
@@ -530,7 +505,7 @@
            SECTION 5: HORIZONTAL SCROLL — TULISAN VS VISUAL
            ================================================== */
         .bg-comparison {
-            background: #070A0F;
+            background: transparent;
             position: relative;
             overflow: hidden;
             min-height: 100vh;
@@ -652,7 +627,7 @@
         }
 
         .comparison-side.text .comparison-side-label {
-            color: #EF4444;
+            color: #F87171;
         }
 
         .comparison-side.visual .comparison-side-label {
@@ -700,7 +675,7 @@
         }
 
         .comparison-side.text .comparison-stat strong {
-            color: #EF4444;
+            color: #F87171;
         }
 
         .comparison-side.visual .comparison-stat strong {
@@ -787,7 +762,7 @@
            ================================================== */
         .pdf-showcase-section {
             position: relative;
-            background-color: #070A0F;
+            background-color: transparent;
         }
 
         .pdf-sticky-container {
@@ -1306,7 +1281,7 @@
             <span>Revolusi Visual</span>
         </a>
         <ul class="nav-items">
-            <li><a href="#statement" class="nav-item-link">Mengapa Visual</a></li>
+            <li><a href="#mengapa" class="nav-item-link">Mengapa Visual</a></li>
             <li><a href="#kosa-gambar" class="nav-item-link">Kosa Gambar</a></li>
             <li><a href="#komparasi" class="nav-item-link">Perbandingan</a></li>
             <li><a href="#preview" class="nav-item-link">Preview PDF</a></li>
@@ -1321,7 +1296,7 @@
             <div class="hero-blur-wrapper">
                 <div class="hero-layout">
                     <div>
-                        <h1 class="hero-headline">
+                        <h1 class="hero-headline text-gradient-gold">
                             Anak Malas Belajar? Mungkin <span class="highlight">Metodenya</span> yang Salah, Bukan Otaknya.
                         </h1>
                         <p class="hero-subtext">
@@ -1366,10 +1341,10 @@
     <section class="pure-statement-wrapper bg-statement" id="statement">
         <div class="screen-wrapper">
             <div class="statement-reveal">
-                <p style="color: var(--primary); font-weight: 700; font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 24px;">
+                <p style="color: rgba(251, 191, 36, 0.7); font-weight: 700; font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 24px;">
                     PERNYATAAN UTAMA
                 </p>
-                <h2 class="pure-statement-text">
+                <h2 class="pure-statement-text text-gradient-gold">
                     "SEJATINYA, OTAK MANUSIA <span class="highlight">TIDAK DIRANCANG</span> UNTUK MEMBACA DINDING TEKS TANPA KONTEKS."
                 </h2>
             </div>
@@ -1381,7 +1356,7 @@
         <div class="screen-wrapper">
             <div class="editorial-split">
                 <div class="editorial-content-left">
-                    <h2 class="reveal-head" style="font-size: 40px; font-weight: 800;">
+                    <h2 class="section-headline">
                         Mengapa Banyak Orang <span class="highlight">Sulit Belajar?</span>
                     </h2>
                     <p class="reveal-body" style="color: var(--text-muted); font-size: 18px; line-height: 1.6;">
@@ -1398,7 +1373,7 @@
 
                     <!-- FORMULA KOSA GAMBAR -->
                     <div class="kosa-gambar-block reveal-detail" id="kosa-gambar" style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border-subtle);">
-                        <span style="color: var(--primary); font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;">FORMULA KOSA GAMBAR</span>
+                        <span style="color: rgba(251, 191, 36, 0.7); font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;">FORMULA KOSA GAMBAR</span>
                         <h3 style="font-size: 24px; font-weight: 800; line-height: 1.2; margin-top: 8px;">
                             "Tuh Kan, <span class="highlight">Semua Orang Bisa Menggambar!</span>"
                         </h3>
@@ -1455,7 +1430,7 @@
     <section class="section-block bg-comparison" id="komparasi">
         <div class="comparison-horizontal-header">
             <div class="badge-pill" style="margin-bottom: 14px;">Perbandingan Nyata</div>
-            <h2>Tulisan <span class="highlight">vs</span> Visual</h2>
+            <h2 class="section-headline">Tulisan <span class="highlight">vs</span> Visual</h2>
             <p>Tiga contoh dari materi Revolusi Visual. Geser dengan scroll untuk melihat berapa banyak bentuk yang harus dijelaskan dengan kata dibandingkan dengan gambar.</p>
             <div class="comparison-scroll-progress" aria-hidden="true"><span></span></div>
         </div>
@@ -1550,10 +1525,10 @@
             <div class="manifesto-editorial-wrap">
                 <div class="manifesto-brand-side">
                     <img src="assets/revolusivisual.png" alt="Logo Manifesto">
-                    <span style="color: var(--primary); font-weight: 800; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;">GERAKAN EDUKASI NASIONAL</span>
+                    <span style="color: rgba(251, 191, 36, 0.7); font-weight: 800; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;">GERAKAN EDUKASI NASIONAL</span>
                 </div>
                 <div class="manifesto-content-side">
-                    <h2 class="manifesto-headline" style="font-size: 34px; font-weight: 800; line-height: 1.3;">
+                    <h2 class="section-headline">
                         Membuat Metode <span class="scribble-text">Penyampaian Informasi<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M 2 4 Q 48 6, 95 3 T 97 5" stroke="#FBBF24" stroke-width="4" fill="none" stroke-linecap="round" /></svg></span> Agar Mudah Dipahami Menggunakan Gambar.
                     </h2>
                     <p style="color: var(--text-muted); font-size: 17px; line-height: 1.6;">
@@ -1571,7 +1546,7 @@
                 <div class="pdf-showcase-grid">
                     <div class="pdf-text-stable">
                         <div class="badge-pill"><i class="ri-file-pdf-line"></i> E-Book HD Siap Cetak</div>
-                        <h2 style="font-size: 38px; font-weight: 800; margin-bottom: 16px; line-height: 1.2;">
+                        <h2 class="section-headline">
                             Ilustrasi Interaktif <span class="highlight">Pemantik Pikiran</span>
                         </h2>
                         <p style="color: var(--text-muted); font-size: 17px; margin-bottom: 28px; line-height: 1.65;">
@@ -1611,7 +1586,7 @@
     <!-- SECTION 8: BENEFIT (EDITORIAL LIST ACTIVE STATE) -->
     <section class="section-block bg-benefit">
         <div class="screen-wrapper">
-            <h2 style="font-size: 40px; font-weight: 800; margin-bottom: 12px;">Dampak Nyata <span class="highlight">Revolusi Visual</span></h2>
+            <h2 class="section-headline text-gradient-gold">Dampak Nyata <span class="highlight">Revolusi Visual</span></h2>
             <p style="color: var(--text-muted); font-size: 18px;">Keunggulan mendasar metode visual dibanding cara hafalan konvensional.</p>
 
             <div class="editorial-benefit-list">
@@ -1642,7 +1617,7 @@
     <!-- SECTION 9: CARA KERJA (VISUAL TIMELINE LINE ACCENT) -->
     <section class="workflow-section bg-workflow">
         <div class="screen-wrapper">
-            <h2 style="font-size: 40px; font-weight: 800; text-align: center;">3 Langkah Mudah <span class="highlight">Mulai Belajar</span></h2>
+            <h2 class="section-headline text-gradient-gold" style="text-align: center;">3 Langkah Mudah <span class="highlight">Mulai Belajar</span></h2>
 
             <div class="workflow-timeline-container">
                 <div class="workflow-line-bg"></div>
@@ -1684,7 +1659,7 @@
 
             <!-- FAQ SECTION -->
             <div class="faq-editorial-container" style="padding-top: 40px;">
-                <h2 style="font-size: 36px; font-weight: 800; text-align: center; margin-bottom: 48px;">Pertanyaan <span class="highlight">FAQ</span></h2>
+                <h2 class="section-headline text-gradient-gold" style="text-align: center; margin-bottom: 48px;">Pertanyaan <span class="highlight">FAQ</span></h2>
 
                 <div class="faq-editorial-list">
                     <div class="faq-row">
@@ -1725,14 +1700,14 @@
     <section class="section-block bg-form" id="form-akses">
         <div class="screen-wrapper">
             <div class="cta-immersive-banner">
-                <h2 class="cta-headline">Siap Mengubah Cara Belajar Anak Anda?</h2>
+                <h2 class="cta-headline text-gradient-gold">Siap Mengubah Cara Belajar Anak Anda?</h2>
                 <p class="cta-subtext">Bergabunglah bersama 1.000+ orang tua yang telah beralih ke metode edukasi visual modern.</p>
             </div>
 
-            <div class="form-glass-container">
+            <div class="form-glass-container glass-panel" style="padding: 48px; border-radius: 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
                 <div style="text-align: center; margin-bottom: 32px;">
                     <span class="badge-pill"><i class="ri-gift-line"></i> Akses PDF Gratis</span>
-                    <h2 style="font-size: 32px; font-weight: 800; margin-top: 10px;">Formulir Akses Instan PDF 'Revi Brain'</h2>
+                    <h2 class="section-headline text-gradient-gold" style="margin-top: 10px;">Formulir Akses Instan PDF 'Revi Brain'</h2>
                 </div>
 
                 <form action="#" method="POST"
@@ -1787,10 +1762,11 @@
                 <div>
                     <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 20px;">Navigasi</h4>
                     <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px;">
-                        <li><a href="#" class="nav-item-link">Beranda</a></li>
-                        <li><a href="#statement" class="nav-item-link">Mengapa Visual</a></li>
+                        <li><a href="#mengapa" class="nav-item-link">Mengapa Visual</a></li>
+                        <li><a href="#kosa-gambar" class="nav-item-link">Kosa Gambar</a></li>
                         <li><a href="#fakta" class="nav-item-link">Statistik</a></li>
                         <li><a href="#komparasi" class="nav-item-link">Perbandingan</a></li>
+                        <li><a href="#preview" class="nav-item-link">Preview PDF</a></li>
                     </ul>
                 </div>
 
@@ -1799,7 +1775,6 @@
                     <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px;">
                         <li><a href="#faq" class="nav-item-link">FAQ</a></li>
                         <li><a href="#form-akses" class="nav-item-link">Unduh PDF</a></li>
-                        <li><a href="#" class="nav-item-link">Kebijakan Privasi</a></li>
                     </ul>
                 </div>
 
