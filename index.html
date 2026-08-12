@@ -25,7 +25,8 @@
             --primary-glow: rgba(251, 191, 36, 0.4);
 
             --bg-void: #070A0F;
-            --bg-surface: rgba(14, 20, 32, 0.4); /* Glassmorphism surface */
+            --bg-surface: rgba(14, 20, 32, 0.4);
+            /* Glassmorphism surface */
             --bg-card: rgba(18, 24, 36, 0.6);
             --bg-card-hover: rgba(23, 32, 48, 0.8);
 
@@ -67,7 +68,7 @@
             -webkit-font-smoothing: antialiased;
             line-height: 1.6;
         }
-        
+
         /* Glassmorphism Utilities */
         .glass-panel {
             background: var(--bg-surface);
@@ -76,7 +77,7 @@
             border: 1px solid var(--border-subtle);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
-        
+
         .text-gradient-gold {
             background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
             -webkit-background-clip: text;
@@ -87,7 +88,8 @@
         /* Layout Grid System */
         .screen-wrapper {
             width: 100%;
-            max-width: 1200px; /* Disamakan dengan header-nav */
+            max-width: 1200px;
+            /* Disamakan dengan header-nav */
             margin: 0 auto;
             padding: 0 32px;
             position: relative;
@@ -211,7 +213,8 @@
             width: calc(100% - 48px);
             max-width: 1200px;
             z-index: 1000;
-            padding: 12px 32px; /* Disamakan dengan padding screen-wrapper */
+            padding: 12px 32px;
+            /* Disamakan dengan padding screen-wrapper */
             background: rgba(14, 20, 32, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -262,9 +265,18 @@
         /* ==================================================
            ALTERNATING SOLID BACKGROUND SYSTEM (REMOVED - TRANSPARENT)
            ================================================== */
-        .bg-hero, .bg-statement, .bg-editorial, .bg-stat, 
-        .bg-comparison, .bg-manifesto, .bg-preview, .bg-benefit, 
-        .bg-workflow, .bg-testi, .bg-faq, .bg-form {
+        .bg-hero,
+        .bg-statement,
+        .bg-editorial,
+        .bg-stat,
+        .bg-comparison,
+        .bg-manifesto,
+        .bg-preview,
+        .bg-benefit,
+        .bg-workflow,
+        .bg-testi,
+        .bg-faq,
+        .bg-form {
             background-color: transparent;
             position: relative;
         }
@@ -509,11 +521,11 @@
             position: relative;
             overflow: hidden;
             min-height: 100vh;
-            padding: 88px 0 16px;
+            padding: clamp(24px, 4vh, 48px) 0 10px;
             scroll-margin-top: 75px;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: center;
             box-sizing: border-box;
         }
 
@@ -527,20 +539,20 @@
 
         .comparison-horizontal-header h2 {
             margin: 0;
-            font-size: clamp(30px, 3.5vw, 48px);
+            font-size: clamp(28px, 3.2vw, 44px);
             font-weight: 900;
-            letter-spacing: -0.04em;
+            letter-spacing: -0.03em;
         }
 
         .comparison-horizontal-header p {
-            margin: 6px 0 0;
+            margin: 4px 0 0;
             color: var(--text-muted);
-            font-size: clamp(14px, 1.2vw, 16px);
+            font-size: clamp(14px, 1.15vw, 16px);
             max-width: 620px;
         }
 
         .comparison-scroll-progress {
-            margin-top: 14px;
+            margin-top: 8px;
             width: 180px;
             height: 3px;
             background: #28354A;
@@ -556,10 +568,23 @@
             transition: transform 0.1s ease-out;
         }
 
+        .comparison-scroll-hint {
+            margin-top: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            opacity: 0;
+            pointer-events: none;
+            text-transform: uppercase;
+            will-change: opacity;
+        }
+
         .comparison-horizontal-viewport {
             width: 100%;
             overflow: hidden;
-            margin-top: 16px;
+            margin-top: clamp(8px, 1.5vh, 16px);
             flex: 1;
             display: flex;
             align-items: center;
@@ -570,7 +595,7 @@
             flex-wrap: nowrap;
             width: max-content;
             will-change: transform;
-            align-items: center;
+            align-items: stretch; /* Memastikan seluruh slide 100% sama tinggi */
         }
 
         .comparison-slide {
@@ -581,53 +606,70 @@
             flex-shrink: 0;
             padding: 0 32px;
             box-sizing: border-box;
+            display: flex;
+            align-items: center;
         }
 
+        /* 50% LEFT / 50% RIGHT Canvas dengan tinggi & baseline yang identik */
         .comparison-slide-inner {
             width: min(1180px, 100%);
             margin: 0 auto;
             display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-            gap: clamp(24px, 5vw, 70px);
-            align-items: center;
+            grid-template-columns: 1fr 1fr;
+            align-items: stretch;
+            min-height: 430px; /* Fixed canvas baseline height */
             border-top: 1px solid var(--border-subtle);
             border-bottom: 1px solid var(--border-subtle);
-            padding: 28px 0;
+            padding: 24px 0;
             position: relative;
-        }
-
-        .comparison-case-label {
-            color: var(--primary);
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            margin-bottom: 12px;
         }
 
         .comparison-side {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            gap: 14px;
+            height: 100%;
+        }
+
+        .comparison-side.text {
+            padding-right: 48px;
         }
 
         .comparison-side.visual {
             border-left: 1px solid var(--border-subtle);
-            padding-left: clamp(24px, 5vw, 70px);
+            padding-left: 48px;
+        }
+
+        .comparison-side-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 12px 0;
+        }
+
+        .comparison-case-label {
+            color: var(--primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
         }
 
         .comparison-side-label {
             display: inline-block;
-            font-size: 12px;
-            font-weight: 800;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            margin-bottom: 12px;
+            margin-bottom: 6px;
         }
 
         .comparison-side.text .comparison-side-label {
-            color: var(--text-muted); /* Diganti dari merah ke abu-abu */
+            color: var(--text-muted);
         }
 
         .comparison-side.visual .comparison-side-label {
@@ -635,27 +677,29 @@
         }
 
         .comparison-copy {
-            color: var(--text-main);
-            font-size: clamp(16px, 1.35vw, 20px);
+            color: #F8FAFC;
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
             line-height: 1.65;
-            max-width: 580px;
+            max-width: 500px;
         }
 
         .comparison-image-frame {
-            height: clamp(220px, 32vh, 340px);
+            height: 240px; /* Fixed height frame agar posisi vertikal gambar 100% konsisten */
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #fff;
+            background: #ffffff;
             border-radius: 16px;
             padding: 16px;
-            margin-bottom: 14px;
             overflow: hidden;
+            box-sizing: border-box;
         }
 
         .comparison-image-frame img {
-            width: 100%;
-            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
         }
 
@@ -663,19 +707,19 @@
             display: flex;
             align-items: flex-end;
             gap: 12px;
-            margin-top: 6px;
+            margin-top: auto;
         }
 
         .comparison-stat strong {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(48px, 5vw, 72px);
+            font-family: 'Sora', 'Outfit', sans-serif;
+            font-size: 68px;
             line-height: 0.95;
-            font-weight: 900;
-            letter-spacing: -0.05em;
+            font-weight: 700;
+            letter-spacing: -0.04em;
         }
 
         .comparison-side.text .comparison-stat strong {
-            color: var(--text-main); /* Diganti dari merah ke putih */
+            color: var(--text-main);
         }
 
         .comparison-side.visual .comparison-stat strong {
@@ -684,8 +728,10 @@
 
         .comparison-stat span {
             color: var(--text-muted);
-            font-size: 14px;
-            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            opacity: 0.85;
             padding-bottom: 4px;
         }
 
@@ -702,7 +748,8 @@
             background: #070A0F;
             border-radius: 50%;
             color: var(--primary);
-            font-weight: 900;
+            font-family: 'Sora', 'Outfit', sans-serif;
+            font-weight: 700;
             font-size: 13px;
             z-index: 3;
         }
@@ -860,7 +907,7 @@
             opacity: 0;
             transform: translateY(16px);
             transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
             will-change: opacity, transform;
         }
@@ -869,7 +916,8 @@
             opacity: 1;
             transform: translateY(0);
             pointer-events: auto;
-            position: relative; /* ambil tinggi dari slide aktif */
+            position: relative;
+            /* ambil tinggi dari slide aktif */
         }
 
         .pdf-slide-label {
@@ -990,7 +1038,8 @@
         }
 
         .benefit-idx {
-            font-size: 18px; /* Diperkecil dari 24px */
+            font-size: 18px;
+            /* Diperkecil dari 24px */
             font-weight: 800;
             color: var(--text-dim);
             font-family: 'Outfit', sans-serif;
@@ -1002,7 +1051,8 @@
         }
 
         .benefit-heading {
-            font-size: 20px; /* Diperkecil dari 24px */
+            font-size: 20px;
+            /* Diperkecil dari 24px */
             font-weight: 700;
             transition: color 0.4s ease;
         }
@@ -1012,7 +1062,8 @@
         }
 
         .benefit-description {
-            font-size: 15px; /* Diperkecil dari 16px */
+            font-size: 15px;
+            /* Diperkecil dari 16px */
             color: var(--text-muted);
         }
 
@@ -1281,6 +1332,7 @@
 
         /* Responsive Breakpoints */
         @media (max-width: 1024px) {
+
             .hero-layout,
             .editorial-split,
             .manifesto-editorial-wrap,
@@ -1306,72 +1358,264 @@
                 grid-template-columns: 1fr 1fr;
             }
 
-            .workflow-line-bg, .workflow-line-active {
+            .workflow-line-bg,
+            .workflow-line-active {
                 display: none;
             }
         }
 
         @media (max-width: 768px) {
+
             /* Layout & Spacing Umum */
-            .screen-wrapper { padding: 0 24px; }
-            .section-block { padding: 80px 0; }
-            .pure-statement-wrapper { padding: 60px 0; min-height: auto; }
-            .giant-stat-section { padding: 90px 0; }
-            .manifesto-editorial-wrap { padding: 80px 0; }
-            .workflow-section { padding: 80px 0; }
-            .footer-block { margin-top: 40px; padding: 50px 0 30px; }
-            .cta-immersive-banner { padding: 40px 0 20px; }
+            .screen-wrapper {
+                padding: 0 24px;
+            }
+
+            .section-block {
+                padding: 80px 0;
+            }
+
+            .pure-statement-wrapper {
+                padding: 60px 0;
+                min-height: auto;
+            }
+
+            .giant-stat-section {
+                padding: 90px 0;
+            }
+
+            .manifesto-editorial-wrap {
+                padding: 80px 0;
+            }
+
+            .workflow-section {
+                padding: 80px 0;
+            }
+
+            .footer-block {
+                margin-top: 40px;
+                padding: 50px 0 30px;
+            }
+
+            .cta-immersive-banner {
+                padding: 40px 0 20px;
+            }
 
             /* Header & Nav */
-            .header-nav { width: calc(100% - 32px); padding: 10px 16px; border-radius: 100px; top: 16px; }
-            .nav-items { display: none; }
-            .brand-logo span { display: inline-block; font-size: 15px; } /* Kembalikan teks logo, sesuaikan ukuran */
-            .brand-logo img { width: 30px; height: 30px; }
-            .header-nav .btn-main { width: auto; padding: 8px 16px !important; font-size: 13px !important; border-radius: 100px; }
+            .header-nav {
+                width: calc(100% - 32px);
+                padding: 10px 16px;
+                border-radius: 100px;
+                top: 16px;
+            }
+
+            .nav-items {
+                display: none;
+            }
+
+            .brand-logo span {
+                display: inline-block;
+                font-size: 15px;
+            }
+
+            /* Kembalikan teks logo, sesuaikan ukuran */
+            .brand-logo img {
+                width: 30px;
+                height: 30px;
+            }
+
+            .header-nav .btn-main {
+                width: auto;
+                padding: 8px 16px !important;
+                font-size: 13px !important;
+                border-radius: 100px;
+            }
 
             /* Hero Section */
-            .hero-block { height: auto; min-height: auto; padding-top: 100px; padding-bottom: 30px; }
-            .hero-layout { display: flex; flex-direction: column; }
-            .hero-media-box { order: -1; margin-top: 0; margin-bottom: 24px; max-width: 280px; margin-left: auto; margin-right: auto; }
-            .hero-headline { font-size: 28px; line-height: 1.3; text-align: center; }
-            .hero-subtext { font-size: 15px; line-height: 1.6; margin-bottom: 24px; text-align: center; }
-            .hero-stats-bar { 
-                display: grid;
-                grid-template-columns: repeat(3, 1fr); 
-                gap: 8px; 
-                text-align: center; 
-                margin-top: 32px; 
-                padding-top: 24px; 
+            .hero-block {
+                height: auto;
+                min-height: auto;
+                padding-top: 100px;
+                padding-bottom: 30px;
             }
-            .stat-num-val { font-size: 20px; }
-            .stat-lbl { font-size: 11px; line-height: 1.3; }
+
+            .hero-layout {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .hero-media-box {
+                order: -1;
+                margin-top: 0;
+                margin-bottom: 24px;
+                max-width: 280px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-headline {
+                font-size: 28px;
+                line-height: 1.3;
+                text-align: center;
+            }
+
+            .hero-subtext {
+                font-size: 15px;
+                line-height: 1.6;
+                margin-bottom: 24px;
+                text-align: center;
+            }
+
+            .hero-stats-bar {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+                text-align: center;
+                margin-top: 32px;
+                padding-top: 24px;
+            }
+
+            .stat-num-val {
+                font-size: 20px;
+            }
+
+            .stat-lbl {
+                font-size: 11px;
+                line-height: 1.3;
+            }
 
             /* Typography */
-            .pure-statement-text { font-size: 22px; line-height: 1.4; }
-            .section-headline { font-size: 24px; line-height: 1.3; margin-bottom: 12px; text-align: center; }
-            .giant-num-display { font-size: 64px; }
-            .giant-subtext { font-size: 16px; }
+            .pure-statement-text {
+                font-size: 22px;
+                line-height: 1.4;
+            }
+
+            .section-headline {
+                font-size: 24px;
+                line-height: 1.3;
+                margin-bottom: 12px;
+                text-align: center;
+            }
+
+            .giant-num-display {
+                font-size: 64px;
+            }
+
+            .giant-subtext {
+                font-size: 16px;
+            }
 
             /* Buttons & Actions (kecuali di navbar) */
-            .btn-action-group { flex-direction: column; width: 100%; gap: 12px; }
-            .btn-action-group .btn-main { width: 100%; justify-content: center; padding: 14px 24px; font-size: 15px; }
+            .btn-action-group {
+                flex-direction: column;
+                width: 100%;
+                gap: 12px;
+            }
+
+            .btn-action-group .btn-main {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 24px;
+                font-size: 15px;
+            }
 
             /* Kosa Gambar / Tabs */
-            .kosa-tab-btn { flex: 1 1 100%; text-align: center; justify-content: center; }
+            .kosa-tab-btn {
+                flex: 1 1 100%;
+                text-align: center;
+                justify-content: center;
+            }
 
             /* Editorial Split (Mengapa Visual) */
-            .editorial-split { display: flex; flex-direction: column; }
-            .editorial-img-wrap { order: -1; margin-bottom: 24px; margin-top: 0; }
-            .editorial-content-left { text-align: center; }
-            .sensory-badge-list { justify-content: center; }
+            .editorial-split {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .editorial-img-wrap {
+                order: -1;
+                margin-bottom: 24px;
+                margin-top: 0;
+            }
+
+            .editorial-content-left {
+                text-align: center;
+            }
+
+            .sensory-badge-list {
+                justify-content: center;
+            }
 
             /* Grids (Workflow, Footer, Manifesto) */
-            .workflow-grid, .footer-grid-layout, .manifesto-editorial-wrap { grid-template-columns: 1fr; gap: 24px; }
-            .manifesto-editorial-wrap { padding: 0 !important; border-top: none; }
-            
-            /* Comparison Section (Horizontal Native Scroll) */
-            .bg-comparison { min-height: auto; padding-bottom: 20px; }
-            .comparison-slide-inner { grid-template-columns: 1fr; gap: 24px; padding: 20px 24px; display: flex; flex-direction: column; }
+            .workflow-grid,
+            .footer-grid-layout,
+            .manifesto-editorial-wrap {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .manifesto-editorial-wrap {
+                padding: 0 !important;
+                border-top: none;
+            }
+
+            /* Comparison Section Mobile Overrides */
+            .bg-comparison {
+                min-height: auto;
+                padding-bottom: 24px;
+            }
+
+            .comparison-horizontal-header p {
+                font-size: 15px !important;
+                line-height: 1.6 !important;
+                color: #CBD5E1 !important;
+                margin-top: 8px !important;
+            }
+
+            .comparison-scroll-hint {
+                font-size: 11px !important;
+                margin-top: 8px !important;
+                color: #94A3B8 !important;
+            }
+
+            .comparison-horizontal-viewport {
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+
+            .comparison-horizontal-viewport::-webkit-scrollbar {
+                display: none;
+            }
+
+            .comparison-horizontal-track {
+                display: flex;
+                align-items: stretch;
+            }
+
+            .comparison-slide {
+                scroll-snap-align: center;
+                width: 100vw;
+                min-width: 100vw;
+                max-width: 100vw;
+                flex: 0 0 100vw;
+                padding: 0 20px;
+                display: flex;
+                box-sizing: border-box;
+            }
+
+            .comparison-slide-inner {
+                width: 100%;
+                min-height: auto;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                gap: 20px;
+                padding: 16px 0;
+                grid-template-columns: 1fr;
+            }
+
             .comparison-case-number {
                 position: relative;
                 left: auto;
@@ -1379,45 +1623,156 @@
                 transform: none;
                 margin: 0 auto;
                 z-index: 2;
+                flex-shrink: 0;
             }
-            .comparison-side.visual { border-left: none; padding-left: 0; border-top: 1px solid var(--border-subtle); padding-top: 20px; }
-            .comparison-horizontal-viewport { 
-                overflow-x: auto; 
-                scroll-snap-type: x mandatory; 
-                -webkit-overflow-scrolling: touch; 
-                scrollbar-width: none; 
+
+            .comparison-side {
+                padding: 0 !important;
             }
-            .comparison-horizontal-viewport::-webkit-scrollbar { display: none; }
-            .comparison-slide { scroll-snap-align: center; }
+
+            .comparison-case-label {
+                font-size: 13.5px !important;
+                margin-bottom: 6px !important;
+            }
+
+            .comparison-side-label {
+                font-size: 12.5px !important;
+                letter-spacing: 0.08em !important;
+                margin-bottom: 6px !important;
+            }
+
+            .comparison-side.text .comparison-side-label {
+                color: #CBD5E1 !important;
+            }
+
+            .comparison-copy {
+                font-size: 16px !important;
+                line-height: 1.6 !important;
+                color: #F1F5F9 !important;
+            }
+
+            .comparison-image-frame {
+                height: 180px !important;
+                margin-bottom: 12px;
+            }
+
+            .comparison-stat strong {
+                font-size: 44px !important;
+            }
+
+            .comparison-stat span {
+                font-size: 14px !important;
+                color: #94A3B8 !important;
+            }
+
+            .comparison-side.visual {
+                border-left: none;
+                border-top: 1px solid var(--border-subtle);
+                padding-top: 16px !important;
+            }
 
             /* PDF Preview */
-            .pdf-sticky-container { min-height: auto; padding: 20px 0; }
-            .pdf-showcase-grid { display: flex; flex-direction: column; gap: 20px; }
-            .pdf-showcase-stage { order: -1; width: 100%; flex-direction: column; gap: 16px; }
-            .pdf-text-stable { width: 100%; }
-            
-            .pdf-display-frame { height: 260px; padding: 8px; width: 100%; max-width: 320px; margin: 0 auto; }
-            .pdf-page-view { inset: 8px; }
-            
-            .pdf-progress-indicator { flex-direction: row; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
-            .pdf-progress-step.is-active::after { left: 50%; top: -8px; transform: translateX(-50%); }
+            .pdf-sticky-container {
+                min-height: auto;
+                padding: 20px 0;
+            }
 
-            /* Dynamic Text Resizing for Mobile */
-            .dynamic-slide h3 { font-size: 22px !important; line-height: 1.3 !important; }
-            .dynamic-slide p { font-size: 15px !important; line-height: 1.5 !important; }
+            .pdf-showcase-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .pdf-showcase-stage {
+                order: -1;
+                width: 100%;
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .pdf-text-stable {
+                width: 100%;
+            }
+
+            .pdf-display-frame {
+                height: 260px;
+                padding: 8px;
+                width: 100%;
+                max-width: 320px;
+                margin: 0 auto;
+            }
+
+            .pdf-page-view {
+                inset: 8px;
+            }
+
+            .pdf-progress-indicator {
+                flex-direction: row;
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-top: 8px;
+            }
+
+            .pdf-progress-step.is-active::after {
+                left: 50%;
+                top: -8px;
+                transform: translateX(-50%);
+            }
+
+            /* Dynamic Text Resizing & Container Height for Mobile */
+            .pdf-dynamic-content {
+                min-height: 210px;
+            }
+
+            .pdf-slide-title {
+                font-size: 20px !important;
+                line-height: 1.35 !important;
+                margin-bottom: 8px !important;
+            }
+
+            .pdf-slide-desc {
+                font-size: 14px !important;
+                line-height: 1.55 !important;
+            }
 
             /* Benefits List */
-            .benefit-editorial-item { grid-template-columns: 1fr; gap: 8px; padding: 20px 16px; }
-            .benefit-idx { font-size: 14px; margin-bottom: 4px; }
-            .benefit-description { grid-column: span 1; font-size: 15px; }
+            .benefit-editorial-item {
+                grid-template-columns: 1fr;
+                gap: 8px;
+                padding: 20px 16px;
+            }
+
+            .benefit-idx {
+                font-size: 14px;
+                margin-bottom: 4px;
+            }
+
+            .benefit-description {
+                grid-column: span 1;
+                font-size: 15px;
+            }
 
             /* Formulir / Form Access */
-            .form-glass-container { padding: 28px 20px !important; border-radius: 20px !important; }
-            .form-input-field { padding: 14px; font-size: 14px; }
-            
+            .form-glass-container {
+                padding: 28px 20px !important;
+                border-radius: 20px !important;
+            }
+
+            .form-input-field {
+                padding: 14px;
+                font-size: 14px;
+            }
+
             /* Testimonial */
-            .testimonial-single-wrapper { padding: 32px 20px; border-radius: 20px; }
-            .testimonial-quote { font-size: 18px; }
+            .testimonial-single-wrapper {
+                padding: 32px 20px;
+                border-radius: 20px;
+            }
+
+            .testimonial-quote {
+                font-size: 18px;
+            }
         }
     </style>
 </head>
@@ -1446,7 +1801,8 @@
                 <div class="hero-layout">
                     <div>
                         <h1 class="hero-headline text-gradient-gold">
-                            Anak Malas Belajar? Mungkin <span class="highlight">Metodenya</span> yang Salah, Bukan Otaknya.
+                            Anak Malas Belajar? Mungkin <span class="highlight">Metodenya</span> yang Salah, Bukan
+                            Otaknya.
                         </h1>
                         <p class="hero-subtext">
                             Tinggalkan metode hafalan usang. Ubah ratusan halaman teks menjadi visual memukau yang bikin
@@ -1490,11 +1846,13 @@
     <section class="pure-statement-wrapper bg-statement" id="statement">
         <div class="screen-wrapper">
             <div class="statement-reveal">
-                <p style="color: rgba(251, 191, 36, 0.7); font-weight: 700; font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 24px;">
+                <p
+                    style="color: rgba(251, 191, 36, 0.7); font-weight: 700; font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 24px;">
                     PERNYATAAN UTAMA
                 </p>
                 <h2 class="pure-statement-text text-gradient-gold">
-                    "SEJATINYA, OTAK MANUSIA <span class="highlight">TIDAK DIRANCANG</span> UNTUK MEMBACA DINDING TEKS TANPA KONTEKS."
+                    "SEJATINYA, OTAK MANUSIA <span class="highlight">TIDAK DIRANCANG</span> UNTUK MEMBACA DINDING TEKS
+                    TANPA KONTEKS."
                 </h2>
             </div>
         </div>
@@ -1521,8 +1879,11 @@
                     </div>
 
                     <!-- FORMULA KOSA GAMBAR -->
-                    <div class="kosa-gambar-block reveal-detail" id="kosa-gambar" style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border-subtle);">
-                        <span style="color: rgba(251, 191, 36, 0.7); font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;">FORMULA KOSA GAMBAR</span>
+                    <div class="kosa-gambar-block reveal-detail" id="kosa-gambar"
+                        style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border-subtle);">
+                        <span
+                            style="color: rgba(251, 191, 36, 0.7); font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;">FORMULA
+                            KOSA GAMBAR</span>
                         <h3 style="font-size: 24px; font-weight: 800; line-height: 1.2; margin-top: 8px;">
                             "Tuh Kan, <span class="highlight">Semua Orang Bisa Menggambar!</span>"
                         </h3>
@@ -1530,26 +1891,42 @@
                             Menulis huruf <em>A, B, O, U, H</em> sebenarnya adalah kegiatan menggambar bentuk huruf!
                         </p>
                         <div style="display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap;">
-                            <button class="kosa-tab-btn active" onclick="switchKosaTab('bentuk-dasar')">1. 3 Bentuk Dasar</button>
-                            <button class="kosa-tab-btn" onclick="switchKosaTab('rekonstruksi-huruf')">2. Menulis = Menggambar</button>
-                            <button class="kosa-tab-btn" onclick="switchKosaTab('kasta-gambar')">3. Kasta Gambar</button>
+                            <button class="kosa-tab-btn active" onclick="switchKosaTab('bentuk-dasar')">1. 3 Bentuk
+                                Dasar</button>
+                            <button class="kosa-tab-btn" onclick="switchKosaTab('rekonstruksi-huruf')">2. Menulis =
+                                Menggambar</button>
+                            <button class="kosa-tab-btn" onclick="switchKosaTab('kasta-gambar')">3. Kasta
+                                Gambar</button>
                         </div>
                         <div id="tab-bentuk-dasar" class="kosa-tab-content" style="margin-top: 14px;">
-                            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 14px 18px;">
-                                <h4 style="font-size: 15px; color: var(--primary); margin-bottom: 4px;">Bulat &#9675;, Kotak &#9633;, Segitiga &#9651;</h4>
-                                <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Dari 3 bentuk sederhana ini, Anda bisa membentuk objek apa saja: Jam Dinding, Buku, Pizza, Gelas, hingga HP.</p>
+                            <div
+                                style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 14px 18px;">
+                                <h4 style="font-size: 15px; color: var(--primary); margin-bottom: 4px;">Bulat &#9675;,
+                                    Kotak &#9633;, Segitiga &#9651;</h4>
+                                <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Dari 3 bentuk
+                                    sederhana ini, Anda bisa membentuk objek apa saja: Jam Dinding, Buku, Pizza, Gelas,
+                                    hingga HP.</p>
                             </div>
                         </div>
-                        <div id="tab-rekonstruksi-huruf" class="kosa-tab-content" style="display: none; margin-top: 14px;">
-                            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 14px 18px;">
-                                <h4 style="font-size: 15px; color: var(--primary); margin-bottom: 4px;">Garis + Lengkung + Titik</h4>
-                                <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Huruf <strong>A</strong> = 2 Garis Panjang + 1 Garis Pendek. Huruf <strong>O</strong> = 1 Lengkungan Bulat.</p>
+                        <div id="tab-rekonstruksi-huruf" class="kosa-tab-content"
+                            style="display: none; margin-top: 14px;">
+                            <div
+                                style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 14px 18px;">
+                                <h4 style="font-size: 15px; color: var(--primary); margin-bottom: 4px;">Garis + Lengkung
+                                    + Titik</h4>
+                                <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Huruf
+                                    <strong>A</strong> = 2 Garis Panjang + 1 Garis Pendek. Huruf <strong>O</strong> = 1
+                                    Lengkungan Bulat.</p>
                             </div>
                         </div>
                         <div id="tab-kasta-gambar" class="kosa-tab-content" style="display: none; margin-top: 14px;">
-                            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 14px 18px;">
-                                <h4 style="font-size: 15px; color: var(--primary); margin-bottom: 4px;">Doodle &rarr; Sketch &rarr; Art</h4>
-                                <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Dunia edukasi tidak butuh lukisan mahakarya (Art). Cukup tingkat <strong>Sketch (Membuat Bentuk)</strong>.</p>
+                            <div
+                                style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 14px 18px;">
+                                <h4 style="font-size: 15px; color: var(--primary); margin-bottom: 4px;">Doodle &rarr;
+                                    Sketch &rarr; Art</h4>
+                                <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Dunia edukasi
+                                    tidak butuh lukisan mahakarya (Art). Cukup tingkat <strong>Sketch (Membuat
+                                        Bentuk)</strong>.</p>
                             </div>
                         </div>
                     </div>
@@ -1569,7 +1946,8 @@
             <div class="giant-stat-content">
                 <div class="giant-num-display">60.000x</div>
                 <p class="giant-subtext">
-                    Otak manusia memproses informasi visual <span class="highlight">60.000 kali lebih cepat</span> dibandingkan membaca teks biasa.
+                    Otak manusia memproses informasi visual <span class="highlight">60.000 kali lebih cepat</span>
+                    dibandingkan membaca teks biasa.
                 </p>
             </div>
         </div>
@@ -1580,8 +1958,10 @@
         <div class="comparison-horizontal-header">
             <div class="badge-pill" style="margin-bottom: 14px;">Perbandingan Nyata</div>
             <h2 class="section-headline">Tulisan <span class="highlight">vs</span> Visual</h2>
-            <p>Tiga contoh dari materi Revolusi Visual. Geser dengan scroll untuk melihat berapa banyak bentuk yang harus dijelaskan dengan kata dibandingkan dengan gambar.</p>
+            <p>Tiga contoh dari materi Revolusi Visual. Geser dengan scroll untuk melihat berapa banyak bentuk yang
+                harus dijelaskan dengan kata dibandingkan dengan gambar.</p>
             <div class="comparison-scroll-progress" aria-hidden="true"><span></span></div>
+            <div class="comparison-scroll-hint" id="comparison-hint" aria-hidden="true">SCROLL TO EXPLORE &rarr;</div>
         </div>
 
         <div class="comparison-horizontal-viewport">
@@ -1674,14 +2054,21 @@
             <div class="manifesto-editorial-wrap">
                 <div class="manifesto-brand-side">
                     <img src="assets/revolusivisual.png" alt="Logo Manifesto">
-                    <span style="color: rgba(251, 191, 36, 0.7); font-weight: 800; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;">GERAKAN EDUKASI NASIONAL</span>
+                    <span
+                        style="color: rgba(251, 191, 36, 0.7); font-weight: 800; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;">GERAKAN
+                        EDUKASI NASIONAL</span>
                 </div>
                 <div class="manifesto-content-side">
                     <h2 class="section-headline">
-                        Membuat Metode <span class="scribble-text">Penyampaian Informasi<svg viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M 2 4 Q 48 6, 95 3 T 97 5" stroke="#FBBF24" stroke-width="4" fill="none" stroke-linecap="round" /></svg></span> Agar Mudah Dipahami Menggunakan Gambar.
+                        Membuat Metode <span class="scribble-text">Penyampaian Informasi<svg viewBox="0 0 100 10"
+                                preserveAspectRatio="none">
+                                <path d="M 2 4 Q 48 6, 95 3 T 97 5" stroke="#FBBF24" stroke-width="4" fill="none"
+                                    stroke-linecap="round" />
+                            </svg></span> Agar Mudah Dipahami Menggunakan Gambar.
                     </h2>
                     <p style="color: var(--text-muted); font-size: 17px; line-height: 1.6;">
-                        Kami berkomitmen menghadirkan metode pendidikan berbasis visual ke dalam sistem pembelajaran Indonesia agar siswa mengerti esensi pelajaran secara alami.
+                        Kami berkomitmen menghadirkan metode pendidikan berbasis visual ke dalam sistem pembelajaran
+                        Indonesia agar siswa mengerti esensi pelajaran secara alami.
                     </p>
                 </div>
             </div>
@@ -1717,7 +2104,9 @@
                                     Semua Orang <span class="highlight">Bisa Menggambar</span> Sejak Lahir
                                 </h2>
                                 <p class="pdf-slide-desc">
-                                    Menulis huruf A, B, O sebenarnya adalah kegiatan menggambar! Modul ini membuktikan bahwa kemampuan visual sudah ada dalam diri setiap anak — tinggal diasah dengan 3 bentuk dasar: bulat, kotak, segitiga.
+                                    Menulis huruf A, B, O sebenarnya adalah kegiatan menggambar! Modul ini membuktikan
+                                    bahwa kemampuan visual sudah ada dalam diri setiap anak — tinggal diasah dengan 3
+                                    bentuk dasar: bulat, kotak, segitiga.
                                 </p>
                             </div>
 
@@ -1728,7 +2117,9 @@
                                     Otak Memproses <span class="highlight">Gambar 60.000x</span> Lebih Cepat
                                 </h2>
                                 <p class="pdf-slide-desc">
-                                    Saat anak membaca teks, otak harus menerjemahkan kata-kata secara berurutan. Saat melihat gambar, pemahaman terjadi instan. Modul ini menjelaskan ilmu di balik kekuatan visual dalam proses belajar.
+                                    Saat anak membaca teks, otak harus menerjemahkan kata-kata secara berurutan. Saat
+                                    melihat gambar, pemahaman terjadi instan. Modul ini menjelaskan ilmu di balik
+                                    kekuatan visual dalam proses belajar.
                                 </p>
                             </div>
 
@@ -1739,7 +2130,9 @@
                                     Dari Teks Membosankan <span class="highlight">Jadi Sketsa</span> Menarik
                                 </h2>
                                 <p class="pdf-slide-desc">
-                                    Pelajaran IPA, Sejarah, Matematika — semua bisa divisualisasikan! Modul ini mengajarkan teknik sketchnote yang mengubah catatan panjang membosankan menjadi ringkasan visual yang mudah diingat dalam menit.
+                                    Pelajaran IPA, Sejarah, Matematika — semua bisa divisualisasikan! Modul ini
+                                    mengajarkan teknik sketchnote yang mengubah catatan panjang membosankan menjadi
+                                    ringkasan visual yang mudah diingat dalam menit.
                                 </p>
                             </div>
 
@@ -1750,13 +2143,16 @@
                                     Mind Map: <span class="highlight">Satu Gambar</span>, Seribu Koneksi
                                 </h2>
                                 <p class="pdf-slide-desc">
-                                    Peta pikiran atau mind map adalah teknik paling efektif untuk memahami hubungan antar konsep. Dengan metode ini, anak bisa meringkas satu bab pelajaran hanya dalam satu halaman penuh gambar dan warna.
+                                    Peta pikiran atau mind map adalah teknik paling efektif untuk memahami hubungan
+                                    antar konsep. Dengan metode ini, anak bisa meringkas satu bab pelajaran hanya dalam
+                                    satu halaman penuh gambar dan warna.
                                 </p>
                             </div>
 
                         </div><!-- /pdf-dynamic-content -->
 
-                        <a href="#form-akses" class="btn-main btn-gold">Dapatkan PDF Gratis <i class="ri-arrow-right-line"></i></a>
+                        <a href="#form-akses" class="btn-main btn-gold">Dapatkan PDF Gratis <i
+                                class="ri-arrow-right-line"></i></a>
                     </div>
 
                     <!-- RIGHT: Gambar frame + progress indicator -->
@@ -1766,10 +2162,12 @@
                                 <img src="assets/sketch_bentuk_dasar.png" alt="Modul 01: Kosa Gambar — 3 Bentuk Dasar">
                             </div>
                             <div class="pdf-page-view" data-page="2">
-                                <img src="assets/sketch_otak_visual.png" alt="Modul 02: Otak memproses gambar lebih cepat">
+                                <img src="assets/sketch_otak_visual.png"
+                                    alt="Modul 02: Otak memproses gambar lebih cepat">
                             </div>
                             <div class="pdf-page-view" data-page="3">
-                                <img src="assets/sketch_belajar_visual.png" alt="Modul 03: Metode belajar visual sketchnote">
+                                <img src="assets/sketch_belajar_visual.png"
+                                    alt="Modul 03: Metode belajar visual sketchnote">
                             </div>
                             <div class="pdf-page-view" data-page="4">
                                 <img src="assets/sketch_mindmap.png" alt="Modul 04: Mind Map peta pikiran">
@@ -1792,29 +2190,35 @@
     <!-- SECTION 8: BENEFIT (EDITORIAL LIST ACTIVE STATE) -->
     <section class="section-block bg-benefit">
         <div class="screen-wrapper">
-            <h2 class="section-headline text-gradient-gold">Dampak Nyata <span class="highlight">Revolusi Visual</span></h2>
-            <p style="color: var(--text-muted); font-size: 18px;">Keunggulan mendasar metode visual dibanding cara hafalan konvensional.</p>
+            <h2 class="section-headline text-gradient-gold">Dampak Nyata <span class="highlight">Revolusi Visual</span>
+            </h2>
+            <p style="color: var(--text-muted); font-size: 18px;">Keunggulan mendasar metode visual dibanding cara
+                hafalan konvensional.</p>
 
             <div class="editorial-benefit-list">
                 <div class="benefit-editorial-item" data-benefit="1">
                     <div class="benefit-idx">01</div>
                     <div class="benefit-heading">Pemahaman 10x Lebih Cepat</div>
-                    <div class="benefit-description">Konsep abstrak disederhanakan menjadi bentuk visual intuitif sehingga anak paham seketika.</div>
+                    <div class="benefit-description">Konsep abstrak disederhanakan menjadi bentuk visual intuitif
+                        sehingga anak paham seketika.</div>
                 </div>
                 <div class="benefit-editorial-item" data-benefit="2">
                     <div class="benefit-idx">02</div>
                     <div class="benefit-heading">Bebas Stress & Hafalan Buta</div>
-                    <div class="benefit-description">Menghilangkan beban stres anak akibat keharusan menghafal ratusan kalimat tanpa makna.</div>
+                    <div class="benefit-description">Menghilangkan beban stres anak akibat keharusan menghafal ratusan
+                        kalimat tanpa makna.</div>
                 </div>
                 <div class="benefit-editorial-item" data-benefit="3">
                     <div class="benefit-idx">03</div>
                     <div class="benefit-heading">Daya Ingat Jangka Panjang</div>
-                    <div class="benefit-description">Memori visual tersimpan kuat dalam sistem memori jangka panjang (long-term memory).</div>
+                    <div class="benefit-description">Memori visual tersimpan kuat dalam sistem memori jangka panjang
+                        (long-term memory).</div>
                 </div>
                 <div class="benefit-editorial-item" data-benefit="4">
                     <div class="benefit-idx">04</div>
                     <div class="benefit-heading">Format PDF HD Siap Cetak</div>
-                    <div class="benefit-description">Dapat diunduh dan dicetak dengan mudah kapan pun untuk sesi belajar mandiri di rumah.</div>
+                    <div class="benefit-description">Dapat diunduh dan dicetak dengan mudah kapan pun untuk sesi belajar
+                        mandiri di rumah.</div>
                 </div>
             </div>
         </div>
@@ -1823,7 +2227,8 @@
     <!-- SECTION 9: CARA KERJA (VISUAL TIMELINE LINE ACCENT) -->
     <section class="workflow-section bg-workflow">
         <div class="screen-wrapper">
-            <h2 class="section-headline text-gradient-gold" style="text-align: center;">3 Langkah Mudah <span class="highlight">Mulai Belajar</span></h2>
+            <h2 class="section-headline text-gradient-gold" style="text-align: center;">3 Langkah Mudah <span
+                    class="highlight">Mulai Belajar</span></h2>
 
             <div class="workflow-timeline-container">
                 <div class="workflow-line-bg"></div>
@@ -1832,17 +2237,20 @@
                     <div class="workflow-node" data-step="1">
                         <div class="step-circle-badge">01</div>
                         <h3 class="workflow-node-title">Isi Form Akses</h3>
-                        <p class="workflow-node-desc">Masukkan nama, WhatsApp, dan email aktif Anda pada formulir resmi.</p>
+                        <p class="workflow-node-desc">Masukkan nama, WhatsApp, dan email aktif Anda pada formulir resmi.
+                        </p>
                     </div>
                     <div class="workflow-node" data-step="2">
                         <div class="step-circle-badge">02</div>
                         <h3 class="workflow-node-title">Unduh E-Book PDF</h3>
-                        <p class="workflow-node-desc">Link akses langsung dikirimkan secara otomatis ke WhatsApp & Email Anda.</p>
+                        <p class="workflow-node-desc">Link akses langsung dikirimkan secara otomatis ke WhatsApp & Email
+                            Anda.</p>
                     </div>
                     <div class="workflow-node" data-step="3">
                         <div class="step-circle-badge">03</div>
                         <h3 class="workflow-node-title">Praktikkan 15 Menit</h3>
-                        <p class="workflow-node-desc">Dampingi anak belajar 15 menit sehari dan lihat lonjakan pemahamannya!</p>
+                        <p class="workflow-node-desc">Dampingi anak belajar 15 menit sehari dan lihat lonjakan
+                            pemahamannya!</p>
                     </div>
                 </div>
             </div>
@@ -1854,9 +2262,11 @@
         <div class="screen-wrapper">
             <!-- SINGLE MAIN TESTIMONIAL FOCUS -->
             <div class="testimonial-single-wrapper">
-                <i class="ri-double-quotes-l" style="font-size: 42px; color: var(--primary); display: block; margin-bottom: 20px;"></i>
+                <i class="ri-double-quotes-l"
+                    style="font-size: 42px; color: var(--primary); display: block; margin-bottom: 20px;"></i>
                 <blockquote class="testimonial-main-quote">
-                    "Anak saya biasanya baru belajar 5 menit sudah mengeluh pusing. Pakai sketsa Revolusi Visual malah dia yang minta dijelasin terus!"
+                    "Anak saya biasanya baru belajar 5 menit sudah mengeluh pusing. Pakai sketsa Revolusi Visual malah
+                    dia yang minta dijelasin terus!"
                 </blockquote>
                 <div class="testimonial-author-info">
                     Bunda Nita — <span>Orang Tua SD</span>
@@ -1865,7 +2275,8 @@
 
             <!-- FAQ SECTION -->
             <div class="faq-editorial-container" style="padding-top: 40px;">
-                <h2 class="section-headline text-gradient-gold" style="text-align: center; margin-bottom: 48px;">Pertanyaan <span class="highlight">FAQ</span></h2>
+                <h2 class="section-headline text-gradient-gold" style="text-align: center; margin-bottom: 48px;">
+                    Pertanyaan <span class="highlight">FAQ</span></h2>
 
                 <div class="faq-editorial-list">
                     <div class="faq-row">
@@ -1874,7 +2285,8 @@
                             <i class="ri-add-line faq-toggle-icon"></i>
                         </div>
                         <div class="faq-content-body">
-                            Ya, modul e-book Revolusi Visual diformat dalam PDF High Definition yang siap dicetak di kertas A4 maupun diajarkan langsung via HP/Tablet.
+                            Ya, modul e-book Revolusi Visual diformat dalam PDF High Definition yang siap dicetak di
+                            kertas A4 maupun diajarkan langsung via HP/Tablet.
                         </div>
                     </div>
 
@@ -1884,7 +2296,8 @@
                             <i class="ri-add-line faq-toggle-icon"></i>
                         </div>
                         <div class="faq-content-body">
-                            Sangat ideal untuk anak usia 6 hingga 15 tahun (SD - SMP), namun pendekatan visual ini efektif untuk siapapun yang ingin paham cepat.
+                            Sangat ideal untuk anak usia 6 hingga 15 tahun (SD - SMP), namun pendekatan visual ini
+                            efektif untuk siapapun yang ingin paham cepat.
                         </div>
                     </div>
 
@@ -1894,7 +2307,8 @@
                             <i class="ri-add-line faq-toggle-icon"></i>
                         </div>
                         <div class="faq-content-body">
-                            Cukup isi nama, nomor WhatsApp, dan email pada form di bawah. Link download akan dikirimkan otomatis secara instan.
+                            Cukup isi nama, nomor WhatsApp, dan email pada form di bawah. Link download akan dikirimkan
+                            otomatis secara instan.
                         </div>
                     </div>
                 </div>
@@ -1907,13 +2321,16 @@
         <div class="screen-wrapper">
             <div class="cta-immersive-banner">
                 <h2 class="cta-headline">Siap Mengubah Cara Belajar Anak Anda?</h2>
-                <p class="cta-subtext">Bergabunglah bersama 999+ orang tua yang telah beralih ke metode edukasi visual modern.</p>
+                <p class="cta-subtext">Bergabunglah bersama 999+ orang tua yang telah beralih ke metode edukasi visual
+                    modern.</p>
             </div>
 
-            <div class="form-glass-container glass-panel" style="padding: 48px; border-radius: 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+            <div class="form-glass-container glass-panel"
+                style="padding: 48px; border-radius: 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
                 <div style="text-align: center; margin-bottom: 32px;">
                     <span class="badge-pill"><i class="ri-gift-line"></i> Akses PDF Gratis</span>
-                    <h2 class="section-headline text-gradient-gold" style="margin-top: 10px;">Formulir Akses Instan PDF 'Revi Brain'</h2>
+                    <h2 class="section-headline text-gradient-gold" style="margin-top: 10px;">Formulir Akses Instan PDF
+                        'Revi Brain'</h2>
                 </div>
 
                 <form action="#" method="POST"
@@ -1939,7 +2356,8 @@
                 <div
                     style="display: flex; justify-content: center; gap: 24px; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 13px;">
                     <span><i class="ri-shield-check-line" style="color: var(--primary);"></i> Data 100% Terjaga</span>
-                    <span><i class="ri-thunderstorms-line" style="color: var(--primary);"></i> Akses Langsung VIA WA</span>
+                    <span><i class="ri-thunderstorms-line" style="color: var(--primary);"></i> Akses Langsung VIA
+                        WA</span>
                 </div>
             </div>
         </div>
@@ -1960,8 +2378,10 @@
                         kreatif, dan bahagia.
                     </p>
                     <div style="display: flex; gap: 12px; margin-top: 20px;">
-                        <a href="https://www.instagram.com/revolusivisual/" target="_blank" class="social-btn-item"><i class="ri-instagram-line"></i></a>
-                        <a href="https://wa.me/62811861384" target="_blank" class="social-btn-item"><i class="ri-whatsapp-line"></i></a>
+                        <a href="https://www.instagram.com/revolusivisual/" target="_blank" class="social-btn-item"><i
+                                class="ri-instagram-line"></i></a>
+                        <a href="https://wa.me/62811861384" target="_blank" class="social-btn-item"><i
+                                class="ri-whatsapp-line"></i></a>
                     </div>
                 </div>
 
@@ -2028,7 +2448,7 @@
         // ==================================================
         function initHeroOverlapTransition() {
             const heroBlock = document.querySelector('.hero-block');
-            const section2  = document.querySelector('#statement');
+            const section2 = document.querySelector('#statement');
             if (!heroBlock || !section2) return;
 
             let mm = gsap.matchMedia();
@@ -2040,18 +2460,18 @@
                 gsap.set(heroBlock, { opacity: 1, y: 0 });
 
                 const pinST = ScrollTrigger.create({
-                    trigger   : heroBlock,
-                    start     : "top top",
+                    trigger: heroBlock,
+                    start: "top top",
                     // Pin berakhir ketika Section 2 selesai melewati Hero
                     // Durasi pin = tinggi Section 2
-                    end       : () => `+=${section2.offsetHeight}`,
-                    pin       : true,
+                    end: () => `+=${section2.offsetHeight}`,
+                    pin: true,
                     // KRITIS: pinSpacing: false
                     // Jika true → GSAP dorong Section 2 jauh ke bawah (bug!)
                     // Jika false → Section 2 tetap di posisi natural tepat di bawah Hero
                     //              sehingga Section 2 naik dari bawah saat Hero di-pin
                     pinSpacing: false,
-                    scrub     : true,
+                    scrub: true,
                     anticipatePin: 1,
                     invalidateOnRefresh: true,
                     onUpdate: (self) => {
@@ -2060,11 +2480,11 @@
 
                         if (p <= 0.35) {
                             opacity = 1;
-                            y       = 0;
+                            y = 0;
                         } else {
                             const fp = (p - 0.35) / 0.65;
-                            opacity  = 1 - fp;
-                            y        = -80 * fp;
+                            opacity = 1 - fp;
+                            y = -80 * fp;
                         }
                         gsap.set(heroBlock, { opacity, y });
                     },
@@ -2130,9 +2550,9 @@
             });
 
             tl.from(".reveal-head", { opacity: 0, x: -30, duration: 0.7, ease: "power2.out" })
-              .from(".reveal-body", { opacity: 0, x: -20, duration: 0.6, ease: "power2.out" }, "-=0.4")
-              .from(".reveal-visual", { opacity: 0, x: 40, duration: 0.8, ease: "power2.out" }, "-=0.5")
-              .from(".reveal-detail", { opacity: 0, y: 20, duration: 0.6, ease: "power2.out" }, "-=0.4");
+                .from(".reveal-body", { opacity: 0, x: -20, duration: 0.6, ease: "power2.out" }, "-=0.4")
+                .from(".reveal-visual", { opacity: 0, x: 40, duration: 0.8, ease: "power2.out" }, "-=0.5")
+                .from(".reveal-detail", { opacity: 0, y: 20, duration: 0.6, ease: "power2.out" }, "-=0.4");
         }
         initMengapaMotion();
 
@@ -2165,7 +2585,29 @@
             const track = document.querySelector('.comparison-horizontal-track');
             const slides = gsap.utils.toArray('.comparison-slide');
             const progress = document.querySelector('.comparison-scroll-progress span');
+            const hintEl = document.getElementById('comparison-hint');
             if (!section || !track || slides.length === 0) return;
+
+            let hintDismissed = false;
+
+            // Trigger untuk memunculkan hint saat Case 01 pertama kali terlihat
+            if (hintEl) {
+                ScrollTrigger.create({
+                    trigger: section,
+                    start: "top 70%",
+                    onEnter: () => {
+                        if (!hintDismissed) {
+                            gsap.to(hintEl, { opacity: 1, duration: 0.6, ease: "power2.out" });
+                        }
+                    }
+                });
+            }
+
+            function dismissHint() {
+                if (hintDismissed || !hintEl) return;
+                hintDismissed = true;
+                gsap.to(hintEl, { opacity: 0, duration: 0.4, ease: "power2.out" });
+            }
 
             let mm = gsap.matchMedia();
 
@@ -2192,6 +2634,9 @@
                         onUpdate: self => {
                             if (progress) {
                                 progress.style.transform = `translateX(${self.progress * 200}%)`;
+                            }
+                            if (self.progress > 0.01) {
+                                dismissHint();
                             }
                         }
                     }
@@ -2226,7 +2671,29 @@
 
             mm.add("(max-width: 768px)", () => {
                 gsap.set(track, { clearProps: "transform" });
-                if (progress) progress.style.transform = "";
+                if (progress) progress.style.transform = "translateX(0%)";
+
+                const viewportEl = document.querySelector('.comparison-horizontal-viewport');
+                if (viewportEl) {
+                    const updateMobileProgress = () => {
+                        const maxScroll = viewportEl.scrollWidth - viewportEl.clientWidth;
+                        if (maxScroll > 0) {
+                            const scrollRatio = viewportEl.scrollLeft / maxScroll;
+                            if (progress) {
+                                progress.style.transform = `translateX(${scrollRatio * 200}%)`;
+                            }
+                        }
+                        if (viewportEl.scrollLeft > 10) {
+                            dismissHint();
+                        }
+                    };
+
+                    viewportEl.addEventListener('scroll', updateMobileProgress, { passive: true });
+
+                    return () => {
+                        viewportEl.removeEventListener('scroll', updateMobileProgress);
+                    };
+                }
             });
         }
         initComparisonHorizontalScroll();
@@ -2257,13 +2724,13 @@
         //    Teks kiri berubah dynamis sesuai halaman aktif.
         // ==================================================
         function initPdfShowcaseMotion() {
-            const section         = document.querySelector('.pdf-showcase-section');
+            const section = document.querySelector('.pdf-showcase-section');
             const stickyContainer = document.querySelector('.pdf-sticky-container');
-            const views           = gsap.utils.toArray('.pdf-page-view');
-            const steps           = gsap.utils.toArray('.pdf-progress-step');
-            const dynamicSlides   = gsap.utils.toArray('.pdf-dynamic-slide');
-            const counterEl       = document.getElementById('pdf-current-page');
-            const fillEl          = document.getElementById('pdf-progress-fill');
+            const views = gsap.utils.toArray('.pdf-page-view');
+            const steps = gsap.utils.toArray('.pdf-progress-step');
+            const dynamicSlides = gsap.utils.toArray('.pdf-dynamic-slide');
+            const counterEl = document.getElementById('pdf-current-page');
+            const fillEl = document.getElementById('pdf-progress-fill');
             if (!section || !stickyContainer || views.length === 0) return;
 
             const totalPages = views.length;
@@ -2303,12 +2770,12 @@
             // Desktop Scroll Pinning
             mm.add("(min-width: 769px)", () => {
                 ScrollTrigger.create({
-                    trigger    : section,
-                    start      : "top top",
-                    end        : () => `+=${totalPages * 100}%`,
-                    pin        : stickyContainer,
-                    pinSpacing : true,
-                    scrub      : 0.5,
+                    trigger: section,
+                    start: "top top",
+                    end: () => `+=${totalPages * 100}%`,
+                    pin: stickyContainer,
+                    pinSpacing: true,
+                    scrub: 0.5,
                     anticipatePin: 1,
                     invalidateOnRefresh: true,
                     onUpdate: (self) => {
