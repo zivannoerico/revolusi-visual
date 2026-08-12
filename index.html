@@ -240,7 +240,7 @@
         .bg-statement {
             background-color: #0E1420;
             position: relative;
-            z-index: 50;
+            z-index: 2;
         }
 
         .bg-editorial {
@@ -306,15 +306,22 @@
             position: relative;
         }
 
-        /* Hero Container */
+        /* ==================================================
+           HERO ↔ SECTION 2 OVERLAP TRANSITION SYSTEM
+           ================================================== */
+
+        /* Hero Container — di-pin oleh GSAP saat scroll */
         .hero-block {
             padding-top: 110px;
             padding-bottom: 50px;
             position: relative;
+            height: 100vh;
             min-height: 100vh;
             display: flex;
             align-items: center;
             will-change: opacity, transform;
+            z-index: 1;
+            /* overflow:hidden dihapus — tidak boleh memotong stacking context */
         }
 
         .hero-blur-wrapper {
@@ -392,6 +399,11 @@
         .pure-statement-wrapper {
             padding: 160px 0;
             text-align: center;
+            position: relative;
+            z-index: 2;
+            background-color: #0E1420;
+            /* Shadow di atas agar transisi terasa natural saat naik */
+            box-shadow: 0 -20px 60px rgba(7, 10, 15, 0.8);
         }
 
         .pure-statement-text {
@@ -1282,9 +1294,6 @@
                 top: -8px;
                 transform: translateX(-50%);
             }
-                width: 260px;
-                height: 300px;
-            }
         }
     </style>
 </head>
@@ -1307,7 +1316,7 @@
     </nav>
 
     <!-- SECTION 1: HERO -->
-    <section class="hero-block bg-hero">
+    <section class="hero-block bg-hero" id="hero-block">
         <div class="screen-wrapper">
             <div class="hero-blur-wrapper">
                 <div class="hero-layout">
@@ -1819,48 +1828,105 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
+        // Konfigurasi global ScrollTrigger
+        // Penting: body pakai overflow-x:hidden, perlu pastikan pin berjalan benar
+        ScrollTrigger.config({
+            ignoreMobileResize: true
+        });
+
         // ==================================================
-        // 1. HERO TRANSITION (Smooth Opening Scene Fade)
+        // 1. HERO ↔ SECTION 2 OVERLAP TRANSITION
+        //
+        //  Mekanisme:
+        //  - Hero di-PIN via GSAP (pinSpacing: true)
+        //  - GSAP menambah space setelah Hero agar Section 2
+        //    tetap di posisi normalnya dan scroll naik alami
+        //  - Section 2 (z-index 2, bg solid) menimpa Hero dari bawah
+        //  - progress 0 → 0.35 : Hero opacity=1, y=0
+        //  - progress 0.35 → 1  : Hero fade + naik -80px
         // ==================================================
-        function initHeroMotion() {
+        function initHeroOverlapTransition() {
             const heroBlock = document.querySelector('.hero-block');
-            if (!heroBlock) return;
+            const section2  = document.querySelector('#statement');
+            if (!heroBlock || !section2) return;
 
             let mm = gsap.matchMedia();
 
+            // ── DESKTOP / TABLET ≥ 769px ───────────────────────────
             mm.add("(min-width: 769px)", () => {
-                // Starts fading out gracefully at ~35% scroll progress
-                gsap.to(heroBlock, {
-                    opacity: 0,
-                    y: -40,
-                    ease: "none",
-                    scrollTrigger: {
-                        trigger: heroBlock,
-                        start: "35% top",
-                        end: "bottom top",
-                        scrub: 0.5,
-                        invalidateOnRefresh: true
+
+                // Initial state: hero penuh visible
+                gsap.set(heroBlock, { opacity: 1, y: 0 });
+
+                const pinST = ScrollTrigger.create({
+                    trigger   : heroBlock,
+                    start     : "top top",
+                    // Pin berakhir ketika Section 2 selesai melewati Hero
+                    // Durasi pin = tinggi Section 2
+                    end       : () => `+=${section2.offsetHeight}`,
+                    pin       : true,
+                    // KRITIS: pinSpacing: false
+                    // Jika true → GSAP dorong Section 2 jauh ke bawah (bug!)
+                    // Jika false → Section 2 tetap di posisi natural tepat di bawah Hero
+                    //              sehingga Section 2 naik dari bawah saat Hero di-pin
+                    pinSpacing: false,
+                    scrub     : true,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true,
+                    onUpdate: (self) => {
+                        const p = self.progress;
+                        let opacity, y;
+
+                        if (p <= 0.35) {
+                            opacity = 1;
+                            y       = 0;
+                        } else {
+                            const fp = (p - 0.35) / 0.65;
+                            opacity  = 1 - fp;
+                            y        = -80 * fp;
+                        }
+                        gsap.set(heroBlock, { opacity, y });
+                    },
+                    onLeave: () => {
+                        gsap.set(heroBlock, { opacity: 0, y: -80 });
+                    },
+                    onEnterBack: () => {
+                        gsap.set(heroBlock, { opacity: 1, y: 0 });
                     }
                 });
+
+                return () => {
+                    pinST.kill();
+                    gsap.set(heroBlock, { clearProps: "opacity,y" });
+                };
+            });
+
+            // ── MOBILE ≤ 768px ─────────────────────────────────
+            mm.add("(max-width: 768px)", () => {
+                gsap.set(heroBlock, { clearProps: "opacity,y" });
             });
         }
-        initHeroMotion();
+        initHeroOverlapTransition();
 
         // ==================================================
         // 2. STATEMENT REVEAL (Typography-driven transition)
+        // Catatan: JANGAN sembunyikan #statement di awal karena
+        // section ini naik dari bawah menutupi Hero.
+        // Cukup animasikan konten DI DALAM section saat sudah terlihat.
         // ==================================================
         function initStatementMotion() {
             const el = document.querySelector('.statement-reveal');
             if (!el) return;
 
+            // Animasi hanya untuk inner content (teks), bukan wrapper section
             gsap.from(el, {
                 opacity: 0,
-                y: 30,
-                duration: 1,
+                y: 20,
+                duration: 0.8,
                 ease: "power2.out",
                 scrollTrigger: {
                     trigger: el,
-                    start: "top 85%",
+                    start: "top 75%",   // lebih dalam agar muncul setelah section sudah naik
                     once: true
                 }
             });
