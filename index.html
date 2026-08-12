@@ -627,7 +627,7 @@
         }
 
         .comparison-side.text .comparison-side-label {
-            color: #F87171;
+            color: var(--text-muted); /* Diganti dari merah ke abu-abu */
         }
 
         .comparison-side.visual .comparison-side-label {
@@ -675,7 +675,7 @@
         }
 
         .comparison-side.text .comparison-stat strong {
-            color: #F87171;
+            color: var(--text-main); /* Diganti dari merah ke putih */
         }
 
         .comparison-side.visual .comparison-stat strong {
@@ -801,10 +801,10 @@
             position: relative;
             width: min(540px, 100%);
             height: clamp(380px, 58vh, 520px);
-            background: #ffffff;
+            background: transparent;
             border-radius: 20px;
             padding: 24px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            box-shadow: none;
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -822,6 +822,22 @@
             pointer-events: none;
             transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform;
+        }
+
+        /* Invert sketsa hitam menjadi putih untuk dark mode (gambar 1-3) */
+        .pdf-page-view[data-page="1"] img,
+        .pdf-page-view[data-page="2"] img,
+        .pdf-page-view[data-page="3"] img {
+            filter: invert(1) brightness(2);
+        }
+
+        /* Pertahankan background putih pada gambar 4 */
+        .pdf-page-view[data-page="4"] {
+            background: #ffffff;
+            border-radius: 20px;
+            inset: 0; /* Perluas ke tepi frame */
+            padding: 24px; /* Kembalikan padding ke dalam view */
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
         }
 
         .pdf-page-view.is-active {
@@ -901,7 +917,7 @@
         }
 
         .benefit-idx {
-            font-size: 24px;
+            font-size: 18px; /* Diperkecil dari 24px */
             font-weight: 800;
             color: var(--text-dim);
             font-family: 'Outfit', sans-serif;
@@ -913,7 +929,7 @@
         }
 
         .benefit-heading {
-            font-size: 24px;
+            font-size: 20px; /* Diperkecil dari 24px */
             font-weight: 700;
             transition: color 0.4s ease;
         }
@@ -923,7 +939,7 @@
         }
 
         .benefit-description {
-            font-size: 16px;
+            font-size: 15px; /* Diperkecil dari 16px */
             color: var(--text-muted);
         }
 
