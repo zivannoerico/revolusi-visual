@@ -189,12 +189,12 @@
         .btn-gold {
             background: linear-gradient(135deg, var(--primary) 0%, #F59E0B 100%);
             color: #05070B;
-            box-shadow: 0 4px 20px var(--primary-glow);
+            box-shadow: none;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .btn-gold:hover {
-            box-shadow: 0 8px 30px rgba(251, 191, 36, 0.6);
+            box-shadow: none;
             transform: translateY(-3px) scale(1.02);
         }
 
@@ -209,7 +209,7 @@
             background: rgba(29, 40, 61, 0.8);
             border-color: rgba(255, 255, 255, 0.15);
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: none;
         }
 
         .header-nav {
@@ -1090,8 +1090,8 @@
         .workflow-line-bg {
             position: absolute;
             top: 24px;
-            left: 50px;
-            right: 50px;
+            left: 24px;
+            right: 24px;
             height: 2px;
             background: var(--border-subtle);
             z-index: 1;
@@ -1099,10 +1099,10 @@
 
         .workflow-line-active {
             position: absolute;
-            top: 24px;
-            left: 50px;
+            top: 0;
+            left: 0;
             width: 0%;
-            height: 2px;
+            height: 100%;
             background: var(--primary);
             z-index: 2;
             transition: width 0.1s linear;
@@ -1603,6 +1603,7 @@
 
             .comparison-slide {
                 scroll-snap-align: center;
+                scroll-snap-stop: always;
                 width: 100vw;
                 min-width: 100vw;
                 max-width: 100vw;
@@ -2238,8 +2239,9 @@
                     class="highlight">Mulai Belajar</span></h2>
 
             <div class="workflow-timeline-container">
-                <div class="workflow-line-bg"></div>
-                <div class="workflow-line-active"></div>
+                <div class="workflow-line-bg">
+                    <div class="workflow-line-active"></div>
+                </div>
                 <div class="workflow-grid">
                     <div class="workflow-node" data-step="1">
                         <div class="step-circle-badge">01</div>
@@ -2627,14 +2629,15 @@
                     scrollTrigger: {
                         trigger: section,
                         start: 'top top',
-                        end: () => `+=${getDistance()}`,
+                        end: () => `+=${window.innerHeight * 3.5}`,
                         pin: true,
                         scrub: 0.8,
                         snap: {
                             snapTo: 1 / (slides.length - 1),
-                            duration: { min: 0.2, max: 0.4 },
-                            delay: 0.05,
-                            ease: 'power1.inOut'
+                            duration: { min: 0.3, max: 0.8 },
+                            delay: 0.15,
+                            ease: 'power1.inOut',
+                            directional: true
                         },
                         invalidateOnRefresh: true,
                         anticipatePin: 1,
@@ -2853,8 +2856,11 @@
                     onUpdate: self => {
                         const p = self.progress;
                         nodes.forEach((node, i) => {
-                            const threshold = i / (nodes.length - 1);
-                            if (p >= threshold - 0.1) {
+                            let threshold = 0;
+                            if (i === 1) threshold = 0.33;
+                            if (i === 2) threshold = 0.68;
+
+                            if (p >= threshold) {
                                 node.classList.add('is-active');
                             } else {
                                 node.classList.remove('is-active');
