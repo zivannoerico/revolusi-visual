@@ -11,33 +11,65 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..900&family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..900&family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&display=swap"
+        rel="stylesheet">
 
     <!-- Remix Icons -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
+    <!-- Lenis Smooth Scroll CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.20/dist/lenis.css">
+
     <style>
+        /* Recommended Lenis Behavior */
+        html.lenis,
+        html.lenis body {
+            height: auto;
+        }
+
+        html.lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+
+        html.lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        html.lenis.lenis-stopped {
+            overflow: hidden;
+        }
+
+        html.lenis.lenis-smooth iframe {
+            pointer-events: none;
+        }
         :root {
-            --primary: #FBBF24;
-            --primary-hover: #F59E0B;
-            --primary-glow: rgba(251, 191, 36, 0.4);
+            --primary: #F59E0B;
+            --primary-hover: #D97706;
+            --primary-glow: rgba(245, 158, 11, 0.25);
+            --primary-light: rgba(245, 158, 11, 0.12);
 
-            --bg-void: #070A0F;
-            --bg-surface: rgba(14, 20, 32, 0.4);
+            --bg-void: #FAFAF9;
+            --bg-surface: rgba(255, 255, 255, 0.82);
             /* Glassmorphism surface */
-            --bg-card: rgba(18, 24, 36, 0.6);
-            --bg-card-hover: rgba(23, 32, 48, 0.8);
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --bg-card-hover: rgba(255, 255, 255, 0.98);
 
-            --border-subtle: rgba(255, 255, 255, 0.08);
-            --border-highlight: rgba(251, 191, 36, 0.3);
+            --border-subtle: rgba(15, 23, 42, 0.08);
+            --border-glass: rgba(255, 255, 255, 0.9);
+            --border-highlight: rgba(245, 158, 11, 0.35);
 
-            --text-main: #F8FAFC;
-            --text-muted: #94A3B8;
-            --text-dim: #475569;
+            --text-main: #0F172A;
+            --text-muted: #475569;
+            --text-dim: #94A3B8;
 
             --radius-lg: 24px;
             --radius-md: 16px;
             --radius-pill: 99px;
+
+            --shadow-subtle: 0 10px 30px -5px rgba(15, 23, 42, 0.04), 0 4px 6px -2px rgba(15, 23, 42, 0.02);
+            --shadow-glass: 0 20px 40px -15px rgba(15, 23, 42, 0.07), 0 0 1px 1px rgba(255, 255, 255, 0.9);
+            --shadow-float: 0 25px 50px -12px rgba(15, 23, 42, 0.09);
 
             --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -54,24 +86,28 @@
         *[id] {
             scroll-margin-top: 100px;
         }
-        
+
         #kosa-gambar {
             scroll-margin-top: 140px;
         }
 
         html {
-            overflow-x: hidden;
+            overflow-x: clip;
             width: 100%;
             background-color: var(--bg-void);
             color: var(--text-main);
         }
 
         body {
-            /* Premium Radial Gradient Background */
-            background: radial-gradient(circle at 50% 0%, #151a28 0%, var(--bg-void) 40%, var(--bg-void) 100%);
+            /* Premium Subtle Radial Mesh Gradient Background */
+            background:
+                radial-gradient(circle at 15% 10%, rgba(251, 191, 36, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 85% 25%, rgba(56, 189, 248, 0.05) 0%, transparent 45%),
+                radial-gradient(circle at 50% 60%, rgba(245, 158, 11, 0.04) 0%, transparent 50%),
+                linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 50%, #F1F5F9 100%);
             background-attachment: fixed;
             color: var(--text-main);
-            overflow-x: hidden;
+            overflow-x: clip;
             -webkit-font-smoothing: antialiased;
             line-height: 1.6;
         }
@@ -79,14 +115,14 @@
         /* Glassmorphism Utilities */
         .glass-panel {
             background: var(--bg-surface);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--border-subtle);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            box-shadow: var(--shadow-glass);
         }
 
         .text-gradient-gold {
-            background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 100%);
+            background: linear-gradient(135deg, #B45309 0%, #D97706 50%, #F59E0B 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -133,7 +169,7 @@
         }
 
         .highlight {
-            color: var(--primary);
+            color: var(--primary-hover);
         }
 
         /* Buttons & Badges */
@@ -143,13 +179,15 @@
             gap: 8px;
             padding: 8px 18px;
             border-radius: var(--radius-pill);
-            background: #141C2B;
-            border: 1px solid #28354A;
-            color: var(--primary);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            box-shadow: 0 2px 10px rgba(245, 158, 11, 0.08);
+            color: #B45309;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 0.5px;
             margin-bottom: 24px;
+            backdrop-filter: blur(8px);
         }
 
         .badge-pulse {
@@ -157,6 +195,7 @@
             height: 6px;
             border-radius: 50%;
             background-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
         }
 
         .btn-action-group {
@@ -187,29 +226,33 @@
         }
 
         .btn-gold {
-            background: linear-gradient(135deg, var(--primary) 0%, #F59E0B 100%);
-            color: #05070B;
-            box-shadow: none;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            color: #FFFFFF;
+            box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.4), 0 4px 6px -2px rgba(245, 158, 11, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
         }
 
         .btn-gold:hover {
-            box-shadow: none;
+            box-shadow: 0 15px 30px -5px rgba(245, 158, 11, 0.5), 0 6px 10px -2px rgba(245, 158, 11, 0.3);
             transform: translateY(-3px) scale(1.02);
+            color: #FFFFFF;
         }
 
         .btn-solid-dark {
-            background: rgba(20, 28, 43, 0.6);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
-            border: 1px solid var(--border-subtle);
+            border: 1px solid rgba(15, 23, 42, 0.12);
             color: var(--text-main);
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
         }
 
         .btn-solid-dark:hover {
-            background: rgba(29, 40, 61, 0.8);
-            border-color: rgba(255, 255, 255, 0.15);
+            background: #FFFFFF;
+            border-color: rgba(245, 158, 11, 0.4);
             transform: translateY(-3px);
-            box-shadow: none;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+            color: #B45309;
         }
 
         .header-nav {
@@ -222,15 +265,15 @@
             z-index: 1000;
             padding: 12px 32px;
             /* Disamakan dengan padding screen-wrapper */
-            background: rgba(14, 20, 32, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--border-subtle);
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.95);
             border-radius: var(--radius-pill);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 35px -10px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04);
         }
 
         .brand-logo {
@@ -246,8 +289,12 @@
         .brand-logo img {
             width: 36px;
             height: 36px;
-            border-radius: 8px;
-            object-fit: cover;
+            border-radius: 0;
+            object-fit: contain;
+            box-shadow: none;
+            border: none;
+            background: transparent;
+            filter: brightness(0);
         }
 
         .nav-items {
@@ -261,16 +308,16 @@
             color: var(--text-muted);
             text-decoration: none;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             transition: var(--transition-smooth);
         }
 
         .nav-item-link:hover {
-            color: var(--primary);
+            color: var(--primary-hover);
         }
 
         /* ==================================================
-           ALTERNATING SOLID BACKGROUND SYSTEM (REMOVED - TRANSPARENT)
+           ALTERNATING SOLID BACKGROUND SYSTEM (TRANSPARENT LIGHT)
            ================================================== */
         .bg-hero,
         .bg-statement,
@@ -297,7 +344,7 @@
         }
 
         .bg-footer {
-            background-color: #05070B;
+            background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
             position: relative;
             border-top: 1px solid var(--border-subtle);
         }
@@ -317,7 +364,6 @@
             align-items: center;
             will-change: opacity, transform;
             z-index: 1;
-            /* overflow:hidden dihapus — tidak boleh memotong stacking context */
         }
 
         .hero-blur-wrapper {
@@ -338,6 +384,7 @@
             font-weight: 800;
             line-height: 1.18;
             margin-bottom: 18px;
+            color: var(--text-main);
         }
 
         .hero-subtext {
@@ -385,8 +432,7 @@
             object-fit: contain;
             position: relative;
             z-index: 2;
-            mix-blend-mode: screen;
-            filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.8));
+            filter: drop-shadow(0 15px 35px rgba(15, 23, 42, 0.12));
         }
 
         /* ==================================================
@@ -407,6 +453,7 @@
             margin: 0 auto;
             line-height: 1.4;
             letter-spacing: -0.01em;
+            color: var(--text-main);
         }
 
         /* ==================================================
@@ -416,7 +463,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
-            align-items: center;
+            align-items: start;
         }
 
         .editorial-content-left {
@@ -435,47 +482,114 @@
         .sensory-chip {
             padding: 10px 20px;
             border-radius: var(--radius-pill);
-            background: #111726;
-            border: 1px solid #232F45;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
             font-size: 14px;
             font-weight: 700;
-            color: var(--primary);
-            display: flex;
+            color: #B45309;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
-        }
-
-        .editorial-img-wrap {
-            text-align: center;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
         }
 
-        .editorial-img-wrap img {
+        .sensory-chip:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 6px 18px rgba(245, 158, 11, 0.18);
+            border-color: rgba(245, 158, 11, 0.4);
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .sensory-chip.is-active {
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            border-color: transparent;
+            color: #FFFFFF;
+            box-shadow: 0 8px 22px rgba(245, 158, 11, 0.38), 0 0 0 3px rgba(245, 158, 11, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Sticky Existing Right Visual Container */
+        .editorial-img-wrap {
+            text-align: center;
+            position: -webkit-sticky;
+            position: sticky;
+            top: 120px;
+            align-self: start;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 440px;
+            z-index: 5;
+        }
+
+        /* Ambient Soft Glow Behind Illustration for Gentle Separation */
+        .editorial-img-wrap::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85%;
+            height: 85%;
+            max-width: 440px;
+            max-height: 440px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, rgba(251, 191, 36, 0.04) 40%, rgba(255, 255, 255, 0) 70%);
+            pointer-events: none;
+            z-index: 1;
+            filter: blur(28px);
+        }
+
+        .sensory-display-img {
             max-width: 100%;
             height: auto;
-            max-height: 480px;
-            border-radius: 20px;
-            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.7));
+            max-height: 460px;
+            width: 100%;
+            max-width: 480px;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            opacity: 1;
+            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
+            transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sensory-display-img.png-sketch-filter {
+            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
+            opacity: 1;
+        }
+
+        .sensory-img-transitioning {
+            opacity: 0 !important;
+            transform: scale(0.92) !important;
         }
 
         /* Kosa Gambar Interactive Tabs */
         .kosa-tab-btn {
             padding: 10px 20px;
             border-radius: var(--radius-pill);
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid var(--border-subtle);
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(15, 23, 42, 0.08);
             color: var(--text-muted);
             font-size: 14px;
             font-weight: 700;
             cursor: pointer;
             transition: var(--transition-smooth);
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
         }
 
         .kosa-tab-btn.active,
         .kosa-tab-btn:hover {
-            background: var(--primary);
-            color: #05070B;
-            border-color: var(--primary);
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            color: #FFFFFF;
+            border-color: transparent;
+            box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35);
         }
 
         /* ==================================================
@@ -493,11 +607,12 @@
             font-size: clamp(80px, 12vw, 120px);
             font-weight: 900;
             font-family: 'Bricolage Grotesque', sans-serif;
-            color: var(--primary);
+            color: var(--primary-hover);
             line-height: 0.95;
             letter-spacing: -0.05em;
             margin-bottom: 24px;
             will-change: transform;
+            text-shadow: 0 10px 30px rgba(245, 158, 11, 0.15);
         }
 
         .giant-subtext {
@@ -516,7 +631,7 @@
             transform: translate(-50%, -50%);
             width: 420px;
             height: auto;
-            opacity: 0.06;
+            opacity: 0.04;
             pointer-events: none;
         }
 
@@ -561,8 +676,9 @@
         .comparison-scroll-progress {
             margin-top: 8px;
             width: 180px;
-            height: 3px;
-            background: #28354A;
+            height: 4px;
+            background: rgba(15, 23, 42, 0.08);
+            border-radius: 4px;
             overflow: hidden;
         }
 
@@ -570,7 +686,8 @@
             display: block;
             width: 33.333%;
             height: 100%;
-            background: var(--primary);
+            background: linear-gradient(90deg, #F59E0B, #D97706);
+            border-radius: 4px;
             will-change: transform;
             transition: transform 0.1s ease-out;
         }
@@ -579,9 +696,9 @@
             margin-top: 6px;
             font-family: 'DM Sans', sans-serif;
             font-size: 11px;
-            font-weight: 500;
+            font-weight: 700;
             letter-spacing: 0.08em;
-            color: var(--text-muted);
+            color: var(--text-dim);
             opacity: 0;
             pointer-events: none;
             text-transform: uppercase;
@@ -602,7 +719,8 @@
             flex-wrap: nowrap;
             width: max-content;
             will-change: transform;
-            align-items: stretch; /* Memastikan seluruh slide 100% sama tinggi */
+            align-items: stretch;
+            /* Memastikan seluruh slide 100% sama tinggi */
         }
 
         .comparison-slide {
@@ -624,10 +742,14 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             align-items: stretch;
-            min-height: 430px; /* Fixed canvas baseline height */
-            border-top: 1px solid var(--border-subtle);
-            border-bottom: 1px solid var(--border-subtle);
-            padding: 24px 0;
+            min-height: 430px;
+            /* Fixed canvas baseline height */
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 20px 45px -15px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.03);
+            border-radius: var(--radius-lg);
+            padding: 36px 40px;
             position: relative;
         }
 
@@ -656,7 +778,7 @@
         }
 
         .comparison-case-label {
-            color: var(--primary);
+            color: #B45309;
             font-family: 'DM Sans', sans-serif;
             font-size: 14px;
             font-weight: 700;
@@ -669,7 +791,7 @@
             display: inline-block;
             font-family: 'DM Sans', sans-serif;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 0.12em;
             text-transform: uppercase;
             margin-bottom: 6px;
@@ -680,11 +802,11 @@
         }
 
         .comparison-side.visual .comparison-side-label {
-            color: var(--primary);
+            color: var(--primary-hover);
         }
 
         .comparison-copy {
-            color: #F8FAFC;
+            color: var(--text-main);
             font-family: 'DM Sans', sans-serif;
             font-size: 18px;
             line-height: 1.65;
@@ -692,22 +814,25 @@
         }
 
         .comparison-image-frame {
-            height: 240px; /* Fixed height frame agar posisi vertikal gambar 100% konsisten */
+            height: 240px;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 16px;
-            overflow: hidden;
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
+            overflow: visible;
             box-sizing: border-box;
+            border: none;
+            box-shadow: none;
         }
 
         .comparison-image-frame img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
+            filter: drop-shadow(0 10px 25px rgba(15, 23, 42, 0.06));
         }
 
         .comparison-stat {
@@ -721,7 +846,7 @@
             font-family: 'Bricolage Grotesque', sans-serif;
             font-size: 68px;
             line-height: 0.95;
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: -0.04em;
         }
 
@@ -730,15 +855,15 @@
         }
 
         .comparison-side.visual .comparison-stat strong {
-            color: var(--primary);
+            color: var(--primary-hover);
         }
 
         .comparison-stat span {
             color: var(--text-muted);
             font-family: 'DM Sans', sans-serif;
-            font-size: 13px;
-            font-weight: 500;
-            opacity: 0.85;
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0.9;
             padding-bottom: 4px;
         }
 
@@ -751,13 +876,14 @@
             height: 54px;
             display: grid;
             place-items: center;
-            border: 1px solid #28354A;
-            background: #070A0F;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            background: #FFFFFF;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
             border-radius: 50%;
-            color: var(--primary);
+            color: #B45309;
             font-family: 'Bricolage Grotesque', sans-serif;
-            font-weight: 700;
-            font-size: 13px;
+            font-weight: 800;
+            font-size: 14px;
             z-index: 3;
         }
 
@@ -789,6 +915,7 @@
         .manifesto-brand-side img {
             width: 140px;
             height: auto;
+            filter: brightness(0) drop-shadow(0 4px 12px rgba(15, 23, 42, 0.08));
         }
 
         .manifesto-content-side {
@@ -800,7 +927,7 @@
         .scribble-text {
             position: relative;
             display: inline-block;
-            color: var(--primary);
+            color: var(--primary-hover);
         }
 
         .scribble-text svg {
@@ -873,10 +1000,11 @@
         .pdf-page-view {
             position: absolute;
             inset: 0;
-            background: #ffffff;
+            background: #FFFFFF;
             border-radius: 20px;
             padding: 24px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -928,13 +1056,12 @@
         }
 
         .pdf-slide-label {
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 800;
-            letter-spacing: 2.5px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--primary);
+            color: #B45309;
             margin-bottom: 10px;
-            opacity: 0.8;
         }
 
         .pdf-slide-title {
@@ -968,16 +1095,16 @@
 
         .pdf-page-counter-bar {
             width: 80px;
-            height: 2px;
-            background: var(--border-subtle);
-            border-radius: 2px;
+            height: 3px;
+            background: rgba(15, 23, 42, 0.08);
+            border-radius: 3px;
             overflow: hidden;
         }
 
         .pdf-page-counter-fill {
             height: 100%;
-            background: var(--primary);
-            border-radius: 2px;
+            background: linear-gradient(90deg, #F59E0B, #D97706);
+            border-radius: 3px;
             transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -1002,7 +1129,7 @@
         }
 
         .pdf-progress-step.is-active {
-            color: var(--primary);
+            color: #B45309;
             transform: scale(1.25);
         }
 
@@ -1012,10 +1139,11 @@
             left: -12px;
             top: 50%;
             transform: translateY(-50%);
-            width: 5px;
-            height: 5px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             background-color: var(--primary);
+            box-shadow: 0 0 0 2px var(--primary-light);
         }
 
         /* ==================================================
@@ -1037,16 +1165,16 @@
             border-bottom: 1px solid var(--border-subtle);
             transition: background 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
             position: relative;
+            border-radius: 12px;
         }
 
         .benefit-editorial-item.is-active {
-            background: rgba(251, 191, 36, 0.04);
+            background: rgba(245, 158, 11, 0.05);
             border-bottom-color: var(--primary);
         }
 
         .benefit-idx {
             font-size: 18px;
-            /* Diperkecil dari 24px */
             font-weight: 800;
             color: var(--text-dim);
             font-family: 'Bricolage Grotesque', sans-serif;
@@ -1054,23 +1182,22 @@
         }
 
         .benefit-editorial-item.is-active .benefit-idx {
-            color: var(--primary);
+            color: #B45309;
         }
 
         .benefit-heading {
             font-size: 20px;
-            /* Diperkecil dari 24px */
             font-weight: 700;
             transition: color 0.4s ease;
+            color: var(--text-main);
         }
 
         .benefit-editorial-item.is-active .benefit-heading {
-            color: var(--text-main);
+            color: #B45309;
         }
 
         .benefit-description {
             font-size: 15px;
-            /* Diperkecil dari 16px */
             color: var(--text-muted);
         }
 
@@ -1092,8 +1219,9 @@
             top: 24px;
             left: 24px;
             right: 24px;
-            height: 2px;
-            background: var(--border-subtle);
+            height: 3px;
+            background: rgba(15, 23, 42, 0.08);
+            border-radius: 3px;
             z-index: 1;
         }
 
@@ -1103,7 +1231,8 @@
             left: 0;
             width: 0%;
             height: 100%;
-            background: var(--primary);
+            background: linear-gradient(90deg, #F59E0B, #D97706);
+            border-radius: 3px;
             z-index: 2;
             transition: width 0.1s linear;
             will-change: width;
@@ -1122,28 +1251,39 @@
             flex-direction: column;
             align-items: flex-start;
             position: relative;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .workflow-node:hover {
+            transform: translateY(-4px);
         }
 
         .step-circle-badge {
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            background: #141C2B;
-            border: 2px solid var(--border-subtle);
+            background: #FFFFFF;
+            border: 2px solid rgba(15, 23, 42, 0.12);
             color: var(--text-muted);
-            font-weight: 900;
+            font-weight: 800;
             font-size: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 24px;
             transition: all 0.4s ease;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
         }
 
         .workflow-node.is-active .step-circle-badge {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: #05070B;
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            border-color: transparent;
+            color: #FFFFFF;
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.35);
         }
 
         .workflow-node-title {
@@ -1151,10 +1291,11 @@
             font-weight: 700;
             margin-bottom: 10px;
             transition: color 0.4s ease;
+            color: var(--text-main);
         }
 
         .workflow-node.is-active .workflow-node-title {
-            color: var(--primary);
+            color: #B45309;
         }
 
         .workflow-node-desc {
@@ -1191,8 +1332,8 @@
         }
 
         .testimonial-author-info span {
-            color: var(--primary);
-            font-weight: 500;
+            color: #B45309;
+            font-weight: 600;
         }
 
         /* ==================================================
@@ -1222,11 +1363,17 @@
             justify-content: space-between;
             font-size: 20px;
             font-weight: 700;
+            color: var(--text-main);
+            transition: color 0.3s ease;
+        }
+
+        .faq-row:hover .faq-header-bar {
+            color: #B45309;
         }
 
         .faq-toggle-icon {
             font-size: 24px;
-            color: var(--primary);
+            color: var(--primary-hover);
             transition: transform 0.3s ease;
         }
 
@@ -1263,6 +1410,7 @@
             font-weight: 900;
             line-height: 1.2;
             margin-bottom: 20px;
+            color: var(--text-main);
         }
 
         .cta-subtext {
@@ -1276,35 +1424,40 @@
         .form-glass-container {
             max-width: 720px;
             margin: 40px auto 0;
-            background: transparent;
-            border: none;
-            border-radius: 0;
-            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            border-radius: 32px;
+            padding: 48px;
+            box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.1), 0 0 1px 1px rgba(255, 255, 255, 0.9);
         }
 
         .form-input-field {
             width: 100%;
             padding: 18px 24px;
-            background: #141C2B;
-            border: 1px solid #28354A;
+            background: #FFFFFF;
+            border: 1px solid rgba(15, 23, 42, 0.12);
             border-radius: 14px;
             font-size: 16px;
             color: var(--text-main);
             outline: none;
             transition: var(--transition-smooth);
             margin-top: 8px;
+            box-shadow: inset 0 2px 4px rgba(15, 23, 42, 0.02);
         }
 
         .form-input-field:focus {
             border-color: var(--primary);
-            background: #192336;
+            background: #FFFFFF;
+            box-shadow: 0 0 0 4px var(--primary-light), inset 0 2px 4px rgba(15, 23, 42, 0.02);
         }
 
         /* ==================================================
            SECTION 13: FOOTER
            ================================================== */
         .footer-block {
-            background: #04060A;
+            background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 100%);
             border-top: 1px solid var(--border-subtle);
             padding: 80px 0 40px;
             margin-top: 120px;
@@ -1321,8 +1474,8 @@
             width: 42px;
             height: 42px;
             border-radius: 12px;
-            background: #141C2B;
-            border: 1px solid #28354A;
+            background: #FFFFFF;
+            border: 1px solid rgba(15, 23, 42, 0.1);
             color: var(--text-main);
             display: inline-flex;
             align-items: center;
@@ -1330,11 +1483,15 @@
             font-size: 18px;
             text-decoration: none;
             transition: var(--transition-smooth);
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
         }
 
         .social-btn-item:hover {
-            background: var(--primary);
-            color: #000;
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            color: #FFFFFF;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(245, 158, 11, 0.3);
         }
 
         /* Responsive Breakpoints */
@@ -1575,14 +1732,14 @@
             .comparison-horizontal-header p {
                 font-size: 15px !important;
                 line-height: 1.6 !important;
-                color: #CBD5E1 !important;
+                color: var(--text-muted) !important;
                 margin-top: 8px !important;
             }
 
             .comparison-scroll-hint {
                 font-size: 11px !important;
                 margin-top: 8px !important;
-                color: #94A3B8 !important;
+                color: var(--text-dim) !important;
             }
 
             .comparison-horizontal-viewport {
@@ -1620,7 +1777,7 @@
                 flex-direction: column;
                 justify-content: space-between;
                 gap: 20px;
-                padding: 16px 0;
+                padding: 24px 20px !important;
                 grid-template-columns: 1fr;
             }
 
@@ -1650,13 +1807,13 @@
             }
 
             .comparison-side.text .comparison-side-label {
-                color: #CBD5E1 !important;
+                color: var(--text-muted) !important;
             }
 
             .comparison-copy {
                 font-size: 16px !important;
                 line-height: 1.6 !important;
-                color: #F1F5F9 !important;
+                color: var(--text-main) !important;
             }
 
             .comparison-image-frame {
@@ -1670,7 +1827,7 @@
 
             .comparison-stat span {
                 font-size: 14px !important;
-                color: #94A3B8 !important;
+                color: var(--text-muted) !important;
             }
 
             .comparison-side.visual {
@@ -1855,7 +2012,7 @@
         <div class="screen-wrapper">
             <div class="statement-reveal">
                 <p
-                    style="color: rgba(251, 191, 36, 0.7); font-weight: 700; font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 24px;">
+                    style="color: #B45309; font-weight: 800; font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 24px;">
                     PERNYATAAN UTAMA
                 </p>
                 <h2 class="pure-statement-text text-gradient-gold">
@@ -1878,19 +2035,41 @@
                         Ketika dipaksa membaca hafalan teks polos, otak mengalami kelelahan kognitif. Manusia merespons
                         lingkungan secara alami melalui integrasi panca indra.
                     </p>
-                    <div class="sensory-badge-list reveal-detail">
-                        <span class="sensory-chip"><i class="ri-eye-line"></i> MATA (VISUAL)</span>
-                        <span class="sensory-chip"><i class="ri-ear-line"></i> TELINGA</span>
-                        <span class="sensory-chip"><i class="ri-hand-heart-line"></i> RABA</span>
-                        <span class="sensory-chip"><i class="ri-emotion-happy-line"></i> MULUT</span>
-                        <span class="sensory-chip"><i class="ri-mental-health-line"></i> HIDUNG</span>
+                    
+                    <!-- Instructional Micro-copy -->
+                    <p style="color: #B45309; font-size: 14px; font-weight: 600; margin-top: 4px; margin-bottom: 2px;">
+                        Eksplorasi Interaktif: Klik salah satu indra di bawah
+                    </p>
+
+                    <div class="sensory-badge-list reveal-detail" id="sensory-list" role="tablist"
+                        aria-label="Panca Indra">
+                        <button type="button" class="sensory-chip" data-sense="mata"
+                            onclick="selectSensory('mata', this)" role="tab" aria-selected="false">
+                            <i class="ri-eye-line"></i> MATA
+                        </button>
+                        <button type="button" class="sensory-chip" data-sense="telinga"
+                            onclick="selectSensory('telinga', this)" role="tab" aria-selected="false">
+                            <i class="ri-headphone-line"></i> TELINGA
+                        </button>
+                        <button type="button" class="sensory-chip" data-sense="raba"
+                            onclick="selectSensory('raba', this)" role="tab" aria-selected="false">
+                            <i class="ri-hand-heart-line"></i> RABA
+                        </button>
+                        <button type="button" class="sensory-chip" data-sense="mulut"
+                            onclick="selectSensory('mulut', this)" role="tab" aria-selected="false">
+                            <i class="ri-emotion-happy-line"></i> MULUT
+                        </button>
+                        <button type="button" class="sensory-chip" data-sense="hidung"
+                            onclick="selectSensory('hidung', this)" role="tab" aria-selected="false">
+                            <i class="ri-windy-line"></i> HIDUNG
+                        </button>
                     </div>
 
                     <!-- FORMULA KOSA GAMBAR -->
                     <div class="kosa-gambar-block reveal-detail" id="kosa-gambar"
                         style="margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border-subtle);">
                         <span
-                            style="color: rgba(251, 191, 36, 0.7); font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;">FORMULA
+                            style="color: #B45309; font-weight: 800; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;">FORMULA
                             KOSA GAMBAR</span>
                         <h3 style="font-size: 24px; font-weight: 800; line-height: 1.2; margin-top: 8px;">
                             "Tuh Kan, <span class="highlight">Semua Orang Bisa Menggambar!</span>"
@@ -1908,10 +2087,11 @@
                         </div>
                         <div id="tab-bentuk-dasar" class="kosa-tab-content" style="margin-top: 14px;">
                             <div
-                                style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 14px 18px;">
-                                <h4 style="font-size: 15px; color: var(--primary); margin-bottom: 4px;">Bulat &#9675;,
+                                style="background: rgba(255,255,255,0.85); border: 1px solid rgba(15,23,42,0.08); border-radius: 14px; padding: 16px 20px; box-shadow: 0 4px 15px rgba(15,23,42,0.03);">
+                                <h4 style="font-size: 15px; color: #B45309; margin-bottom: 4px; font-weight: 700;">Bulat
+                                    &#9675;,
                                     Kotak &#9633;, Segitiga &#9651;</h4>
-                                <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Dari 3 bentuk
+                                <p style="color: var(--text-muted); font-size: 14px; line-height: 1.55;">Dari 3 bentuk
                                     sederhana ini, Anda bisa membentuk objek apa saja: Jam Dinding, Buku, Pizza, Gelas,
                                     hingga HP.</p>
                             </div>
@@ -1919,29 +2099,32 @@
                         <div id="tab-rekonstruksi-huruf" class="kosa-tab-content"
                             style="display: none; margin-top: 14px;">
                             <div
-                                style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 14px 18px;">
-                                <h4 style="font-size: 15px; color: var(--primary); margin-bottom: 4px;">Garis + Lengkung
+                                style="background: rgba(255,255,255,0.85); border: 1px solid rgba(15,23,42,0.08); border-radius: 14px; padding: 16px 20px; box-shadow: 0 4px 15px rgba(15,23,42,0.03);">
+                                <h4 style="font-size: 15px; color: #B45309; margin-bottom: 4px; font-weight: 700;">Garis
+                                    + Lengkung
                                     + Titik</h4>
-                                <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Huruf
+                                <p style="color: var(--text-muted); font-size: 14px; line-height: 1.55;">Huruf
                                     <strong>A</strong> = 2 Garis Panjang + 1 Garis Pendek. Huruf <strong>O</strong> = 1
-                                    Lengkungan Bulat.</p>
+                                    Lengkungan Bulat.
+                                </p>
                             </div>
                         </div>
                         <div id="tab-kasta-gambar" class="kosa-tab-content" style="display: none; margin-top: 14px;">
                             <div
-                                style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 14px 18px;">
-                                <h4 style="font-size: 15px; color: var(--primary); margin-bottom: 4px;">Doodle &rarr;
+                                style="background: rgba(255,255,255,0.85); border: 1px solid rgba(15,23,42,0.08); border-radius: 14px; padding: 16px 20px; box-shadow: 0 4px 15px rgba(15,23,42,0.03);">
+                                <h4 style="font-size: 15px; color: #B45309; margin-bottom: 4px; font-weight: 700;">
+                                    Doodle &rarr;
                                     Sketch &rarr; Art</h4>
-                                <p style="color: var(--text-muted); font-size: 13px; line-height: 1.5;">Dunia edukasi
+                                <p style="color: var(--text-muted); font-size: 14px; line-height: 1.55;">Dunia edukasi
                                     tidak butuh lukisan mahakarya (Art). Cukup tingkat <strong>Sketch (Membuat
                                         Bentuk)</strong>.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="editorial-img-wrap reveal-visual" style="text-align: center;">
-                    <img src="assets/panca_indra_sketch.png" alt="Panca Indra Sketsa"
-                        style="max-height: 480px; width: 100%; max-width: 520px; object-fit: contain; filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));">
+                <div class="editorial-img-wrap" id="sensory-visual-container">
+                    <img id="sensory-img-display" class="sensory-display-img png-sketch-filter"
+                        src="assets/panca_indra_sketch.png" alt="Panca Indra Sketsa">
                 </div>
             </div>
         </div>
@@ -2063,14 +2246,14 @@
                 <div class="manifesto-brand-side">
                     <img src="assets/revolusivisual.png" alt="Logo Manifesto">
                     <span
-                        style="color: rgba(251, 191, 36, 0.7); font-weight: 800; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;">GERAKAN
+                        style="color: #B45309; font-weight: 800; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;">GERAKAN
                         EDUKASI NASIONAL</span>
                 </div>
                 <div class="manifesto-content-side">
                     <h2 class="section-headline">
                         Membuat Metode <span class="scribble-text">Penyampaian Informasi<svg viewBox="0 0 100 10"
                                 preserveAspectRatio="none">
-                                <path d="M 2 4 Q 48 6, 95 3 T 97 5" stroke="#FBBF24" stroke-width="4" fill="none"
+                                <path d="M 2 4 Q 48 6, 95 3 T 97 5" stroke="#F59E0B" stroke-width="4" fill="none"
                                     stroke-linecap="round" />
                             </svg></span> Agar Mudah Dipahami Menggunakan Gambar.
                     </h2>
@@ -2334,8 +2517,7 @@
                     modern.</p>
             </div>
 
-            <div class="form-glass-container glass-panel" id="form-akses"
-                style="padding: 48px; border-radius: 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+            <div class="form-glass-container glass-panel" id="form-akses">
                 <div style="text-align: center; margin-bottom: 32px;">
                     <span class="badge-pill"><i class="ri-gift-line"></i> Akses PDF Gratis</span>
                     <h2 class="section-headline text-gradient-gold" style="margin-top: 10px;">Formulir Akses Instan PDF
@@ -2345,15 +2527,16 @@
                 <form action="#" method="POST"
                     onsubmit="event.preventDefault(); alert('Terima kasih! Link download PDF Revi Brain telah dikirimkan ke WhatsApp & Email Anda.');">
                     <div style="margin-bottom: 20px;">
-                        <label style="font-size: 14px; font-weight: 600;">Nama Lengkap</label>
+                        <label style="font-size: 14px; font-weight: 600; color: var(--text-main);">Nama Lengkap</label>
                         <input type="text" class="form-input-field" placeholder="Andrian Dito" required>
                     </div>
                     <div style="margin-bottom: 20px;">
-                        <label style="font-size: 14px; font-weight: 600;">Nomor WhatsApp Aktif</label>
+                        <label style="font-size: 14px; font-weight: 600; color: var(--text-main);">Nomor WhatsApp
+                            Aktif</label>
                         <input type="tel" class="form-input-field" placeholder="08123456789" required>
                     </div>
                     <div style="margin-bottom: 32px;">
-                        <label style="font-size: 14px; font-weight: 600;">Alamat Email</label>
+                        <label style="font-size: 14px; font-weight: 600; color: var(--text-main);">Alamat Email</label>
                         <input type="email" class="form-input-field" placeholder="andriandito@gmail.com" required>
                     </div>
                     <button type="submit" class="btn-main btn-gold"
@@ -2364,8 +2547,9 @@
 
                 <div
                     style="display: flex; justify-content: center; gap: 24px; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 13px;">
-                    <span><i class="ri-shield-check-line" style="color: var(--primary);"></i> Data 100% Terjaga</span>
-                    <span><i class="ri-thunderstorms-line" style="color: var(--primary);"></i> Akses Langsung VIA
+                    <span><i class="ri-shield-check-line" style="color: var(--primary-hover);"></i> Data 100%
+                        Terjaga</span>
+                    <span><i class="ri-thunderstorms-line" style="color: var(--primary-hover);"></i> Akses Langsung VIA
                         WA</span>
                 </div>
             </div>
@@ -2395,7 +2579,8 @@
                 </div>
 
                 <div>
-                    <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 20px;">Navigasi</h4>
+                    <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 20px; color: var(--text-main);">
+                        Navigasi</h4>
                     <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px;">
                         <li><a href="#mengapa" class="nav-item-link">Mengapa Visual</a></li>
                         <li><a href="#kosa-gambar" class="nav-item-link">Kosa Gambar</a></li>
@@ -2406,7 +2591,8 @@
                 </div>
 
                 <div>
-                    <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 20px;">Informasi</h4>
+                    <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 20px; color: var(--text-main);">
+                        Informasi</h4>
                     <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px;">
                         <li><a href="#faq" class="nav-item-link">FAQ</a></li>
                         <li><a href="#form-akses" class="nav-item-link">Unduh PDF</a></li>
@@ -2414,28 +2600,64 @@
                 </div>
 
                 <div>
-                    <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 20px;">Kontak</h4>
+                    <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 20px; color: var(--text-main);">Kontak
+                    </h4>
                     <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">
-                        <i class="ri-mail-line" style="color: var(--primary);"></i> andriandito@gmail.com
+                        <i class="ri-mail-line" style="color: var(--primary-hover);"></i> andriandito@gmail.com
                     </p>
                     <p style="color: var(--text-muted); font-size: 14px;">
-                        <i class="ri-phone-line" style="color: var(--primary);"></i> +62 811 861 384
+                        <i class="ri-phone-line" style="color: var(--primary-hover);"></i> +62 811 861 384
                     </p>
                 </div>
             </div>
 
             <div
-                style="padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; font-size: 13px; color: var(--text-dim);">
+                style="padding-top: 30px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; font-size: 13px; color: var(--text-dim);">
                 <div>© 2026 Revolusi Visual. Hak Cipta Dilindungi.</div>
-                <div>Designed with Solid High-Contrast Modern Theme</div>
+                <div>Designed with Light Glassmorphism Premium Theme</div>
             </div>
         </div>
     </footer>
 
+    <!-- Lenis Smooth Scroll Script -->
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <script>
+        // ==================================================
+        // LENIS SMOOTH SCROLL INITIALIZATION (SINGLE INSTANCE)
+        // ==================================================
+        const lenis = new Lenis({
+            autoRaf: true,
+            smoothWheel: true,
+            anchors: true,
+            lerp: 0.1,
+            wheelMultiplier: 1.0,
+            touchMultiplier: 1.5,
+        });
+
+        // Sync Lenis scroll with GSAP ScrollTrigger
+        lenis.on('scroll', ScrollTrigger.update);
+
+        // Smooth anchor link scrolling with navbar offset
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId && targetId !== '#' && targetId.startsWith('#')) {
+                    const targetEl = document.querySelector(targetId);
+                    if (targetEl) {
+                        e.preventDefault();
+                        lenis.scrollTo(targetEl, {
+                            offset: -85,
+                            duration: 1.2,
+                            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+                        });
+                    }
+                }
+            });
+        });
+
         gsap.registerPlugin(ScrollTrigger);
 
         // Konfigurasi global ScrollTrigger
@@ -2445,18 +2667,11 @@
         });
 
         // ==================================================
-        // 1. HERO ↔ SECTION 2 OVERLAP TRANSITION
-        //
-        //  Mekanisme:
-        //  - Hero di-PIN via GSAP (pinSpacing: true)
-        //  - GSAP menambah space setelah Hero agar Section 2
-        //    tetap di posisi normalnya dan scroll naik alami
-        //  - Section 2 (z-index 2, bg solid) menimpa Hero dari bawah
-        //  - progress 0 → 0.35 : Hero opacity=1, y=0
-        //  - progress 0.35 → 1  : Hero fade + naik -80px
+        // 1. HERO ↔ SECTION 2 OVERLAP & RE-ENTRY TRANSITION
         // ==================================================
         function initHeroOverlapTransition() {
             const heroBlock = document.querySelector('.hero-block');
+            const heroWrapper = document.querySelector('.hero-blur-wrapper');
             const section2 = document.querySelector('#statement');
             if (!heroBlock || !section2) return;
 
@@ -2464,56 +2679,56 @@
 
             // ── DESKTOP / TABLET ≥ 769px ───────────────────────────
             mm.add("(min-width: 769px)", () => {
+                // Initial smooth entrance on page load (subtle, no layout shift)
+                if (heroWrapper) {
+                    gsap.fromTo(heroWrapper,
+                        { opacity: 0, y: 16, scale: 0.99 },
+                        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "cubic-bezier(0.22, 1, 0.36, 1)", delay: 0.1 }
+                    );
+                }
 
-                // Initial state: hero penuh visible
-                gsap.set(heroBlock, { opacity: 1, y: 0 });
-
-                const pinST = ScrollTrigger.create({
-                    trigger: heroBlock,
-                    start: "top top",
-                    // Pin berakhir ketika Section 2 selesai melewati Hero
-                    // Durasi pin = tinggi Section 2
-                    end: () => `+=${section2.offsetHeight}`,
-                    pin: true,
-                    // KRITIS: pinSpacing: false
-                    // Jika true → GSAP dorong Section 2 jauh ke bawah (bug!)
-                    // Jika false → Section 2 tetap di posisi natural tepat di bawah Hero
-                    //              sehingga Section 2 naik dari bawah saat Hero di-pin
-                    pinSpacing: false,
-                    scrub: true,
-                    anticipatePin: 1,
-                    invalidateOnRefresh: true,
-                    onUpdate: (self) => {
-                        const p = self.progress;
-                        let opacity, y;
-
-                        if (p <= 0.35) {
-                            opacity = 1;
-                            y = 0;
-                        } else {
-                            const fp = (p - 0.35) / 0.65;
-                            opacity = 1 - fp;
-                            y = -80 * fp;
-                        }
-                        gsap.set(heroBlock, { opacity, y });
-                    },
-                    onLeave: () => {
-                        gsap.set(heroBlock, { opacity: 0, y: -80 });
-                    },
-                    onEnterBack: () => {
-                        gsap.set(heroBlock, { opacity: 1, y: 0 });
+                // Seamless scrubbed timeline for scroll-down and scroll-up back to Hero
+                const heroTL = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: heroBlock,
+                        start: "top top",
+                        end: () => `+=${section2.offsetHeight}`,
+                        pin: true,
+                        pinSpacing: false,
+                        scrub: 0.6, // Smooth easing interpolation on scroll up and down
+                        anticipatePin: 1,
+                        invalidateOnRefresh: true
                     }
                 });
 
+                // Stay solid from 0 to 35% of overlap
+                heroTL.to(heroBlock, {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    ease: "none",
+                    duration: 0.35
+                })
+                    // Seamlessly fade and slight translate from 35% to 100%
+                    .to(heroBlock, {
+                        opacity: 0,
+                        y: -40, // Subtle translateY (< 50px as requested)
+                        scale: 0.98,
+                        ease: "power2.inOut",
+                        duration: 0.65
+                    });
+
                 return () => {
-                    pinST.kill();
-                    gsap.set(heroBlock, { clearProps: "opacity,y" });
+                    heroTL.kill();
+                    gsap.set(heroBlock, { clearProps: "all" });
+                    if (heroWrapper) gsap.set(heroWrapper, { clearProps: "all" });
                 };
             });
 
             // ── MOBILE ≤ 768px ─────────────────────────────────
             mm.add("(max-width: 768px)", () => {
-                gsap.set(heroBlock, { clearProps: "opacity,y" });
+                gsap.set(heroBlock, { clearProps: "all" });
+                if (heroWrapper) gsap.set(heroWrapper, { clearProps: "all" });
             });
         }
         initHeroOverlapTransition();
@@ -2560,7 +2775,6 @@
 
             tl.from(".reveal-head", { opacity: 0, x: -30, duration: 0.7, ease: "power2.out" })
                 .from(".reveal-body", { opacity: 0, x: -20, duration: 0.6, ease: "power2.out" }, "-=0.4")
-                .from(".reveal-visual", { opacity: 0, x: 40, duration: 0.8, ease: "power2.out" }, "-=0.5")
                 .from(".reveal-detail", { opacity: 0, y: 20, duration: 0.6, ease: "power2.out" }, "-=0.4");
         }
         initMengapaMotion();
@@ -2623,22 +2837,16 @@
             mm.add("(min-width: 769px)", () => {
                 const getDistance = () => track.scrollWidth - window.innerWidth;
 
+                // Generous vertical scroll distance (5.5x innerHeight) to give plenty of reading room per case
                 const tween = gsap.to(track, {
                     x: () => -getDistance(),
                     ease: 'none',
                     scrollTrigger: {
                         trigger: section,
                         start: 'top top',
-                        end: () => `+=${window.innerHeight * 3.5}`,
+                        end: () => `+=${window.innerHeight * 5.5}`,
                         pin: true,
-                        scrub: 0.8,
-                        snap: {
-                            snapTo: 1 / (slides.length - 1),
-                            duration: { min: 0.3, max: 0.8 },
-                            delay: 0.15,
-                            ease: 'power1.inOut',
-                            directional: true
-                        },
+                        scrub: 1.2, // Smooth, calm scrub without abrupt snapping
                         invalidateOnRefresh: true,
                         anticipatePin: 1,
                         onUpdate: self => {
@@ -2649,26 +2857,6 @@
                                 dismissHint();
                             }
                         }
-                    }
-                });
-
-                // Subtle entry transition for internal contents of active slide
-                slides.forEach((slide, idx) => {
-                    const textSide = slide.querySelector('.comparison-side.text');
-                    const visualSide = slide.querySelector('.comparison-side.visual');
-                    if (textSide && visualSide) {
-                        gsap.from([textSide, visualSide], {
-                            opacity: 0.4,
-                            y: 15,
-                            duration: 0.5,
-                            ease: "power2.out",
-                            scrollTrigger: {
-                                trigger: slide,
-                                containerAnimation: tween,
-                                start: "left center",
-                                toggleActions: "play reverse play reverse"
-                            }
-                        });
                     }
                 });
 
@@ -2907,7 +3095,105 @@
         });
 
         // ==================================================
-        // 12. KOSA GAMBAR TAB SWITCHER
+        // 12. PANCA INDRA INTERACTIVE SENSORY SWITCHER
+        // ==================================================
+        const sensoryAssets = {
+            'default': {
+                src: 'assets/panca_indra_sketch.png',
+                alt: 'Panca Indra Sketsa',
+                isSvg: false
+            },
+            'mata': {
+                src: 'assets/sketch_mata.svg',
+                alt: 'Sketsa Indera Penglihatan - Mata (Visual)',
+                isSvg: true
+            },
+            'telinga': {
+                src: 'assets/sketch_telinga.svg',
+                alt: 'Sketsa Indera Pendengaran - Telinga (Auditori)',
+                isSvg: true
+            },
+            'raba': {
+                src: 'assets/sketch_raba.svg',
+                alt: 'Sketsa Indera Peraba - Tangan & Kulit (Taktil)',
+                isSvg: true
+            },
+            'mulut': {
+                src: 'assets/sketch_mulut.svg',
+                alt: 'Sketsa Indera Pengecap - Mulut & Lidah (Gustatori)',
+                isSvg: true
+            },
+            'hidung': {
+                src: 'assets/sketch_hidung.svg',
+                alt: 'Sketsa Indera Penciuman - Hidung (Olfaktori)',
+                isSvg: true
+            }
+        };
+
+        let currentActiveSense = null;
+
+        function selectSensory(senseKey, clickedBtn) {
+            const imgDisplay = document.getElementById('sensory-img-display');
+            const chips = document.querySelectorAll('.sensory-chip');
+            if (!imgDisplay) return;
+
+            // If clicking the currently active sense, toggle back to default full Panca Indra
+            if (currentActiveSense === senseKey) {
+                currentActiveSense = null;
+                chips.forEach(c => {
+                    c.classList.remove('is-active');
+                    c.setAttribute('aria-selected', 'false');
+                });
+                applySensoryTransition(sensoryAssets['default']);
+                return;
+            }
+
+            // Set new active sense
+            currentActiveSense = senseKey;
+            chips.forEach(c => {
+                c.classList.remove('is-active');
+                c.setAttribute('aria-selected', 'false');
+            });
+
+            if (clickedBtn) {
+                clickedBtn.classList.add('is-active');
+                clickedBtn.setAttribute('aria-selected', 'true');
+            }
+
+            const targetAsset = sensoryAssets[senseKey] || sensoryAssets['default'];
+            applySensoryTransition(targetAsset);
+        }
+
+        function applySensoryTransition(asset) {
+            const imgDisplay = document.getElementById('sensory-img-display');
+            if (!imgDisplay) return;
+
+            // 1. Smooth Fade out & scale down
+            imgDisplay.classList.add('sensory-img-transitioning');
+
+            setTimeout(() => {
+                // 2. Change image source and styles
+                imgDisplay.src = asset.src;
+                imgDisplay.alt = asset.alt;
+
+                // Adjust filter if SVG vs PNG
+                if (asset.isSvg) {
+                    imgDisplay.classList.remove('png-sketch-filter');
+                    imgDisplay.style.filter = 'none';
+                } else {
+                    imgDisplay.classList.add('png-sketch-filter');
+                    imgDisplay.style.filter = '';
+                }
+
+                // 3. Smooth Fade in & scale up to normal
+                setTimeout(() => {
+                    imgDisplay.classList.remove('sensory-img-transitioning');
+                }, 50);
+            }, 300);
+        }
+
+        // ==================================================
+        // 13. KOSA GAMBAR TAB SWITCHER
         // ==================================================
         function switchKosaTab(tabId) {
             document.querySelectorAll('.kosa-tab-content').forEach(el => el.style.display = 'none');

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 420" width="100%" height="100%" fill="none" stroke="#475569" stroke-linecap="round" stroke-linejoin="round">
+  <g>
+    <!-- Touch waves -->
+    <path d="M 235 40 C 245 30, 260 30, 270 40" stroke="#F59E0B" stroke-width="2.5"/>
+    <path d="M 220 25 C 245 10, 265 10, 285 25" stroke="#F59E0B" stroke-width="2" stroke-dasharray="3 3"/>
+    <path d="M 252 18 L 252 5" stroke="#F59E0B" stroke-width="2.5"/>
+
+    <!-- Hand and Fingers -->
+    <path d="M 185 305 C 185 265, 198 245, 210 225" stroke-width="3.2"/>
+    <path d="M 315 305 C 310 260, 302 240, 290 220" stroke-width="3.2"/>
+    
+    <!-- Thumb -->
+    <path d="M 198 235 C 170 220, 148 198, 150 172 C 152 155, 166 152, 178 168 C 192 185, 205 205, 215 210" stroke-width="3.2" fill="rgba(245,158,11,0.04)"/>
+    <path d="M 155 168 C 153 160, 160 158, 166 162" stroke="#94A3B8" stroke-width="1.6"/>
+
+    <!-- Index Finger -->
+    <path d="M 215 205 L 222 98 C 224 72, 244 72, 246 98 L 248 185" stroke-width="3.2" fill="rgba(245,158,11,0.05)"/>
+    <path d="M 226 90 C 227 78, 240 78, 242 90" stroke="#94A3B8" stroke-width="1.6"/>
+    <path d="M 225 125 C 232 128, 240 128, 246 125" stroke="#94A3B8" stroke-width="1.5"/>
+
+    <!-- Middle Finger -->
+    <path d="M 248 180 L 254 80 C 256 56, 276 56, 278 80 L 280 190" stroke-width="3.2" fill="rgba(245,158,11,0.04)"/>
+    <path d="M 258 74 C 260 62, 272 62, 274 74" stroke="#94A3B8" stroke-width="1.6"/>
+    <path d="M 257 115 C 264 118, 272 118, 278 115" stroke="#94A3B8" stroke-width="1.5"/>
+
+    <!-- Ring Finger -->
+    <path d="M 280 190 L 286 108 C 288 88, 306 88, 308 108 L 308 200" stroke-width="3" fill="rgba(245,158,11,0.04)"/>
+    <path d="M 290 102 C 292 92, 302 92, 304 102" stroke="#94A3B8" stroke-width="1.6"/>
+
+    <!-- Little Finger -->
+    <path d="M 308 200 L 314 145 C 316 130, 332 130, 334 145 C 336 172, 330 220, 315 242" stroke-width="3" fill="rgba(245,158,11,0.04)"/>
+
+    <!-- Palm Lines -->
+    <path d="M 205 240 C 232 255, 270 250, 298 232" stroke="#94A3B8" stroke-width="2"/>
+    <path d="M 218 258 C 245 272, 272 280, 295 276" stroke="#94A3B8" stroke-width="1.8"/>
+
+    <!-- Clean Badge Without Outline Distortion -->
+    <g transform="translate(170, 340)">
+      <rect x="0" y="0" width="160" height="38" rx="19" fill="rgba(245,158,11,0.08)" stroke="#F59E0B" stroke-width="1.8"/>
+      <text x="80" y="24" font-family="'DM Sans', sans-serif" font-size="14" font-weight="800" fill="#B45309" stroke="none" text-anchor="middle" letter-spacing="1.5">RABA (KULIT)</text>
+    </g>
+  </g>
+</svg>

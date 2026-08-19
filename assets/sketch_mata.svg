@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 420" width="100%" height="100%" fill="none" stroke="#475569" stroke-linecap="round" stroke-linejoin="round">
+  <g>
+    <!-- Visual rays / spark -->
+    <path d="M 250 65 L 250 35" stroke="#F59E0B" stroke-width="2.5" stroke-dasharray="3 3"/>
+    <path d="M 345 80 L 375 55" stroke="#F59E0B" stroke-width="2.5" stroke-dasharray="3 3"/>
+    <path d="M 155 80 L 125 55" stroke="#F59E0B" stroke-width="2.5" stroke-dasharray="3 3"/>
+    <path d="M 400 175 L 435 170" stroke="#F59E0B" stroke-width="2.5"/>
+    <path d="M 100 175 L 65 170" stroke="#F59E0B" stroke-width="2.5"/>
+
+    <!-- Eyebrow -->
+    <path d="M 135 105 C 190 75, 310 75, 365 100" stroke-width="3.2"/>
+    <path d="M 155 95 C 205 75, 290 73, 345 92" stroke="#94A3B8" stroke-width="1.8"/>
+
+    <!-- Eye Outlines -->
+    <path d="M 105 185 C 155 105, 345 105, 395 185" stroke-width="3.5"/>
+    <path d="M 115 178 C 160 115, 335 115, 385 178" stroke="#94A3B8" stroke-width="1.6"/>
+    
+    <path d="M 105 185 C 160 260, 340 260, 395 185" stroke-width="3"/>
+    <path d="M 125 188 C 170 248, 330 248, 375 188" stroke="#94A3B8" stroke-width="1.6"/>
+    
+    <!-- Eyelashes -->
+    <path d="M 175 125 L 165 95" stroke-width="2.2"/>
+    <path d="M 215 115 L 212 80" stroke-width="2.5"/>
+    <path d="M 250 112 L 250 78" stroke-width="2.5"/>
+    <path d="M 285 115 L 288 80" stroke-width="2.5"/>
+    <path d="M 325 125 L 335 95" stroke-width="2.2"/>
+
+    <!-- Iris -->
+    <circle cx="250" cy="185" r="58" stroke-width="3" fill="rgba(245,158,11,0.06)"/>
+    <circle cx="250" cy="185" r="54" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="4 3"/>
+    
+    <!-- Pupil -->
+    <circle cx="250" cy="185" r="24" fill="#334155" stroke="#334155"/>
+    
+    <!-- Iris details -->
+    <path d="M 250 130 L 250 155 M 250 215 L 250 240" stroke="#64748B" stroke-width="1.5"/>
+    <path d="M 195 185 L 220 185 M 280 185 L 305 185" stroke="#64748B" stroke-width="1.5"/>
+    <path d="M 212 147 L 230 165 M 270 205 L 288 223" stroke="#64748B" stroke-width="1.5"/>
+    <path d="M 288 147 L 270 165 M 230 205 L 212 223" stroke="#64748B" stroke-width="1.5"/>
+    
+    <!-- Light Reflection -->
+    <circle cx="240" cy="172" r="8" fill="#FFFFFF" stroke="#FFFFFF"/>
+    <circle cx="258" cy="195" r="4" fill="#FFFFFF" stroke="#FFFFFF"/>
+    
+    <!-- Clean Badge Without Outline Distortion -->
+    <g transform="translate(160, 320)">
+      <rect x="0" y="0" width="180" height="38" rx="19" fill="rgba(245,158,11,0.08)" stroke="#F59E0B" stroke-width="1.8"/>
+      <text x="90" y="24" font-family="'DM Sans', sans-serif" font-size="14" font-weight="800" fill="#B45309" stroke="none" text-anchor="middle" letter-spacing="1.5">MATA (VISUAL)</text>
+    </g>
+  </g>
+</svg>

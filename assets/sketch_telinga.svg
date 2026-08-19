@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 420" width="100%" height="100%" fill="none" stroke="#475569" stroke-linecap="round" stroke-linejoin="round">
+  <g>
+    <!-- Sound Waves -->
+    <path d="M 130 145 C 105 170, 105 210, 130 235" stroke="#F59E0B" stroke-width="3" stroke-dasharray="3 3"/>
+    <path d="M 100 120 C 65 160, 65 220, 100 260" stroke="#F59E0B" stroke-width="2.5"/>
+    <path d="M 70 95 C 25 150, 25 230, 70 285" stroke="#F59E0B" stroke-width="2" stroke-dasharray="4 4"/>
+
+    <!-- Ear Outer Helix -->
+    <path d="M 230 250 C 215 240, 205 215, 205 165 C 205 85, 275 55, 330 70 C 375 82, 398 120, 390 175 C 380 230, 355 258, 345 288 C 338 312, 310 315, 290 302 C 275 292, 275 270, 285 260" stroke-width="3.5" fill="rgba(245,158,11,0.04)"/>
+    
+    <!-- Inner Rim -->
+    <path d="M 285 90 C 330 98, 355 130, 350 170 C 345 208, 325 235, 310 248" stroke-width="2.5"/>
+    <path d="M 268 112 C 302 120, 322 142, 320 170 C 318 192, 305 210, 292 220" stroke="#94A3B8" stroke-width="1.8"/>
+    
+    <!-- Concha / Canal -->
+    <path d="M 235 160 C 260 148, 295 152, 290 180 C 285 202, 255 202, 250 182" stroke-width="2.8"/>
+    <path d="M 245 188 C 238 192, 235 208, 245 215 C 255 220, 262 212, 258 200 Z" stroke-width="2.5" fill="rgba(245,158,11,0.08)"/>
+    <path d="M 260 195 C 270 190, 282 195, 278 208 C 274 220, 260 220, 258 208" stroke-width="2" fill="#64748B"/>
+
+    <!-- Earlobe -->
+    <path d="M 330 280 C 335 302, 312 318, 288 306 C 272 295, 272 270, 285 260" stroke-width="3"/>
+
+    <!-- Clean Badge With Descriptive Function Label: TELINGA (PENDENGAR) -->
+    <g transform="translate(145, 340)">
+      <rect x="0" y="0" width="210" height="38" rx="19" fill="rgba(245,158,11,0.08)" stroke="#F59E0B" stroke-width="1.8"/>
+      <text x="105" y="24" font-family="'DM Sans', sans-serif" font-size="14" font-weight="800" fill="#B45309" stroke="none" text-anchor="middle" letter-spacing="1.5">TELINGA (PENDENGAR)</text>
+    </g>
+  </g>
+</svg>
